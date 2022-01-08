@@ -28,7 +28,7 @@ __Note: User Macros are not available in Confluence Cloud!__
 1. Click Save
 
 ## Usage
-Use the bootstrap-progress-bar-styles macro once on a page. Use as many bootstrap-progress-bar macros on that same page as you like.
+Use the `bootstrap-progress-bar-styles` macro once on a page. Use as many `bootstrap-progress-bar` macros on that same page as you like.
 
 ## Credits
 Icon and stylesheet by the [Bootstrap team](http://getbootstrap.com/), distributed under MIT License.
