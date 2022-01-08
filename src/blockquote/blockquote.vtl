@@ -3,7 +3,7 @@ BLOCKQOUTE
 
 This Confluence user macro adds a styled blockquote to your page.
 
-Version:    1.1.0
+Version:    1.2.0
 Updated:    2021-01-08
 Author/s:   George Lewe
 Source:     https://github.com/glewe/confluence-user-macros
@@ -20,23 +20,21 @@ PARAMETERS
 #** ---------------------------------------------------------------------------
 DEFAULTS
 *#
-#set ($citeTag = "")
 
 #** ---------------------------------------------------------------------------
 INPUT
 *#
-#if ($paramSource != "")
-    #set ($citeTag = "<cite>" + $paramSource + "</cite>")
-#end
 
 #* ----------------------------------------------------------------------------
 OUTPUT
 *#
 <blockquote class="usermacro">
-    #if ($body!="")
+    #if ($body != "")
         $body
     #end
-    $citeTag
+    #if ($paramSource != "")
+        <cite>$paramSource</cite>
+    #end
 </blockquote>
 
 <style>
