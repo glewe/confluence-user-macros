@@ -37,3 +37,9 @@ This Confluence user macro adds an HTML5 audio control element to your page that
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/blockquote/info-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds a styled blockquote to your page.
 
+---
+
+### [Bootstrap Button](/src/bootstrap-button)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/bootstrap-button/bootstrap-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a Bootstrap 4 styled button, supporting different colors and sizes, and linking to a URL.
+
