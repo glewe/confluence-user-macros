@@ -1,5 +1,5 @@
-![Confluence User Macros](https://github.com/glewe/confluence-user-macros/raw/master/img/template_source.png)
-# Confluence User Macros
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/img/template_source.png?raw=true" align="left" alt=""/>Confluence User Macros</h1>
+
 [![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
 [![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
 [![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
@@ -13,3 +13,7 @@ I will not address the basics of writing a user macro here. That is well documen
 ## My User Macros
 
 Along my work as a Confluence administrator I ran into several situations where native Confluence Server features did not offer what admins or users needed. Plugins were not available either or too expensive for the purpose. In many of those cases I found that a user macro was just the right solution to the challenge. The Confluence user community helped me a lot writing them. Here are my most useful ones as my contribution back to that community.
+
+### Anonymous Permissions
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" align="left" width="80" height="80" alt=""/>Anonymous Permissions
+Daaa madss
