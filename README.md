@@ -1,6 +1,7 @@
 ![Confluence User Macros](https://github.com/glewe/confluence-user-macros/raw/master/img/template_source.png)
 # Confluence User Macros
 [![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
 [![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
 
 ## What are Confluence User Macros ?

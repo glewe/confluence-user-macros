@@ -1,17 +1,20 @@
-# Add Parent ID as Label #
+![Icon](https://github.com/glewe/confluence-user-macros/raw/master/src/add-parent-id-as-label/knotes.png)
+# Add Parent ID as Label
 This Confluence user macro adds the parent content ID (page ID) as a label to the current page.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
-Check it out here: https://www.atlassian.com/software/confluence
+Check it out here:
+[https://www.atlassian.com/software/confluence](https://www.atlassian.com/software/confluence)
 
 When running Confluence on your own server, it allows you to create so-called "User Macros" that you can insert into your pages to add great features and visuals.
 
 Read more about Confluence User Macros here:
-https://confluence.atlassian.com/doc/writing-user-macros-4485.html
+[https://confluence.atlassian.com/doc/writing-user-macros-4485.html](https://confluence.atlassian.com/doc/writing-user-macros-4485.html)
 
-# Installation in Confluence Server #
+## Installation in Confluence Server and Data Center
+
 **Note: User Macros are not available in Confluence Cloud!**
 
 1. Login as administrator
@@ -22,8 +25,8 @@ https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
 
-# License #
+## License
 This Confluence User Macro is distributed under the GNU LGPLv3 license.
 
-# Credits #
+## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1
