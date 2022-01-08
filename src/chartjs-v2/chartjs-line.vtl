@@ -1,21 +1,20 @@
-#* ============================================================================
- * CHARTJS v2 LINE
- *
- * This Confluence user macro adds an animated line chart to your page.
- *
- * Version: 1.0.0
- * Date:    2017-06-22
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/chartjs-v2
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+CHARTJS v2 LINE
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro adds an animated line chart to your page.
+
+Version:    1.1.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyLineChart
 ## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Line Chart
 ## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
@@ -33,16 +32,16 @@
 ## @param Data2Color:title=Dataset 2 Color|type=string|required=false|desc=Enter the color of the second dataset here in the form of three decimal values for R, G and B separated by a comma.|default=179,179,0
 ## @param Data2Fill:title=Dataset 2 Colorfill|type=boolean|required=false|desc=Select whether the area below the line shall be filled with color.|default=true
 
-#* ----------------------------------------------------------------------------
- * PROCESS INPUT
- *#
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #if (!$paramChartTitle)
    #set ($paramTitle="My Line Chart")
 #end
 
-#* ----------------------------------------------------------------------------
- * OUTPUT
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <div style="width: $paramChartWidth;">
    #if ($paramShowTitle == true)
    <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
@@ -50,9 +49,6 @@
    <canvas id="$paramChartID" data-charttype="line" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#* ----------------------------------------------------------------------------
- * JAVASCRIPT
- *#
 <script type="text/javascript">
 //<![CDATA[
    var data$paramChartID = {

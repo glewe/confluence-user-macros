@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * HIDE IF
  *
  * This Confluence user macro allows to hide content based on conditions.
@@ -10,11 +10,11 @@
  *
  * Macro body:      Yes
  * Body processing: Rendered
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param match:title=Match Using|type=enum|enumValues=all,any|required=false|desc=If set to any, only one of the specified restrictions needs to match.|default=any
 ## @param user:title=Users|type=username|required=false|desc=The list of users to match.|multiple=true
 ## @param group:title=User groups|type=string|required=false|desc=The list of user groups to match.
@@ -26,9 +26,9 @@
 #set( $getPermission = false )
 #set( $username = "$req.getRemoteUser()" )
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check users to hide from
- *#
+*#
 #if( $!paramuser )
    #foreach( $userlisted in $paramuser.split(",") )
       #if( $userlisted == $username )
@@ -37,9 +37,9 @@
    #end
 #end
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check groups to hide from
- *#
+*#
 #if( $!paramgroup )
    #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
       #foreach( $grouplisted in $paramgroup.split(",") )
@@ -50,9 +50,9 @@
    #end
 #end
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check permissions to hide from
- *#
+*#
 #if( $!paramspacePermission )
    #set ( $colonIndex = $paramspacePermission.indexOf(":") )
    #if ( $colonIndex == -1 )
@@ -74,9 +74,9 @@
 #end
  
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Display body based on above check
- *#
+*#
 #if( $parammatch == "any" )
    #if( $hidecontentuser || $hidecontentgroup || $getPermission )
       #if( $!paramdisplay != "printable" )

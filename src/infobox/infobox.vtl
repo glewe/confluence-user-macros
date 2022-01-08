@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * GROUP MEMBERS
  *
  * This Confluence user macro adds an info box with fivwe custom labels and values.
@@ -11,11 +11,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param Title:title=Title|type=string|required=false|desc=You can define a custom title for the info box. Default ist "Info".
 ## @param Other1Label:title=Custom 1 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 1 here.
 ## @param Other1:title=Custom 1 Value|type=string|required=false|desc=Enter the value for custom field 1 here.
@@ -28,9 +28,9 @@
 ## @param Other5Label:title=Custom 5 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 5 here.
 ## @param Other5:title=Custom 5 Value|type=string|required=false|desc=Enter the value for custom field 5 here.
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if (!$paramTitle)
    #set ($paramTitle="Info")
 #end
@@ -75,9 +75,9 @@
    #set ($paramOther5="")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <ac:structured-macro ac:name="coloredpanel">
    <ac:parameter ac:name="Style">Blue</ac:parameter>
    <ac:parameter ac:name="GradientBackground">true</ac:parameter>

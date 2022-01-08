@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * TELEPHONE LINK
  *
  * This Confluence user macro adds an HTML telephone link to your page.
@@ -11,18 +11,18 @@
  *
  * Macro body:      no
  * Body processing: no
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param PhoneNumber:title=PhoneNumber|type=string|required=true|desc=Enter the phone number to dial including the country code with + prefix, e.g. +491234567|default=
 ## @param LinkText:title=Link Text|type=string|desc=Enter the link text to be displayed. Leav empty to use the pphone number.|default=
 ## @param LinkType:title=Link Type|type=enum|enumValues=callto,skype,tel|default=tel
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if (!$paramLinkType)
    #set ($paramLinkType="tel")
 #end
@@ -31,7 +31,7 @@
    #set ($paramLinkText=$paramPhoneNumber)
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <a href="$paramLinkType:$paramPhoneNumber">$paramLinkText</a>

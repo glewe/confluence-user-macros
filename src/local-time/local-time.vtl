@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * LOCAL TIME
  *
  * This Confluence user macro displays the user's local date and time offering
@@ -12,11 +12,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param ShowDate:title=Show Date|type=boolean|default=true
 ## @param ShowWeekday:title=Show Weekday|type=boolean|default=false
 ## @param RefreshRate:title=Refresh Rate|type=string|desc=Specify the refresh rate of the time in milliseconds, e.g. 1000 for every second or 60000 for every minute.|default=1000
@@ -33,9 +33,9 @@
 ## @param GMTOffset:title=GMT Offset|type=string|desc=Enter the GMT offset for the fixed timezone you want to display, e.g. +2 or -5.5. Default is 0. This setting only has an effect with Fixed Timezone being selected above.|default=0
 ## @param TimezoneText:title=Timezone|type=string|desc=You may enter a text for the fixed timezone here, e.g. a city name, that will be displayed too. This setting only has an effect with Fixed Timezone being selected above.
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 ##
 ## Figure out what to display
 ##
@@ -70,14 +70,14 @@
    #set($borderStyle="border:1px solid " + $paramBorderColor + ";border-radius:4px;padding:4px 6px 4px 6px")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <span id='local-time' style="font-size:$fontSize;font-family:$paramFont,$paramFamily;color:$paramColor;$backgroundStyle;$borderStyle;$fontWeightStyle;$fontStyleStyle;"></span>
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * JAVASCRIPT
- *#
+*#
 <script type="text/javascript">
 //<![CDATA[
 window.onload = function(){

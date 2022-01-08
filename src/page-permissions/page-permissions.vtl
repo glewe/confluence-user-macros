@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * PAGE PERMISSIONS
  *
  * This Confluence user macro lists space permissions and page restrictions.
@@ -11,11 +11,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param ShowSpacePermissions:title=Show Space Permissions|type=boolean|default=true
 ## @param CollapseSpacePermissions:title=Collapse Space Permissions|type=boolean|default=false
 ## @param ShowPageRestrictions:title=Show Page Restrictions|type=boolean|default=true
@@ -34,9 +34,9 @@
 #set($spaceGroups = [] )
 #set($spaceUsers = [] )
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * BUBBLE SORT GROUP SPACE PERMISSIONS
- *#
+*#
 ## 
 ## Create an array for the groups that we can sort
 ##
@@ -74,9 +74,9 @@
    #end
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * BUBBLE SORT USER SPACE PERMISSIONS
- *#
+*#
 ## 
 ## Create an array for the users that we can sort
 ##
@@ -114,9 +114,9 @@
    #end
 #end
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * BUILD SPACE SPACE PERMISSIONS TABLES
- *#
+*#
 #if ( $paramShowSpacePermissions != true )
 <!--
 #end
@@ -542,9 +542,9 @@
 -->
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * BUILT PAGE RESTRICTIONS TABLES
- *#
+*#
 ##
 ## Assume we don't find permission warning
 ##

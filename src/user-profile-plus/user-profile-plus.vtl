@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * USER PROFILE PLUS
  *
  * This Confluence user macro displays
@@ -13,11 +13,11 @@
  *
  * Macro body:      Yes
  * Body processing: Rendered
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param user:title=Username|type=username|required=false|desc=If "Single user" is checked, specify the username here.|default=
 ## @param GroupUsers:title=Group Users|type=boolean|desc=Select this option if you want to display the business card of all users in a group. Use the text box below to specify the group name. If you select this option, the username above is ignored.|default=false
 ## @param group:title=Group name|type=string|required=false|desc=If "Single user" is unchecked, specify the group name here.|default=
@@ -25,9 +25,9 @@
 ## @param PanelBorderColor:title=Panel Border Color|type=string|desc=Enter the panel border color in hexadecimal starting with a #.|default=#CCCCCC
 ## @param showBody:title=Custom Text|type=boolean|required=false|desc=Select this option if you want to use the macro body to display a custom text at the bottom of the business card. If this option is unchecked, the body will be ignored.|default=false
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * VARIABLES AND INPUT
- *#
+*#
 #set($containerManagerClass = $content.class.forName('com.atlassian.spring.container.ContainerManager'))
 #set($getInstanceMethod = $containerManagerClass.getDeclaredMethod('getInstance',null))
 #set($containerManager = $getInstanceMethod.invoke(null,null))
@@ -59,17 +59,17 @@
 
 #* -------------------------------------------------------------------------
  * BUBBLE SORT BY FULL NAME
- *#
+*#
 
 #*
  * Create an array that we can sort
- *#
+*#
 #set( $uarray = [] )
 #set( $unarray = [] )
 
 #*
  * Now fill it with the full names
- *#
+*#
 #set ( $count = 0 )
 #foreach( $user in  $users )
    #set( $fullName = $uarray.add( $userAccessor.getUserByName($user).getFullName() ) )
@@ -80,7 +80,7 @@
 #*
  * Bubble Sort
  * Takes n^2 passes
- *#
+*#
 #set($size=$uarray.size())
 #foreach($junk in $uarray)
    #set($actual=-1)
@@ -89,7 +89,7 @@
       #if($velocityCount<$size)
          #*
           * Compare this and previous. If this is smaller, swap.
-          *#
+         *#
          #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
             #set ($tmp=$uarray.get($velocityCount))
             #set ($junk=$uarray.set($velocityCount,$line))
@@ -97,7 +97,7 @@
 
             #*
              * Sort usernames together with fullnames as map is not available in confluence velocity version
-             *#
+            *#
             #set ($tmp2=$unarray.get($velocityCount))
             #set ($junk=$unarray.set($velocityCount, $unarray.get($actual)))
             #set ($junk=$unarray.set($actual, $tmp2))
@@ -108,7 +108,7 @@
 
 #* -------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <ac:structured-macro ac:macro-id="34fdfadb-b62b-4960-bb09-e4c1410131cf" ac:name="note" ac:schema-version="1">
   <ac:rich-text-body>
     <p>The User Profile Plus macro is obsolete. Please use the "Business Card" macro instead.</p>

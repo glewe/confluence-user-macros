@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * GROUP MEMBERS
  *
  * This Confluence user macro adds a sorted table with numbered rows for each
@@ -12,11 +12,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param Group:title=Group|type=string|desc=Enter the group name here|default=jira-administrators
 ## @param ShowUsername:title=Show username|type=boolean|desc=Select whether to show the username in an extra column.|default=false
 ## @param ShowEmailAddresses:title=Show mail addresses|type=boolean|desc=Select whether to show the email addresses in an extra column.|default=false
@@ -29,9 +29,9 @@
 #set($containerManager = $getInstanceMethod.invoke(null,null))
 #set($containerContext = $containerManager.containerContext)
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if (!$paramGroup)
    #set ($paramshowGroup="jira-administrators")
 #else
@@ -44,9 +44,9 @@
 
    #set ( $usernames = $userAccessor.getMemberNamesAsList($group) )
    
-   #* ----------------------------------------------------------------------------
+   #** ---------------------------------------------------------------------------
     * BUBBLE SORT BY FULL NAME
-    *#
+   *#
    ## 
    ## Create an array that we can sort
    ##
@@ -90,9 +90,9 @@
       #end
    #end
    
-   #* ----------------------------------------------------------------------------
+   #** ---------------------------------------------------------------------------
     * OUTPUT
-    *#
+   *#
    #set ($colspan = 2)
    #if ($paramShowUsername == true)
       #set ($colspan = $colspan + 1)
@@ -161,9 +161,9 @@
    #end
 #else
 
-   #* ----------------------------------------------------------------------------
+   #** ---------------------------------------------------------------------------
     * OUTPUT: Group not found
-    *#
+   *#
    <!-- Group Members Macro -->
    <table class="confluenceTable">
       <tr>

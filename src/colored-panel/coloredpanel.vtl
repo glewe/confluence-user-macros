@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * COLORED PANEL
  *
  * This Confluence user macro adds a panel to your page with several coloring options.
@@ -11,11 +11,11 @@
  *
  * Macro body:      Yes
  * Body processing: Rendered
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param Style:title=Style|type=enum|enumValues=Gray,Dark,Cyan,Blue,Blue (Dark),Green,Yellow,Orange,Red,Gray (Gradient),Dark (Gradient),Cyan (Gradient),Blue (Gradient),Orange (Gradient),Green (Gradient),Red (Gradient)|default=Gray
 ## @param Title:title=Title|type=string|desc=Enter the title of the panel|default=My Title
 ## @param showTitle:title=Show Title|type=boolean|desc=Select whether a title shall be shown|default=true
@@ -24,9 +24,9 @@
 ## @param GradientTopColor:title=Gradient Top Color|type=string|desc=Enter the gradient top color in hexadecimal starting with a #. If "Gradient Background" is unchecked, this color will be used as the panel''s background color. Default: #FFFFFF (Recommended for CSP styles)|default=#FFFFFF
 ## @param GradientBottomColor:title=Gradient Bottom Color|type=string|desc=Enter the gradient bottom color in hexadecimal starting with a #. If "Gradient Background" is unchecked, this color will be ignored. Default: #EDEDED (Recommended for CSP styles)|default=#EDEDED
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * SET DEFAULTS
- *#
+*#
 #set ($borderColor="#dddddd")
 #set ($backgroundColor="#f5f5f5")
 #set ($textColor="#333333")
@@ -55,9 +55,9 @@
    #set($paramStyle="Yellow (Gradient)")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if ($paramStyle=="Dark")
    #set ($borderColor="#767676")
    #set ($backgroundColor="#878787")
@@ -205,9 +205,9 @@
 #end
 
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * GENERATE STYLES
- *#
+*#
 #set ($panelBackgroundStyle = "background-color: "+$paramGradientTopColor+";")
 #set ($headerBackgroundStyle = "background-color: "+$backgroundColor+";")
 
@@ -250,9 +250,9 @@
 #set ($headerStyle = $headerStyle+"font-size: 110%;")
 
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <div class="panel" style="$panelStyle">
    #if ($paramshowTitle==true)
       <div class="panelHeader" style="$headerStyle">$paramTitle</div>

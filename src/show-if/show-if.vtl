@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * SHOW IF
  *
  * This Confluence user macro allows to show content based on conditions.
@@ -10,11 +10,11 @@
  *
  * Macro body:      Yes
  * Body processing: Rendered
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param match:title=Match Using|type=enum|enumValues=all,any|required=false|desc=If set to any, only one of the specified restrictions needs to match.|default=any
 ## @param user:title=Users|type=username|required=false|desc=The list of users that can see this content.|multiple=true
 ## @param group:title=User groups|type=string|required=false|desc=The list of user groups that can see this content.
@@ -26,9 +26,9 @@
 #set( $getPermission = false )
 #set( $username = "$req.getRemoteUser()" )
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check allowed users
- *#
+*#
 #if( $!paramuser )
    #foreach( $userlisted in $paramuser.split(",") )
       #if( $userlisted == $username )
@@ -37,9 +37,9 @@
    #end
 #end
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check allowed groups
- *#
+*#
 #if( $!paramgroup )
    #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
       #foreach( $grouplisted in $paramgroup.split(",") )
@@ -50,9 +50,9 @@
    #end
 #end
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Check allowed permissions
- *#
+*#
 #if( $!paramspacePermission )
    #set ( $colonIndex = $paramspacePermission.indexOf(":") )
    #if ( $colonIndex == -1 )
@@ -74,9 +74,9 @@
 #end
  
  
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * Display body based on above check
- *#
+*#
 #if( $parammatch == "any" )
    #if( $showcontentuser || $showcontentgroup || $getPermission )
       #if( $!paramdisplay != "printable" )

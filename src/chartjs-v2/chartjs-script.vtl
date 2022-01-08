@@ -1,74 +1,74 @@
-#* ============================================================================
- * CHARTJS v2 SCRIPT
- *
- * This Confluence user macro needs to be included once on every page that 
- * makes use of a ChartJS chart macro.
- *
- * Version: 1.1.0
- * Date:    2018-11-16
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/chartjs-v2
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+CHARTJS v2 SCRIPT
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro needs to be included once on every page that makes
+use of a ChartJS chart macro.
+
+Version:    1.1.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @noparams
 
-#* ----------------------------------------------------------------------------
- * JAVASCRIPT
- *#
+#** ---------------------------------------------------------------------------
+OUTPPUT
+*#
 <script type="text/javascript">
 //<![CDATA[
 window.onload = function()
 {
-   var canvs = document.getElementsByTagName("canvas");
-   for(var i = 0; i < canvs.length; i++)
-   {
-      var canvid = canvs[i].getAttribute('id');
-      var data = 'data' + canvid;
-      var options = 'options' + canvid;
-      var config = 'config' + canvid;
-      var ctx = document.getElementById(canvid).getContext("2d");
+    var canvs = document.getElementsByTagName("canvas");
+    for(var i = 0; i < canvs.length; i++)
+    {
+        var canvid = canvs[i].getAttribute('id');
+        var data = 'data' + canvid;
+        var options = 'options' + canvid;
+        var config = 'config' + canvid;
+        var ctx = document.getElementById(canvid).getContext("2d");
 
-      switch(canvs[i].getAttribute('data-charttype'))
-      {
-         case "bar":
-            window.canvid = new Chart(ctx, { type:'bar', data:window[data], options:window[options] });
-            break;
-            
-         case "line":
-            window.canvid = new Chart(ctx, { type:'line', data:window[data], options:window[options] });
-            break;
+        switch(canvs[i].getAttribute('data-charttype'))
+        {
+            case "bar":
+                window.canvid = new Chart(ctx, { type:'bar', data:window[data], options:window[options] });
+                break;
+                
+            case "line":
+                window.canvid = new Chart(ctx, { type:'line', data:window[data], options:window[options] });
+                break;
 
-         case "radar":
-            window.canvid = new Chart(ctx, { type:'radar', data:window[data], options:window[options] });
-            break;
+            case "radar":
+                window.canvid = new Chart(ctx, { type:'radar', data:window[data], options:window[options] });
+                break;
 
-         case "pie":
-            window.canvid = new Chart(ctx, { type:'pie', data:window[data], options:window[options] });
-            break;
+            case "pie":
+                window.canvid = new Chart(ctx, { type:'pie', data:window[data], options:window[options] });
+                break;
 
-         case "doughnut":
-            window.canvid = new Chart(ctx, { type:'doughnut', data:window[data], options:window[options] });
-            break;
+            case "doughnut":
+                window.canvid = new Chart(ctx, { type:'doughnut', data:window[data], options:window[options] });
+                break;
 
-         case "polarArea":
-            window.canvid = new Chart(ctx, { type:'polarArea', data:window[data], options:window[options] });
-            break;
+            case "polarArea":
+                window.canvid = new Chart(ctx, { type:'polarArea', data:window[data], options:window[options] });
+                break;
 
-         case "bubble":
-            window.canvid = new Chart(ctx, { type:'bubble', data:window[data], options:window[options] });
-            break;
+            case "bubble":
+                window.canvid = new Chart(ctx, { type:'bubble', data:window[data], options:window[options] });
+                break;
 
-         default:
-            window.canvid = new Chart(ctx, { type:'bar', data:window[data], options:window[options] });
-            break;
-      }
-   }   
+            default:
+                window.canvid = new Chart(ctx, { type:'bar', data:window[data], options:window[options] });
+                break;
+        }
+    }   
 }
 //]]>
 </script>

@@ -1,21 +1,20 @@
-#* ============================================================================
- * CHARTJS v2 RADAR
- *
- * This Confluence user macro adds an animated radar chart to your page.
- *
- * Version: 1.0.0
- * Date:    2017-07-22
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/chartjs-v2
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+CHARTJS v2 RADAR
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro adds an animated radar chart to your page.
+
+Version:    1.1.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyRadarChart
 ## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Radar Chart
 ## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
@@ -37,71 +36,68 @@
 ## @param Data2BackgroundColor:title=Dataset 2 Background Color|type=string|required=false|desc=Enter the fill color inside the area of this dataset. Use three decimal values for R, G and B separated by a comma.|default=179,179,0
 
 
-#* ----------------------------------------------------------------------------
- * PROCESS INPUT
- *#
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #if (!$paramChartTitle)
-   #set ($paramTitle="My Radar Chart")
+    #set ($paramTitle="My Radar Chart")
 #end
 
-#* ----------------------------------------------------------------------------
- * OUTPUT
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <div style="width: $paramChartWidth;">
-   #if ($paramShowTitle == true)
-   <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
-   #end
-   <canvas id="$paramChartID" data-charttype="radar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
+    #if ($paramShowTitle == true)
+    <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
+    #end
+    <canvas id="$paramChartID" data-charttype="radar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#* ----------------------------------------------------------------------------
- * JAVASCRIPT
- *#
 <script type="text/javascript">
 //<![CDATA[
-   var data$paramChartID = {
-      labels : [
-         #set( $myLabels = $paramDataLabels.split(","))
-         #foreach( $item in $myLabels )
-            "$item",
-         #end
-      ],
-      datasets : [
-         {
-            label : "$paramData1Title",
-            backgroundColor : "rgba($paramData1BackgroundColor,0.2)",
-            borderColor : "rgba($paramData1LineColor,1)",
-            borderWidth: $paramData1LineWidth,
-            pointBackgroundColor : "rgba($paramData1LineColor,1)",
-            data : [
-            #set( $myValues = $paramData1Values.split(","))
-            #foreach( $item in $myValues )
-               $item,
+    var data$paramChartID = {
+        labels : [
+            #set( $myLabels = $paramDataLabels.split(","))
+            #foreach( $item in $myLabels )
+                "$item",
             #end
-            ]
-         }
-         #if ($paramShowSecondSet == true)
-         ,{
-            label : "$paramData2Title",
-            backgroundColor : "rgba($paramData2BackgroundColor,0.2)",
-            borderColor : "rgba($paramData2LineColor,1)",
-            borderWidth: $paramData2LineWidth,
-            pointBackgroundColor : "rgba($paramData2LineColor,1)",
-            data : [
-            #set( $myValues = $paramData2Values.split(","))
-            #foreach( $item in $myValues )
-               $item,
+        ],
+        datasets : [
+            {
+                label : "$paramData1Title",
+                backgroundColor : "rgba($paramData1BackgroundColor,0.2)",
+                borderColor : "rgba($paramData1LineColor,1)",
+                borderWidth: $paramData1LineWidth,
+                pointBackgroundColor : "rgba($paramData1LineColor,1)",
+                data : [
+                #set( $myValues = $paramData1Values.split(","))
+                #foreach( $item in $myValues )
+                $item,
+                #end
+                ]
+            }
+            #if ($paramShowSecondSet == true)
+            ,{
+                label : "$paramData2Title",
+                backgroundColor : "rgba($paramData2BackgroundColor,0.2)",
+                borderColor : "rgba($paramData2LineColor,1)",
+                borderWidth: $paramData2LineWidth,
+                pointBackgroundColor : "rgba($paramData2LineColor,1)",
+                data : [
+                #set( $myValues = $paramData2Values.split(","))
+                #foreach( $item in $myValues )
+                $item,
+                #end
+                ]
+            }
             #end
-            ]
-         }
-         #end
-      ]
-   }
-   
-   var options$paramChartID = {
-      legend: { position: 'top', },
-      scale: { ticks: { beginAtZero: true } },
-      responsive : true
-   }
+        ]
+    }
+    
+    var options$paramChartID = {
+        legend: { position: 'top', },
+        scale: { ticks: { beginAtZero: true } },
+        responsive : true
+    }
 //]]>
 </script>

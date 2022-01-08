@@ -1,21 +1,20 @@
-#* ============================================================================
- * CHARTJS v2 PIE
- *
- * This Confluence user macro adds an animated pie chart to your page.
- *
- * Version: 1.0.1
- * Date:    2018-03-24
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/chartjs-v2
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+CHARTJS v2 PIE
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro adds an animated pie chart to your page.
+
+Version:    1.1.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyPieChart
 ## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Pie Chart
 ## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
@@ -32,75 +31,75 @@
 ## @param Data2Values:title=Dataset 2 Values|type=string|required=true|desc=Enter a comma separated list of your slice values.|default=18,29,110
 ## @param Data2Colors:title=Dataset 2 Colors|type=string|required=true|desc=Enter a comma separated list of your slice colors.|default=#F7464A,#46BFBD,#FDB45C
 
-#* ----------------------------------------------------------------------------
- * PROCESS INPUT
- *#
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #if (!$paramChartTitle)
-   #set ($paramTitle="My Pie Chart")
+    #set ($paramTitle="My Pie Chart")
 #end
 
 #if ($paramDoughnut == true) 
-   #set ($paramType = "doughnut")
+    #set ($paramType = "doughnut")
 #else
-   #set ($paramType = "pie")
+    #set ($paramType = "pie")
 #end
 
-#* ----------------------------------------------------------------------------
- * OUTPUT
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <div style="width: $paramChartWidth;">
-   #if ($paramShowTitle == true)
-   <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
-   #end
-   <canvas id="$paramChartID" data-charttype="$paramType" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
+    #if ($paramShowTitle == true)
+    <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
+    #end
+    <canvas id="$paramChartID" data-charttype="$paramType" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * JAVASCRIPT
- *#
+*#
 <script type="text/javascript">
 //<![CDATA[
-var data$paramChartID = {
-   datasets: [
-      {
-         data: [
-            #set( $myDataValues = $paramDataValues.split(","))
-            #foreach( $dataValue in $myDataValues )
-               $dataValue,
-            #end
-         ],
-         backgroundColor: [
-            #set( $myDataColors = $paramDataColors.split(","))
-            #foreach( $dataColor in $myDataColors )
-               '$dataColor',
-            #end
-         ],
-         label: '$paramDataLegend'
-      }
-      #if ($paramShowSecondSet == true)
-      ,{
-         data: [
-            #set( $myData2Values = $paramData2Values.split(","))
-            #foreach( $data2Value in $myData2Values )
-               $data2Value,
-            #end
-         ],
-         backgroundColor: [
-            #set( $myData2Colors = $paramData2Colors.split(","))
-            #foreach( $data2Color in $myData2Colors )
-               '$data2Color',
-            #end
-         ],
-         label: '$paramData2Legend'
-      }
-      #end
-   ],
-   labels: [
-      #set( $myDataLabels = $paramDataLabels.split(","))
-      #foreach( $dataLabel in $myDataLabels )
-         "$dataLabel",
-      #end
-   ]
-}
+    var data$paramChartID = {
+    datasets: [
+        {
+            data: [
+                #set( $myDataValues = $paramDataValues.split(","))
+                #foreach( $dataValue in $myDataValues )
+                $dataValue,
+                #end
+            ],
+            backgroundColor: [
+                #set( $myDataColors = $paramDataColors.split(","))
+                #foreach( $dataColor in $myDataColors )
+                '$dataColor',
+                #end
+            ],
+            label: '$paramDataLegend'
+        }
+        #if ($paramShowSecondSet == true)
+        ,{
+            data: [
+                #set( $myData2Values = $paramData2Values.split(","))
+                #foreach( $data2Value in $myData2Values )
+                $data2Value,
+                #end
+            ],
+            backgroundColor: [
+                #set( $myData2Colors = $paramData2Colors.split(","))
+                #foreach( $data2Color in $myData2Colors )
+                '$data2Color',
+                #end
+            ],
+            label: '$paramData2Legend'
+        }
+        #end
+    ],
+    labels: [
+        #set( $myDataLabels = $paramDataLabels.split(","))
+        #foreach( $dataLabel in $myDataLabels )
+            "$dataLabel",
+        #end
+    ]
+    }
 //]]>
 </script>

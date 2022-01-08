@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * DROPDOWN
  *
  * This Confluence user macro adds a Confluence dropdown button to your page.
@@ -11,25 +11,25 @@
  * License: 
  *
  * Macro body: Rendered
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param ID:title=ID|type=string|required=true|desc=Enter a unique ID for this dropdown button.|default=my-dropdown-button
 ## @param Title:title=Title|type=string|required=true|desc=Enter the title of the dropdown button.|default=Dropdown menu
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * DEFAULTS
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <button class="aui-button aui-dropdown2-trigger" aria-controls="$paramID">$paramTitle</button>
 <aui-dropdown-menu id="$paramID">
    #if ($body != "")

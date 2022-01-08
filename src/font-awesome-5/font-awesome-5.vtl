@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * FONT AWESOME 5
  *
  * This Confluence user macro displays a Font Awesome 5 icon with many options
@@ -11,11 +11,11 @@
  * License: GNU LGPLv3
  *
  * Macro body: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETERS
- *#
+*#
 ## @param Type:title=Icon Type|type=enum|enumValues=regular,solid,brand|desc=Select the icon type.<br><span style="margin-right:4px;" class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><span style="color:#990000;">Make sure the type fits the icon name you enter below.</span>|default=solid
 ## @param Icon:title=Icon Name|type=string|desc=Enter the name of the icon you want to display.<br><span style="margin-right:4px;" class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><span style="color:#990000;">Make sure the name fits the icon type you select above.</span><br>Find icon names here:<ul><li><a href="https://fontawesome.com/icons?d=gallery&s=brands&m=free" target="_blank">Font Awesome Brand Icons</a></li><li><a href="https://fontawesome.com/icons?d=gallery&s=regular&m=free" target="_blank">Font Awesome Regular Icons</a></li><li><a href="https://fontawesome.com/icons?d=gallery&s=solid&m=free" target="_blank">Font Awesome Solid Icons</a></li></ul>|default=paper-plane
 ## @param Size:title=Icon Size|type=enum|enumValues=xs,sm,lg,1x,2x,3x,5x,7x,10x|desc=Select the relative icon size.|default=1x
@@ -26,9 +26,9 @@
 ## @param Animation:title=Icon Animation|type=enum|enumValues=none,spin,pulse|desc=Select spin to get any icon to rotate, and use pulse to have it rotate with 8 steps.|default=none
 ## @param Color:title=Icon Color|type=string|desc=Enter the hexadecimal color code here, e.g. 000000 = black, ffffff = white. Default is "inherit".|default=inherit
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * DEFAULTS
- *#
+*#
 #set ($faIcon="fa-paper-plane")
 #set ($faType="fas")
 #set ($faSize="")
@@ -39,62 +39,62 @@
 #set ($faAnimation="")
 #set ($cssColor="inherit")
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * INPUT
- *#
+*#
 
-#* Icon *#
+#* Icon*#
 #if ($paramIcon)
    #set ($faIcon="fa-$paramIcon")
 #end
 
-#* Style *#
+#* Style*#
 #if ($paramType == "regular")
    #set ($faType="far")
 #elseif ($paramType == "brand")
    #set ($faType="fab")
 #end
 
-#* Color *#
+#* Color*#
 #if ($paramColor)
    #set ($cssColor="$paramColor")
 #end
  
-#* Relative Size *#
+#* Relative Size*#
 #if ($paramSize != "1x")
    #set ($faSize="fa-$paramSize")
 #end
  
-#* Border *#
+#* Border*#
 #if ($paramBorder==true)
    #set ($faBorder="fa-border")
 #end
  
-#* Alignment *#
+#* Alignment*#
 #if ($paramAlignment == "left")
    #set ($faAlignment="fa-pull-left")
 #elseif ($paramAlignment == "right")
    #set ($faAlignment="fa-pull-right")
 #end
  
-#* Rotation *#
+#* Rotation*#
 #if ($paramRotate != "none")
    #set ($faRotate="fa-rotate-$paramRotate")
 #end
  
-#* Flip *#
+#* Flip*#
 #if ($paramFlip != "none")
    #set ($faFlip="fa-flip-$paramFlip")
 #end
  
-#* Animaaton *#
+#* Animaaton*#
 #if ($paramAnimation == "spin")
    #set ($faAnimation="fa-spin")
 #elseif ($paramAnimation == "pulse")
    #set ($faAnimation="fa-pulse")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <i class="$faType $faIcon $faSize $faAlignment $faBorder $faRotate $faFlip $faAnimation" style="color: #$cssColor;"></i>

@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * RISK MATRIX IS
  *
  * Creates a 4-level risk matrix based on an issue type, Likelihood field and
@@ -11,11 +11,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param ProjectKeys:title=Project Keys|type=string|desc=Enter the project keys you want include in the report. Separate them by comma.|default=ISOA,ISOB
 ## @param Issuetype:title=Issue Type|type=string|desc=Enter the issue type for the report.|default=Information Security Risk
 ## @param FontSize:title=Font Size|type=string|desc=Enter the factor by which you want to increase the font size, e.g. 1 = normal, 1.2 = 20% bigger.|default=1.1
@@ -31,14 +31,14 @@
 ## @param Impact4:title=Impact 1|type=string|desc=Enter the text for impact level 4.|default=4 - Significant
 ## @param Impact5:title=Impact 1|type=string|desc=Enter the text for impact level 5.|default=5 - Critical
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * VARIABLES
- *#
+*#
 #set ($fontSize = $paramFontSize + "em")
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <div>
    <table class="riskmatrix">
       <tr>

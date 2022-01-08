@@ -1,21 +1,20 @@
-#* ============================================================================
- * CHARTJS v2 BAR
- *
- * This Confluence user macro adds an animated bar chart to your page.
- *
- * Version: 1.0.0
- * Date:    2017-06-22
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/chartjs-v2
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+CHARTJS v2 BAR
 
-#* ----------------------------------------------------------------------------
+This Confluence user macro adds an animated bar chart to your page.
+
+Version:    1.1.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyBarChart
 ## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Bar Chart
 ## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
@@ -32,82 +31,82 @@
 ## @param Data2Color:title=Dataset 2 Color|type=string|required=false|desc=Enter the color of the second dataset here in the form of three decimal values for R, G and B separated by a comma.|default=179,179,0
 ## @param Data2Line:title=Show Dataset 2 as a line|type=boolean|desc=Select whether the second dataset shall be shown as a line.|default=false
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if (!$paramChartTitle)
-   #set ($paramTitle="My Bar Chart")
+    #set ($paramTitle="My Bar Chart")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <div style="width: $paramChartWidth;">
-   #if ($paramShowTitle == true)
-   <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
-   #end
-   <canvas id="$paramChartID" data-charttype="bar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
+    #if ($paramShowTitle == true)
+    <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
+    #end
+    <canvas id="$paramChartID" data-charttype="bar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * JAVASCRIPT
- *#
+*#
 <script type="text/javascript">
 //<![CDATA[
-   var data$paramChartID = {
-      labels : [
-         #set( $myLabels = $paramDataLabels.split(","))
-         #foreach( $item in $myLabels )
-            "$item",
-         #end
-      ],
-      datasets : [
-         {
-            label : '$paramDataLegend',
-            backgroundColor : "rgba($paramDataColor,0.5)",
-            borderColor : "rgba($paramDataColor,0.8)",
-            hoverBackgroundColor : "rgba($paramDataColor,0.75)",
-            hoverBorderColor : "rgba($paramDataColor,1)",
-            borderWidth : 1,
-            data : [
-               #set( $myValues = $paramDataValues.split(","))
-               #foreach( $item in $myValues )
-                  $item,
-               #end
-            ]
-         }
-         #if ($paramShowSecondSet == true)
-         ,{
-            label : '$paramData2Legend',
-            hoverBackgroundColor : "rgba($paramData2Color,0.75)",
-            hoverBorderColor : "rgba($paramData2Color,1)",
-            borderWidth : 1,
-            data : [
-               #set( $myValues = $paramData2Values.split(","))
-               #foreach( $item in $myValues )
-                  $item,
-               #end
-            ],
-            #if ($paramData2Line == true)
-               type: 'line',
-               borderColor : "rgba($paramData2Color,1)",
-               backgroundColor : "rgba($paramData2Color,0)",
-               pointBackgroundColor : "rgba($paramData2Color,1)",
-               pointBorderColor : "#fff",
-               pointHoverBackgroundColor : "#fff",
-               pointHoverBorderColor : "rgba($paramData2Color,1)",
-               pointHoverBorderWidth : 1
-            #else
-               borderColor : "rgba($paramData2Color,0.8)",
-               backgroundColor : "rgba($paramData2Color,0.5)"
+    var data$paramChartID = {
+        labels : [
+            #set( $myLabels = $paramDataLabels.split(","))
+            #foreach( $item in $myLabels )
+                "$item",
             #end
-         }
-         #end
-      ]
-   }
+        ],
+        datasets : [
+            {
+                label : '$paramDataLegend',
+                backgroundColor : "rgba($paramDataColor,0.5)",
+                borderColor : "rgba($paramDataColor,0.8)",
+                hoverBackgroundColor : "rgba($paramDataColor,0.75)",
+                hoverBorderColor : "rgba($paramDataColor,1)",
+                borderWidth : 1,
+                data : [
+                #set( $myValues = $paramDataValues.split(","))
+                #foreach( $item in $myValues )
+                    $item,
+                #end
+                ]
+            }
+            #if ($paramShowSecondSet == true)
+            ,{
+                label : '$paramData2Legend',
+                hoverBackgroundColor : "rgba($paramData2Color,0.75)",
+                hoverBorderColor : "rgba($paramData2Color,1)",
+                borderWidth : 1,
+                data : [
+                #set( $myValues = $paramData2Values.split(","))
+                #foreach( $item in $myValues )
+                    $item,
+                #end
+                ],
+                #if ($paramData2Line == true)
+                type: 'line',
+                borderColor : "rgba($paramData2Color,1)",
+                backgroundColor : "rgba($paramData2Color,0)",
+                pointBackgroundColor : "rgba($paramData2Color,1)",
+                pointBorderColor : "#fff",
+                pointHoverBackgroundColor : "#fff",
+                pointHoverBorderColor : "rgba($paramData2Color,1)",
+                pointHoverBorderWidth : 1
+                #else
+                borderColor : "rgba($paramData2Color,0.8)",
+                backgroundColor : "rgba($paramData2Color,0.5)"
+                #end
+            }
+            #end
+        ]
+    }
 
-   var options$paramChartID = {
-      responsive : true
-   }
+    var options$paramChartID = {
+        responsive : true
+    }
 //]]>
 </script>

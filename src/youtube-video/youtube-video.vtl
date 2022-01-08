@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * YOUTUBE VIDEO
  *
  * This Confluence user macro adds a YouTube video frame to your page. 
@@ -11,27 +11,27 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param Videoid:title=Youtube Video ID|type=string|required=true|desc=Enter the Youtube video ID
 ## @param Height:title=Height|type=string|required=true|default=315|desc=Enter the height of the video frame on your page.
 ## @param Width:title=Width|type=string|required=true|default=560|desc=Enter the width of the video frame on your page.
 ## @param Frameborder:title=Frame Border|type=string|required=true|default=0|desc=Enter the width of the video frame border your page.
 ## @param Fullscreen:title=Allow Fullscreen|type=boolean|desc=Select whether the video can be switched to fullscreen|default=true
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #if ($paramFullscreen==true)
    #set ($allowFullscreen = "allowfullscreen")
 #else
    #set ($allowFullscreen = "")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 <div class="scroll-unprocessed"><iframe src="https://www.youtube.com/embed/$paramVideoid" $allowFullscreen frameborder="$paramFrameborder" height="$paramHeight" width="$paramWidth"></iframe></div>

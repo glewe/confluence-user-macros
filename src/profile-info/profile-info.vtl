@@ -1,6 +1,9 @@
 #** ===========================================================================
 PROFILE INFO
 
+This Confluence user macro displays a panel with the profile info of a single
+user or all users of a group.
+
 Version:    1.0.0
 Updated:    2022-01-08
 Author/s:   George Lewe
@@ -10,6 +13,9 @@ License:    GNU LGPLv3
 Macro Body Processing:  Rendered
 *#
 
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @param user:title=Username|type=username|required=false|desc=If "Single user" is checked, specify the username here.|default=
 ## @param GroupUsers:title=Group Users|type=boolean|desc=Select this option if you want to display the business card of all users in a group. Use the text box below to specify the group name. If you select this option, the username above is ignored.|default=false
 ## @param group:title=Group name|type=string|required=false|desc=If "Single user" is unchecked, specify the group name here.|default=
@@ -17,6 +23,9 @@ Macro Body Processing:  Rendered
 ## @param PanelBgColor:title=Background Color|type=string|required=false|desc=Enter the panel background color in hexadecimal starting with a #.|default=#f8f8f8
 ## @param PanelBorderColor:title=Border Color|type=string|desc=Enter the panel border color in hexadecimal starting with a #.|default=#cccccc
 
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #set($users = [])
 
 #if ($paramGroupUsers==false && $paramuser != "")
@@ -24,14 +33,14 @@ Macro Body Processing:  Rendered
    #**
    Single User
    Setting $tmp is workaround to stop boolean output
-   *#
+  *#
    #set ($tmp = $users.add($paramuser))
 
 #elseif ($paramgroup != "")
 
    #**
    All Users in Group
-   *#
+  *#
    #set($group = $userAccessor.getGroup($paramgroup))
    #if ($group)
       #set($users = $userAccessor.getMemberNamesAsList($group))
@@ -71,7 +80,7 @@ Takes n^2 passes
         #if($velocityCount<$size)
             #**
             Compare this and previous. If this is smaller, swap.
-            *#
+           *#
             #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
                 #set ($tmp=$uarray.get($velocityCount))
                 #set ($junk=$uarray.set($velocityCount,$line))
@@ -79,7 +88,7 @@ Takes n^2 passes
                 #**
                 Sort usernames together with fullnames as map is not available
                 in Confluence velocity version
-                *#
+               *#
                 #set ($tmp2=$unarray.get($velocityCount))
                 #set ($junk=$unarray.set($velocityCount, $unarray.get($actual)))
                 #set ($junk=$unarray.set($actual, $tmp2))
@@ -88,6 +97,9 @@ Takes n^2 passes
     #end
 #end
 
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 #foreach ($item in $unarray)
 
     #if ($paramPanelBgColor != "")
@@ -108,7 +120,7 @@ Takes n^2 passes
     #if($userAccessor.getGroupNames($userAccessor.getUser($item)).indexOf('my-group') > -1)
         #set($bordercolor = '#FFB300')
     #end
-    *#
+   *#
 
     <ac:structured-macro ac:name="panel">
         <ac:parameter ac:name="bgColor">$bgcolor</ac:parameter>
@@ -125,7 +137,7 @@ Takes n^2 passes
                 <p>
                 #**
                 Set $body to avoid output of 'body')
-                *#
+               *#
                 #set($body = $body)
                 $body
                 </p>
@@ -134,9 +146,6 @@ Takes n^2 passes
     </ac:structured-macro>
 #end
 
-#** 
-STYLES
-*#
 <style type="text/css">
     .profile-macro {color: #000066;}
     .profile-macro .profile-info th.confluenceTh, .profile-macro .profile-info td, .profile-macro .profile-info th {text-align:left;background-color:#f8f8f8;border:0px;}

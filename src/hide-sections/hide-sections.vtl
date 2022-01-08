@@ -1,4 +1,4 @@
-#* ============================================================================
+#** ===========================================================================
  * HIDE SECTIONS
  *
  * This Confluence user macro hides Confluence sections of your page.
@@ -11,11 +11,11 @@
  *
  * Macro body:      None
  * Body processing: None
- *#
+*#
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PARAMETER
- *#
+*#
 ## @param HideBreadcrumbs:title=Hide Breadcrumbs|type=boolean|desc=Select to hide the breadcrumbs section.|default=false
 ## @param HideChildren:title=Hide Children|type=boolean|desc=Select to hide the children section.|default=false
 ## @param HideComments:title=Hide Comments|type=boolean|desc=Select to hide the comments section.|default=false
@@ -26,9 +26,9 @@
 ## @param HideSidebar:title=Hide Sidebar|type=boolean|desc=Select to hide the sidebar.|default=false
 ## @param HideToolsMenu:title=Hide Tools Menu|type=boolean|desc=Select to hide the tools menu.|default=false
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * PROCESS INPUT
- *#
+*#
 #set ($hideScripts="") 
 #set ($hideStyles="")
  
@@ -60,9 +60,9 @@
    #set($hideStyles=$hideStyles+"a#action-menu-link {display: none;}")
 #end
 
-#* ----------------------------------------------------------------------------
+#** ---------------------------------------------------------------------------
  * OUTPUT
- *#
+*#
 #if ($hideStyles!="")
    <style type="text/css">$hideStyles</style>
 #end   
