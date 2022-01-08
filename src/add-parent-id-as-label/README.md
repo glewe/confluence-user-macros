@@ -8,14 +8,14 @@ Confluence is Atlassian's Enterprise Wiki.
 Check it out here:
 [https://www.atlassian.com/software/confluence](https://www.atlassian.com/software/confluence)
 
-When running Confluence on your own server, it allows you to create so-called "User Macros" that you can insert into your pages to add great features and visuals.
+When running Confluence on your own server, it allows you to create so-called "User Macros" that you can insert into your pages to add features and visuals.
 
 Read more about Confluence User Macros here:
 [https://confluence.atlassian.com/doc/writing-user-macros-4485.html](https://confluence.atlassian.com/doc/writing-user-macros-4485.html)
 
 ## Installation in Confluence Server and Data Center
 
-**Note: User Macros are not available in Confluence Cloud!**
+__Note: User Macros are not available in Confluence Cloud!__
 
 1. Login as administrator
 1. Got to "General Configuration", then select "User Macros" from the menu on the left
