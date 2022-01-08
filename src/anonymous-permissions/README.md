@@ -1,5 +1,5 @@
-<p align="left">
-  <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" alt=""/>And some text
+<p>
+  <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" align="left" alt=""/>And some text
 </p>
 
 # Anonymous Permissions
