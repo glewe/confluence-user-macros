@@ -1,0 +1,556 @@
+<ac:layout>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h1>You need at least two of the Macros!</h1>
+        <p>At least two macros are needed on each page you want to show Chart.js charts.</p>
+        <ol>
+            <li>
+            <p>The macro "ChartJS v2: Script". This macro includes the Chart.js v2 script and draws all your charts. You need to include it once on your page.</p>
+            </li>
+            <li>
+            <p>At least one chart macro, e.g. "ChartJS v2: Bar Chart". This is your chart macro in which you specify your chart values. Of course you can instert as many chart macros as you want.</p>
+            </li>
+        </ol>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="two_right_sidebar">
+        <ac:layout-cell>
+        <h1>Chart Types</h1>
+        </ac:layout-cell>
+        <ac:layout-cell>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Bar Chart (Single Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="163a71ef-bb48-4ee4-a496-042647b3843d" ac:name="chartjsv2-bar" ac:schema-version="1">
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="Bar2Color">179,179,0</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="BorderWidth">2px</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearBarChartSingle</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Bar Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearBarChartSingle".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Bar Chart (Two Datasets)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="138b869f-e612-44d2-bb0d-b9cf0d901f46" ac:name="chartjsv2-bar" ac:schema-version="1">
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="Bar2Color">179,179,0</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="BorderWidth">2px</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearBarChartDouble</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Bar Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearBarChartDouble".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Check the "Show Second Dataset" box</li>
+            <li>Below that you will find the field "Dataset 2 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Bar Chart (Mixed)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="ca2dfc78-ac38-494d-90cf-fa2a725b983a" ac:name="chartjsv2-bar" ac:schema-version="1">
+            <ac:parameter ac:name="Data2Color">179,0,0</ac:parameter>
+            <ac:parameter ac:name="Data2Line">true</ac:parameter>
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="Bar2Color">179,179,0</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="BorderWidth">2px</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearBarChartDoubleLine</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Bar Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearBarChartMixed".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Check the "Show Second Dataset" box</li>
+            <li>Below that you will find the field "Dataset 2 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Check the "Show Dataset 2 as a line"</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Bubble Chart (from Table)</h2>
+        <ac:structured-macro ac:macro-id="49da98d9-2fc3-487f-a89c-95e7faaac06d" ac:name="chartjsv2-bubble" ac:schema-version="1">
+            <ac:parameter ac:name="AspectRatio">false</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The last 3 Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">TheLastThreeYearsBubble</ac:parameter>
+            <ac:parameter ac:name="atlassian-macro-output-type">INLINE</ac:parameter>
+        </ac:structured-macro>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Bubble Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearBoubleChart".</li>
+            <li>Enter a title in the field "Chart Title". For example "The last 3x Years".</li>
+            <li>Save the Macro dialog.</li>
+            <li>In the macro body, create a table with 4 columns and a header row. The columns are read as:<br/>
+            <ul>
+                <li>Column 1: Dataset Name</li>
+                <li>Column 2: X-coordinate</li>
+                <li>Column 3: Y-coordinate</li>
+                <li>Column 4: Radius (how big the radius of the bubble is)</li>
+            </ul>
+            </li>
+            <li>For each bubble enter one row with the dataset name it belongs to plus the x, y and r value</li>
+            <li>All rows for one dataset must be together (underneath each other). The dataset name must be repeated in each of its rows.</li>
+        </ul>
+        <p>
+            <strong>Example of above chart:</strong>
+        </p>
+        <table class="wrapped">
+            <colgroup> <col/> <col/> <col/> <col/> </colgroup>
+            <tbody>
+            <tr>
+                <th>Label</th>
+                <th>x</th>
+                <th>y</th>
+                <th>r</th>
+            </tr>
+            <tr>
+                <td>2016</td>
+                <td>12</td>
+                <td>-4</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>2016</td>
+                <td>-6</td>
+                <td>19</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>2016</td>
+                <td>23</td>
+                <td>12</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>2016</td>
+                <td>34</td>
+                <td>14</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>2017</td>
+                <td>-11</td>
+                <td>7</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>2017</td>
+                <td>9</td>
+                <td>8</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>2017</td>
+                <td>11</td>
+                <td>-11</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>2017</td>
+                <td>16</td>
+                <td>12</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>6</td>
+                <td>23</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>-12</td>
+                <td>-23</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>-4</td>
+                <td>-21</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>-22</td>
+                <td>17</td>
+                <td>14</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            <strong> <br/>
+            </strong>
+        </p>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Line Chart (Single Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="015babcd-6ff8-4b7a-bb10-aae1ae0f48f1" ac:name="chartjsv2-line" ac:schema-version="1">
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearLineChartSingle</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Line Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearLineChartSingle".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Line Chart (Double Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="f297b40b-d886-4183-b9a7-4d86632297c8" ac:name="chartjsv2-line" ac:schema-version="1">
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearLineChartDouble</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Line Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearLineChartDouble".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Check the "Show Second Dataset" box</li>
+            <li>Below that you will find the field "Dataset 2 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Radar Chart (Single Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="50b60317-cee8-44bc-a6b9-9eafbe6c712d" ac:name="chartjsv2-radar" ac:schema-version="1">
+            <ac:parameter ac:name="Data1Title">Maximum</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="Data2Title">Minimum</ac:parameter>
+            <ac:parameter ac:name="Data1Values">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearRadarChartSingle</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Radar Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearRadarChartSingle".</li>
+            <li>Enter a title in the field "Chart Titles". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Radar Chart (Double Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="92a836ab-5f16-4e1b-9c31-d18e65b35a5a" ac:name="chartjsv2-radar" ac:schema-version="1">
+            <ac:parameter ac:name="Data1Title">Maximum</ac:parameter>
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="Data2Title">Minimum</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="Data1Values">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearRadarChartDouble</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS v2: Radar Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearRadarChartSingle".</li>
+            <li>Enter a title in the field "Chart Title". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "123,245,99,105,186,123".</li>
+            <li>Check the "Show Second Dataset" box</li>
+            <li>Below that you will find the field "Dataset 2 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Pie Chart (Single Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="ad00142a-af33-4096-8222-03c67b83b1d1" ac:name="chartjsv2-pie" ac:schema-version="1">
+            <ac:parameter ac:name="DataColors">#F7464A,#46BFBD,#FDB45C,#9E023D,#A1B334,#3456E5</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearPieChartSingle</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS: Pie Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearPieChartSingle".</li>
+            <li>Enter a title in the field "Chart Title". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017"</li>
+            <li>Enter the "Dataset 1 Legend".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Enter the "Dataset 1 Colors" in hexadecimal format (see bottom of this page to find the right color values).</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Pie Chart (Double Dataset)</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="0f967f19-f23c-4a81-a25b-847f8073a259" ac:name="chartjsv2-pie" ac:schema-version="1">
+            <ac:parameter ac:name="DataColors">#F7464A,#46BFBD,#FDB45C,#9E023D,#A1B334,#3456E5</ac:parameter>
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="Data2Colors">#F7464A,#46BFBD,#FDB45C,#9E023D,#A1B334,#3456E5</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearPieChartDouble</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <ul>
+            <li>Edit your page. Insert the macro "ChartJS v2: Script" at the bottom of your page if not already done. You need the script macro only once on your page no matter how much other charts you include.</li>
+            <li>Insert a "ChartJS: Pie Chart" macro at the position of your liking.</li>
+            <li>In the macro dialog, enter a identifier for this chart. The identifier must be unique on your page. Don't use any blanks. For example "MySixYearPieChartSingle".</li>
+            <li>Enter a title in the field "Chart Title". For example "The Last Six Years".</li>
+            <li>Scroll down until you see the field "Dataset Labels". Let's say you want to show values of the last six years. Enter "2012,2013,2014,2015,2016,2017"</li>
+            <li>Enter the "Dataset 1 Legend".</li>
+            <li>Below that you will find the field "Dataset 1 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Enter the "Dataset 1 Colors" in hexadecimal format (see bottom of this page to find the right color values).</li>
+            <li>Check the "Show Second Dataset" box</li>
+            <li>Enter the "Dataset 2 Legend".</li>
+            <li>Below that you will find the field "Dataset 2 values". Enter the values for those years, separated by a comma. Enter as much values as you have labels. Example: "97,111,54,45,99,77".</li>
+            <li>Enter the "Dataset 2 Colors" in hexadecimal format (see bottom of this page to find the right color values).</li>
+            <li>Save the macro and save the page.</li>
+        </ul>
+        <p>
+            <strong>Note:</strong> There are several more parameters you can adjust in this macro. Try them out until you reach the result you want.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h2>Doughnut Chart</h2>
+        <p>
+            <ac:structured-macro ac:macro-id="091bffb9-82a0-4d23-a58c-6c4d3aa06d8f" ac:name="chartjsv2-pie" ac:schema-version="1">
+            <ac:parameter ac:name="DataColors">#F7464A,#46BFBD,#FDB45C,#9E023D,#A1B334,#3456E5</ac:parameter>
+            <ac:parameter ac:name="Data2Values">97,111,54,45,99,77</ac:parameter>
+            <ac:parameter ac:name="DataLabels">2012,2013,2014,2015,2016,2017</ac:parameter>
+            <ac:parameter ac:name="DataValues">123,245,99,105,186,123</ac:parameter>
+            <ac:parameter ac:name="Doughnut">true</ac:parameter>
+            <ac:parameter ac:name="ShowSecondSet">true</ac:parameter>
+            <ac:parameter ac:name="Data2Colors">#F7464A,#46BFBD,#FDB45C,#9E023D,#A1B334,#3456E5</ac:parameter>
+            <ac:parameter ac:name="ChartTitle">The Last Six Years</ac:parameter>
+            <ac:parameter ac:name="ChartID">MySixYearDoughnutChartDouble</ac:parameter>
+            </ac:structured-macro>
+        </p>
+        <p>A Doughnut Chart is a deviation of the Pie Chart. It shows an opening in the middle of the pie, just like the shape of a doughnut. You have to use the same macro "ChartJS: Pie Chart" and enter the values just the same way. The only parameter you have to change in the macro is, tick the option "Show as Doughnut".</p>
+        <p>The above macro will look like this as a Doughnut Chart.</p>
+        <p>
+            <br/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <hr/>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <h1>Troubleshooting</h1>
+        <h2>I don't know the color values</h2>
+        <p>All of the above macros offer the option to change colors. Most fields require the hex value of a color, some require the decimal values. Hex or decimal, both input formats define the vlaue for Red, Green and Blue (RGB). The lowest value for each color is decimal 0 (hex 0), the highest is decimal 255 (hex F). Any combination of those three create a specific color. If all three are 0, the color is black. If all three are 255, the color is white.</p>
+        <p>Other examples are (R,G,B):</p>
+        <ul>
+            <li>0,0,0 =&gt; Black</li>
+            <li>255,0,0 =&gt; Bright Red</li>
+            <li>0,255,0 =&gt; Bright Green</li>
+            <li>0,0,255 =&gt; Bright Blue</li>
+            <li>255,255,255 =&gt; White</li>
+        </ul>
+        <p>Every other combination is one of 16.5 million color shades in between.</p>
+        <p>There is a free online service that makes it very easy for you to select a color and know the corresponding decimal or hex value of it.</p>
+        <p>
+            <a href="http://hslpicker.com/">http://hslpicker.com/</a>
+        </p>
+        <h2>My chart does not show</h2>
+        <p>In most of the cases when the chart does not show, it is because you have included several chart macros but you did not give each one a unique identifier on your page. Remember, each ChartJS v2 macro, no matter what type, needs to have a unique identifier on your page. Do not just use the default value.</p>
+        <p>Another reason could be that the amount of labels and values differ in the macro that is not displayed. Also, make sure that all commas and semicolons - the separators - are set right.</p>
+        <h2>My chart does not show in the macro preview</h2>
+        <p>Unfortuantely that is just so. The reason is that not all necessary code is available to the macro dialog because the ChartJS v2: Script macro is separate.</p>
+        <h2>My chart does not show inside another macro</h2>
+        <p>Unfortuantely that is just so. In some cases, the ChartJS v2 macros do not work embedded in other Confluence macros. The Expand macro is one of them.</p>My charts do not show in PDF Exporter<p>Unfortunately that cannot be changed. The ChartJS v2 charts are meant for online presentation. The PDF Exporter plugin can only render standard Confluence content. Most of our user macros will not show in the output. In order to print your ChartJS v2 charts you need to take screenshots or use the browser print function and direct it to a PDF printer, e.g. to "Adobe PDF" printer in case you have the full Acrobat product installed.</p>
+        </ac:layout-cell>
+    </ac:layout-section>
+    <ac:layout-section ac:type="single">
+        <ac:layout-cell>
+        <p>
+            <ac:structured-macro ac:macro-id="818e9715-f72a-453a-ad78-440411beee61" ac:name="chartjsv2-script" ac:schema-version="1"/>
+        </p>
+        </ac:layout-cell>
+    </ac:layout-section>
+</ac:layout>
