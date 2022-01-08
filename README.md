@@ -13,6 +13,12 @@ I will not address the basics of writing a user macro here. That is well documen
 ## My User Macros
 
 Along my work as a Confluence administrator I ran into several situations where native Confluence Server features did not offer what admins or users needed. Plugins were not available either or too expensive for the purpose. In many of those cases I found that a user macro was just the right solution to the challenge. The Confluence user community helped me a lot writing them. Here are my most useful ones as my contribution back to that community.
+---
+
+### Anonymous Permissions
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro lists all spaces where 'Anonymous' has at least view permissions.
+---
 
 ### Anonymous Permissions
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
