@@ -27,5 +27,5 @@ __Note: User Macros are not available in Confluence Cloud!__
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
  
-# Credits #
+## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1

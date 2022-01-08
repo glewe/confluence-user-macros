@@ -25,5 +25,5 @@ https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 # License #
 This Confluence User Macro is distributed under the GNU LGPLv3 license.
 
-# Credits #
+## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1

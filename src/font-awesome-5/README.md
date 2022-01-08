@@ -35,5 +35,5 @@ https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 # License #
 This Confluence User Macro is distributed under the GNU LGPLv3 license.
 
-# Credits #
+## Credits
 Icon font and macro icon from [Font Awesome](https://fontawesome.com/)

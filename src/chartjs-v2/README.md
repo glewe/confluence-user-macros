@@ -28,7 +28,7 @@ https://support.lewe.com/docs/confluence-user-macros/chartjs-v2/
 # License #
 These Confluence User Macros are distributed under the GNU LGPLv3 license.
 
-# Credits #
+## Credits
 Chart.js by [Nick Downey](http://www.chartjs.org/), distributed under the MIT License
 
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1
