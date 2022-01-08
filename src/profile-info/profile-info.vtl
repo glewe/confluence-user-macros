@@ -1,0 +1,146 @@
+#** ===========================================================================
+PROFILE INFO
+
+Version:    1.0.0
+Updated:    2022-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing:  Rendered
+*#
+
+## @param user:title=Username|type=username|required=false|desc=If "Single user" is checked, specify the username here.|default=
+## @param GroupUsers:title=Group Users|type=boolean|desc=Select this option if you want to display the business card of all users in a group. Use the text box below to specify the group name. If you select this option, the username above is ignored.|default=false
+## @param group:title=Group name|type=string|required=false|desc=If "Single user" is unchecked, specify the group name here.|default=
+## @param showBody:title=Custom Text|type=boolean|required=false|desc=Select this option if you want to use the macro body to display a custom text at the bottom of the business card. If this option is unchecked, the body will be ignored.|default=false
+## @param PanelBgColor:title=Background Color|type=string|required=false|desc=Enter the panel border color in hexadecimal starting with a #.|default=#f8f8f8
+## @param PanelBorderColor:title=Border Color|type=string|desc=Enter the panel border color in hexadecimal starting with a #.|default=#cccccc
+
+#set($users = [])
+
+#if ($paramGroupUsers==false && $paramuser != "")
+
+   #**
+   Single User
+   Setting $tmp is workaround to stop boolean output
+   *#
+   #set ($tmp = $users.add($paramuser))
+
+#elseif ($paramgroup != "")
+
+   #**
+   All Users in Group
+   *#
+   #set($group = $userAccessor.getGroup($paramgroup))
+   #if ($group)
+      #set($users = $userAccessor.getMemberNamesAsList($group))
+   #end
+   
+#end
+
+#** ---------------------------------------------------------------------------
+Bubble sort by full name
+*#
+
+#**
+ Create an array that we can sort
+*#
+#set( $uarray = [] )
+#set( $unarray = [] )
+
+#**
+Now fill it with the full names
+*#
+#set ( $count = 0 )
+#foreach( $user in  $users )
+    #set( $fullName = $uarray.add( $userAccessor.getUserByName($user).getFullName() ) )
+    #set( $un = $unarray.add( $user) )
+    #set ( $count = $count + 1 )
+#end
+
+#**
+Bubble Sort
+Takes n^2 passes
+*#
+#set($size=$uarray.size())
+#foreach($junk in $uarray)
+    #set($actual=-1)
+    #foreach($line in $uarray)
+        #set($actual=$actual+1)
+        #if($velocityCount<$size)
+            #**
+            Compare this and previous. If this is smaller, swap.
+            *#
+            #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
+                #set ($tmp=$uarray.get($velocityCount))
+                #set ($junk=$uarray.set($velocityCount,$line))
+                #set ($junk=$uarray.set($actual,$tmp))
+                #**
+                Sort usernames together with fullnames as map is not available
+                in Confluence velocity version
+                *#
+                #set ($tmp2=$unarray.get($velocityCount))
+                #set ($junk=$unarray.set($velocityCount, $unarray.get($actual)))
+                #set ($junk=$unarray.set($actual, $tmp2))
+            #end
+        #end
+    #end
+#end
+
+#foreach ($item in $unarray)
+
+    #if ($paramPanelBgColor != "")
+        #set($bgcolor = $paramPanelBgColor)
+    #else
+        #set($bgcolor = '#f8f8f8')
+    #end
+
+    #if ($paramPanelBorderColor != "")
+        #set($bordercolor = $paramPanelBorderColor)
+    #else
+        #set($bordercolor = '#cccccc')
+    #end
+
+    #**
+    Enable the following section to change the border color based on group
+    membership.
+    #if($userAccessor.getGroupNames($userAccessor.getUser($item)).indexOf('my-group') > -1)
+        #set($bordercolor = '#FFB300')
+    #end
+    *#
+
+    <ac:structured-macro ac:name="panel">
+        <ac:parameter ac:name="bgColor">$bgcolor</ac:parameter>
+        <ac:parameter ac:name="borderStyle">solid</ac:parameter>
+        <ac:parameter ac:name="borderColor">$bordercolor</ac:parameter>
+        <ac:parameter ac:name="borderWidth">1</ac:parameter>
+        <ac:rich-text-body>
+            <p><ac:structured-macro ac:name="profile">
+                <ac:parameter ac:name="user">
+                <ri:user ri:userkey="$userAccessor.getUser($item).getKey()"/>
+                </ac:parameter>
+            </ac:structured-macro></p>
+            #if ($paramGroupUsers==false && $paramshowBody==true)
+                <p>
+                #**
+                Set $body to avoid output of 'body')
+                *#
+                #set($body = $body)
+                $body
+                </p>
+            #end
+        </ac:rich-text-body>
+    </ac:structured-macro>
+#end
+
+#** 
+STYLES
+*#
+<style type="text/css">
+    .profile-macro {color: #000066;}
+    .profile-macro .profile-info th.confluenceTh, .profile-macro .profile-info td, .profile-macro .profile-info th {text-align:left;background-color:#f8f8f8;border:0px;}
+    .profile-macro .vcard .userLogo {margin-bottom:10px;}
+    .profile-macro .vcard .values {width:300px;}
+    .profile-macro a {font-size:14px;}
+</style>

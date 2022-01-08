@@ -49,3 +49,9 @@ This Confluence user macro adds a Bootstrap 3 styled button, supporting differen
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/bootstrap-progress-bar/bootstrap-32.png?raw=true" align="left" alt=""/>
 This set of two Confluence user macros adds a Bootstrap like progress to your page, offering different coloring and animation options.
 
+---
+
+### [Profile Info](/src/profile-info)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
+
