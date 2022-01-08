@@ -24,3 +24,10 @@ This Confluence user macro lists all spaces where 'Anonymous' has at least view 
 ### [Audio Control](/src/audio-control)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/audio-control/arts-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds an HTML5 audio control element to your page that can play MP3, OGG and WAV files.
+
+---
+
+### [Blockquote](/src/blockquote)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/blockquote/info-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a styled blockquote to your page.
+
