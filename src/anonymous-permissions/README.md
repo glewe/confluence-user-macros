@@ -1,6 +1,5 @@
-<h1>
-  <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" align="left" alt=""/>Anonymous Permissions
-</h1>
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" align="left" alt=""/>Anonymous Permissions</h1>
+
 
 [![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
 [![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
