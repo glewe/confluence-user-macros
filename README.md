@@ -55,8 +55,10 @@ This set of two Confluence user macros adds a Bootstrap like progress to your pa
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/chartjsv2/kchart-32.png?raw=true" align="left" alt=""/>
 This set of Confluence user macros adds animated diagrams to your page based on Chart.js v2.
 
+---
+
 ### [Colored Panel](/src/colored-panel)
-<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/colored-panel/window-list-32.png?raw=true" align="left" alt=""/>
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/colored-panel/window_list-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds a headed panel to your page with several coloring options.
 
 ---
