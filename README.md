@@ -16,7 +16,7 @@ Along my work as a Confluence administrator I ran into several situations where 
 
 ---
 
-### [Anonymous Permissions](/master/src/anonymous-permissions)
+### [Anonymous Permissions](/src/anonymous-permissions)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro lists all spaces where 'Anonymous' has at least view permissions.
 
