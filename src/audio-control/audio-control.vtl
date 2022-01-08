@@ -32,9 +32,11 @@ INPUT
 #** ---------------------------------------------------------------------------
 OUTPUT
 *#
+<!-- User Macro: Audio Control START -->
 <audio controls>
     <source src="/download/attachments/$content.getIdAsString()/$paramFile" type="audio/$paramFormat">Your browser does not support this HTML5 audio element.
 </audio>
 #if ($paramFilename==true)
     <p style="margin-top:-4px; font-style:italic">$paramFile</p>
 #end
+<!-- User Macro: Audio Control END -->
