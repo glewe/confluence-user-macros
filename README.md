@@ -51,7 +51,7 @@ This set of two Confluence user macros adds a Bootstrap like progress to your pa
 
 ---
 
-### [ChartJs v2](/src/chartjs-v2)
+### [ChartJs v2](/src/chartjsv2)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/chartjsv2/kchart-32.png?raw=true" align="left" alt=""/>
 This set of Confluence user macros adds animated diagrams to your page based on Chart.js v2.
 
