@@ -11,7 +11,7 @@ When running Confluence on your own server, it allows you to create so-called "U
 Read more about Confluence User Macros here:
 https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 
-## Installation in Confluence Server
+## Installation in Confluence Server or Data Center
 ## Include Font Awesome 5 style shhet ##
 
 1. Login as administrator
