@@ -7,4 +7,8 @@
 
 If you run your own Confluence instance (Server or Data Center) you can create custom “User Macros”, little scripts that can be included in pages creating content on the fly. With those macros you can create simple HTML code as well as utilize Velocity code accessing information from your Confluence database.
 
-I will not address the basics of writing a user macro here. That is well documented in the Confluence documentation here.
+I will not address the basics of writing a user macro here. That is well documented in the Confluence documentation [here](https://confluence.atlassian.com/doc/writing-user-macros-4485.html).
+
+## My User Macros
+
+Along my work as a Confluence administrator I ran into several situations where native Confluence Server features did not offer what my admins or my users needed. Plugins were not available either or too expensive for the purpose. In many of those cases I found that a user macro was just the right solution to the challenge. The Confluence user community helped me a lot writing them. Here are my most useful ones as my contribution back to that community.
