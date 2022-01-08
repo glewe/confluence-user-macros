@@ -28,7 +28,9 @@ __Note: User Macros are not available in Confluence Cloud!__
 1. Click Save
 
 ## Documentation
-https://support.lewe.com/docs/confluence-user-macros/chartjs-v2/
+The ChartJs v2 macros require some advanced knowledge to use them. Read all about it here:
+
+[ChartJs v2 Manual](https://support.lewe.com/docs/confluence-user-macros/chartjs-v2/)
 
 ## Credits
 Chart.js by [Nick Downey](http://www.chartjs.org/), distributed under the MIT License
