@@ -1,0 +1,35 @@
+## Macro title: User View Permissions
+## Macro has a body: N
+## Body processing: Rendered
+##
+## Developed by: George Lewe
+## Date created: 2018-01-12
+## Installed by: George Lewe
+## 
+## This macro lists all spaces to which the group 'confluence-users' has at least permission to view it.
+## @param Username:title=Username|type=string|desc=Enter the username for which you want to list all view permissions|default=
+   
+<h1>View permissions for user: $paramUsername</h1>
+   
+<table class="confluenceTable">
+   <tbody>
+      <tr>
+         <th class="confluenceTh">Space</th>
+         <th class="confluenceTh">Permission</th>
+      </tr> 
+      #foreach ($space in $spaceManager.getAllSpaces())
+         #foreach ($permission in $space.getPermissions())
+            #if ($permission.isUserPermission() && $permission.getType() == "VIEWSPACE" && $permission.getUserName() == $paramUsername)
+               <tr>
+                  <td class="confluenceTd"><a href="$req.contextPath$space.getUrlPath()">$space.getName() ($space.getKey())</a></td>
+                  <td class="confluenceTd">
+                     <ul>
+                        <li><a href="/spaces/spacepermissions.action?key=$space.getKey()">View permission</a></li>
+                     </ul>
+                  </td>
+               </tr> 
+            #end
+         #end
+      #end
+   </tbody>
+</table>

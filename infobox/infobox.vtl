@@ -1,0 +1,130 @@
+#* ============================================================================
+ * GROUP MEMBERS
+ *
+ * This Confluence user macro adds an info box with fivwe custom labels and values.
+ *
+ * Version: 1.0.0
+ * Date:    2020-07-14
+ * Author:  George Lewe
+ * Source:
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param Title:title=Title|type=string|required=false|desc=You can define a custom title for the info box. Default ist "Info".
+## @param Other1Label:title=Custom 1 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 1 here.
+## @param Other1:title=Custom 1 Value|type=string|required=false|desc=Enter the value for custom field 1 here.
+## @param Other2Label:title=Custom 2 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 2 here.
+## @param Other2:title=Custom 2 value|type=string|required=false|desc=Enter the value for custom field 2 here.
+## @param Other3Label:title=Custom 3 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 3 here.
+## @param Other3:title=Custom 3 Value|type=string|required=false|desc=Enter the value for custom field 3 here.
+## @param Other4Label:title=Custom 4 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 4 here.
+## @param Other4:title=Custom 4 Value|type=string|required=false|desc=Enter the value for custom field 4 here.
+## @param Other5Label:title=Custom 5 Label|type=string|required=false|desc=You can define five custom fields. Enter the label of field 5 here.
+## @param Other5:title=Custom 5 Value|type=string|required=false|desc=Enter the value for custom field 5 here.
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#if (!$paramTitle)
+   #set ($paramTitle="Info")
+#end
+
+#if (!$paramOther1Label)
+   #set ($paramOther1Label="My Label 1")
+#end
+
+#if (!$paramOther2Label)
+   #set ($paramOther2Label="My Label 2")
+#end
+
+#if (!$paramOther3Label)
+   #set ($paramOther3Label="My Label 3")
+#end
+
+#if (!$paramOther4Label)
+   #set ($paramOther4Label="My Label 4")
+#end
+
+#if (!$paramOther5Label)
+   #set ($paramOther5Label="My Label 5")
+#end
+
+#if (!$paramOther1)
+   #set ($paramOther1="")
+#end
+
+#if (!$paramOther2)
+   #set ($paramOther2="")
+#end
+
+#if (!$paramOther3)
+   #set ($paramOther3="")
+#end
+
+#if (!$paramOther4)
+   #set ($paramOther4="")
+#end
+
+#if (!$paramOther5)
+   #set ($paramOther5="")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<ac:structured-macro ac:name="coloredpanel">
+   <ac:parameter ac:name="Style">Blue</ac:parameter>
+   <ac:parameter ac:name="GradientBackground">true</ac:parameter>
+   <ac:parameter ac:name="atlassian-macro-output-type">BLOCK</ac:parameter>
+   <ac:parameter ac:name="Title">$paramTitle</ac:parameter>
+   <ac:rich-text-body>
+      <ac:structured-macro ac:name="table-plus">
+         <ac:parameter ac:name="class">companycard</ac:parameter>
+         <ac:parameter ac:name="width">100%</ac:parameter>
+         <ac:parameter ac:name="atlassian-macro-output-type">BLOCK</ac:parameter>
+         <ac:parameter ac:name="retainRowStyleOrder">false</ac:parameter>
+         <ac:parameter ac:name="heading">0</ac:parameter>
+         <ac:rich-text-body>
+            <table>
+               <tbody>
+                  <tr>
+                     <td style="min-width:30%;"><strong>$paramOther1Label:</strong></td>
+                     <td>$paramOther1</td>
+                  </tr>
+                  <tr>
+                     <td><strong>$paramOther2Label:</strong></td>
+                     <td>$paramOther2</td>
+                  </tr>
+                  <tr>
+                     <td><strong>$paramOther3Label:</strong></td>
+                     <td>$paramOther3</td>
+                  </tr>
+                  <tr>
+                     <td><strong>$paramOther4Label:</strong></td>
+                     <td>$paramOther4</td>
+                  </tr>
+                  <tr>
+                     <td><strong>$paramOther5Label:</strong></td>
+                     <td>$paramOther5</td>
+                  </tr>
+               </tbody>
+            </table>
+         </ac:rich-text-body>
+      </ac:structured-macro>
+   </ac:rich-text-body>
+</ac:structured-macro>
+
+<ac:structured-macro ac:name="style">
+   <ac:plain-text-body>
+   <![CDATA[
+   .companycard .confluenceTd {border: 0px; padding: 2px 4px 2px 2px;}
+   .companycard .confluenceTh {border: 0px; padding: 2px 4px 2px 2px;}
+   ]]>
+   </ac:plain-text-body>
+</ac:structured-macro>

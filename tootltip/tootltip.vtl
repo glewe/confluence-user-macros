@@ -1,0 +1,103 @@
+#* ============================================================================
+ * TOOLTIP
+ *
+ * This Confluence user macro adds a text with a tooltip.
+ *
+ * Version: 2.0.4
+ * Date:    2021-08-05
+ * Author:  George Lewe
+ * Source:  
+ * License: 
+ *
+ * Macro body: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param Text:title=Hover Text|type=string|required=true|desc=Enter the text over which you want to hover for the tooltip.|default=Hover over me
+## @param Tooltip:title=Tooltip|type=string|required=true|desc=Enter the tooltip you want to pop up.|default=This is a tooltip
+## @param Fontstyle:title=Hover Text Font Style|type=enum|enumValues=normal,italic|desc=Select the font style for the text to hover over. This style is applied to all previous occurrences of this macro on the page.|default=normal
+## @param Fontcolor:title=Hover Text Font Color|type=string|desc=Enter the hexadecimal color code for the text to hover over here, e.g. #000000 = black, #ffffff = white. This style is applied to all occurrences of this macro on the page.|default=inherit
+## @param Underline:title=Hover Text Underline|type=boolean|desc=Use this switch to draw a dotted line under the text to hover over. This style is applied to all previous occurrences of this macro on the page.|default=false
+## @param TTstyle:title=Tooltip Text Font Style|type=enum|enumValues=normal,italic|desc=Select the font style for the text to hover over. This style is applied to all previous occurrences of this macro on the page.|default=normal
+## @param TTcolor:title=Tooltip Text Font Color|type=string|desc=Enter the hexadecimal color code for the text to hover over here, e.g. #000000 = black, #ffffff = white. This style is applied to all previous occurrences of this macro on the page.|default=#ffffff
+## @param TTLink:title=Tooltip Link|type=string|desc=Enter the URL that this tooltip shal link to.|default=#
+
+#* ----------------------------------------------------------------------------
+ * DEFAULTS
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<style>
+.lsy-has-tooltip {
+/*   position: relative;*/
+   display: inline;
+   #if ($paramUnderline==true)
+   border-bottom: 1px dotted black;
+   #end
+   font-style: $paramFontstyle;
+   color: $paramFontcolor;
+}
+
+.lsy-tooltip-wrapper {
+   position: absolute;
+   visibility: hidden;
+   min-width:200px;
+   max-width:350px;
+}
+
+.lsy-has-tooltip:hover .lsy-tooltip-wrapper {
+   visibility: visible;
+   opacity: 0.8;
+   /*top: 30px;*/
+   /*left: 50%;*/
+   /*margin-left: 20px;*/
+   z-index: 9999;
+}
+
+.lsy-tooltip {
+   display: block;
+   position: relative;
+   top: 2em;
+   right: 75%;
+   /* width: 140px; */
+   /* height: 96px; */
+   /* margin-left: -76px; */
+   background: #000000;
+   /* line-height: 96px; */
+   text-align: center;
+   border-radius: 8px;
+   box-shadow: 4px 3px 10px #000000;
+   padding: 12px;
+   font-style: $paramTTstyle !important;
+   color: $paramTTcolor;
+}
+
+.lsy-tooltip:after {
+   content: '';
+   position: absolute;
+   bottom: 100%;
+   left: 50%;
+   margin-left: -8px;
+   width: 0;
+   height: 0;
+   border-bottom: 8px solid #000000;
+   border-right: 8px solid transparent;
+   border-left: 8px solid transparent;
+}
+</style>
+
+#if ($paramTTLink!="#")
+   <a href="$paramTTLink">
+#end
+<i class="lsy-has-tooltip ">$paramText<i class="lsy-tooltip-wrapper"><i class="lsy-tooltip">$paramTooltip</i></i></i>
+#if ($paramTTLink!="#")
+   </a>
+#end

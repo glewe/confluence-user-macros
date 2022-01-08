@@ -1,0 +1,42 @@
+## Macro title: Group members
+## Macro has a body: N
+## Body processing: No macro body
+##
+## Developed by: Balint Zsolt
+## Date created: 2016-07-14
+## Installed by: 
+## Last updated: 2016-07-14 (added links to profile page by B.Zsolt)
+
+## @param Group:title=Group|type=string|desc=Enter the group name here|default=jira-administrators
+
+#set($containerManagerClass = $content.class.forName('com.atlassian.spring.container.ContainerManager'))
+#set($getInstanceMethod = $containerManagerClass.getDeclaredMethod('getInstance',null))
+#set($containerManager = $getInstanceMethod.invoke(null,null))
+#set($containerContext = $containerManager.containerContext)
+
+#set($loginManager = $containerContext.getComponent('loginManager'))
+
+#if (!$paramGroup)
+   #set ($paramshowGroup="jira-administrators")
+#else
+   #set ($paramshowGroup=$paramGroup)
+#end
+
+#set ( $group = $userAccessor.getGroup($paramshowGroup) )
+#set ( $usernames = $userAccessor.getMemberNamesAsList($group) )
+<ac:structured-macro ac:name="table-plus" ac:schema-version="1"><ac:parameter ac:name="sortColumn">1</ac:parameter><ac:parameter ac:name="autoNumber">true</ac:parameter><ac:parameter ac:name="atlassian-macro-output-type">INLINE</ac:parameter><ac:rich-text-body>
+<table class="confluenceTable">
+   <tr>
+      <th class="confluenceTh">Group: $paramshowGroup ($usernames.size())</th>
+       <th class="confluenceTh">Last Login</th>
+   </tr>
+   #foreach ($username in $usernames)
+      #set($fullName = $userAccessor.getUserByName($username).getFullName())
+      #set($lastLoginDate = $loginManager.getLoginInfo($username).lastSuccessfulLoginDate)
+      <tr>
+         <td class="confluenceTd"><a href='/display/~$username'>$fullName</a></td>
+         <td class="confluenceTd">$action.dateFormatter.formatGivenString('yyyy-MM-dd HH:mm', $lastLoginDate)</td>
+      </tr>
+   #end
+</table>
+</ac:rich-text-body></ac:structured-macro>

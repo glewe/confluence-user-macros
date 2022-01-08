@@ -1,0 +1,52 @@
+/*
+ * The imap div
+ */
+#imap {
+   margin: 20px 0px 20px 0px;
+}
+
+/*
+ * The first Confluence table im imap div
+ */
+#imap > .table-wrap > .table-wrap > .confluenceTable {
+   border-collapse: collapse;
+   table-layout: fixed;
+   width: 100%;
+}
+
+/*
+* All rows, left cell
+*/
+#imap > .table-wrap > .table-wrap > .confluenceTable > tbody > tr > .confluenceTd:first-child {
+   border: 0px;
+   padding-top: 12px;
+   padding-bottom: 12px;
+   width: 150px;
+}
+
+/*
+* All rows, right cell
+*/
+#imap > .table-wrap > .table-wrap > .confluenceTable > tbody > tr > .confluenceTd:nth-child(2) {
+   border-top: 1px solid #009900;
+   border-right: 0px;
+   border-bottom: 0px;
+   border-left: 0px;
+   padding-top: 12px;
+   padding-bottom: 12px;
+}
+
+/*
+* First row, right cell (top cell in right column)
+*/
+#imap > .table-wrap > .table-wrap > .confluenceTable > tbody > tr:first-child > .confluenceTd:nth-child(2) {
+   border-top: 1px solid #009900;
+}
+
+/*
+* Last row, right cell (bottom cell in right column)
+*/
+ #imap > .table-wrap > .table-wrap > .confluenceTable > tbody > tr:last-child > .confluenceTd:nth-child(2) {
+   border-bottom: 2px solid #090;
+}
+

@@ -1,0 +1,33 @@
+#* ============================================================================
+ * SPACER
+ *
+ * This Confluence user macro adds a vertical space into your page.
+ *
+ * Version: 1.0.000
+ * Date:    2018-12-04
+ * Author:  George Lewe
+ * Source:  
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETERS
+ *#
+## @param Height:title=Height|type=string|desc=Enter the height of the space in pixel. The default is 20.|default=20
+
+#* ----------------------------------------------------------------------------
+ * INPUT
+ *#
+#if (!$paramHeight)
+   #set ($paramHeight="20px")
+#else
+   #set ($paramHeight=$paramHeight+"px")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<div style="height:$paramHeight;"></div>

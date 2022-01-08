@@ -1,0 +1,124 @@
+#* ============================================================================
+ * INFOMAP
+ *
+ * This Confluence user macro creates an information map table.
+ *
+ * Version: 1.0.002
+ * Date:    2017-09-16
+ * Author:  George Lewe
+ * Source:  
+ * License: 
+ *
+ * Macro body: Rendered
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param Id:title=Identifier|type=string|desc=Please specify a unique identifier for this InfoMap. It must be uique on this page.|required=true|default=infomap
+## @param TitleWidth:title=Title Width|type=string|desc=Enter the width of the title column in pixels or percentage here.|default=150px
+## @param BorderColor:title=Border Color|type=string|desc=Enter the border color to be used in the right column as a hex value starting with a hash.|default=#787878
+## @param BorderWidth:title=Border Color|type=string|desc=Enter the border width to be used in the right column in pixel.|default=1px
+## @param BorderTop:title=Top Border|type=boolean|desc=Select whether the top cell on the right shall have a top border.|default=true
+## @param BorderBottom:title=Bottom Border|type=boolean|desc=Select whether the bottom cell on right shall have a bottom border.|default=true
+## @param TopMargin:title=Top Margin|type=string|desc=Enter the top margin (space above) the InfoMap in pixel here.|default=20px
+## @param BottomMargin:title=Bottom Margin|type=string|desc=Enter the bottom margin (space below) the InfoMap in pixel here.|default=20px
+
+#* ----------------------------------------------------------------------------
+ * DEFAULTS
+ *#
+#set ($varTitleWidth = "150px")
+#set ($varBorderColor = "#787878")
+#set ($varBorderWidth = "1px")
+#set ($varTopBorderWidth = "1px")
+#set ($varBottomBorderWidth = "1px")
+#set ($varTopMargin = "20px")
+#set ($varBottomMargin = "20px")
+#set ($varGT = ">")
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#if ($paramTitleWidth != "")
+   #set ($varTitleWidth = $paramTitleWidth)
+#end
+
+#if ($paramBorderColor != "")
+   #set ($varBorderColor = $paramBorderColor)
+#end
+
+#if ($paramBorderTop == false)
+   #set ($varTopBorderWidth = "0px")
+#end
+
+#if ($paramBorderBottom == false)
+   #set ($varBottomBorderWidth = "0px")
+#end
+
+#if ($paramTopMargin != "")
+   #set ($varTopMargin = $paramTopMargin)
+#end
+
+#if ($paramBottomMargin != "")
+   #set ($varBottomMargin = $paramBottomMargin)
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<div id="$paramId">
+   #if ($body!="")
+      $body
+   #end
+</div>
+
+<style>
+   #$paramId {
+      margin: $varTopMargin 0px $varTopMargin 0px;
+   }
+
+   /*
+   * The whole IMAP table
+   */
+   #$paramId $varGT .table-wrap $varGT .table-wrap $varGT .confluenceTable {
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+   }
+
+   /*
+   * All rows, left cell
+   */
+   #$paramId $varGT .table-wrap $varGT .table-wrap $varGT .confluenceTable $varGT tbody $varGT tr $varGT .confluenceTd:first-child {
+      border: 0px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      width: $varTitleWidth;
+   }
+
+   /*
+   * All rows, right cell
+   */
+   #$paramId $varGT .table-wrap $varGT .table-wrap $varGT .confluenceTable $varGT tbody $varGT tr $varGT .confluenceTd:nth-child(2) {
+      border-top: 1px solid $varBorderColor;
+      border-right: 0px;
+      border-bottom: 0px;
+      border-left: 0px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+   }
+
+   /*
+   * First row, right cell (top cell in right column)
+   */
+   #$paramId $varGT .table-wrap $varGT .table-wrap $varGT .confluenceTable $varGT tbody $varGT tr:first-child $varGT .confluenceTd:nth-child(2) {
+      border-top: $varTopBorderWidth solid $varBorderColor;
+   }
+
+   /*
+   * Last row, right cell (bottom cell in right column)
+   */
+   #$paramId $varGT .table-wrap $varGT .table-wrap $varGT .confluenceTable $varGT tbody $varGT tr:last-child $varGT .confluenceTd:nth-child(2) {
+      border-bottom: $varBottomBorderWidth solid $varBorderColor;
+   }
+</style>
