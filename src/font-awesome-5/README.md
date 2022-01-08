@@ -22,7 +22,7 @@ https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 1. Click Save
 
 ## Install the User Macro ##
-__Note: User Macros are not available in Confluence Cloud!__
+_Note: User Macros are not available in Confluence Cloud!_
 
 1. Login as administrator
 1. Go to "General Configuration", then select "User Macros" from the menu on the left
