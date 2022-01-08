@@ -1,0 +1,28 @@
+#* ============================================================================
+ * TINY LINK
+ *
+ * Displays a link to the Tiny URL of the current page.
+ *
+ * Version: 1.0.0
+ * Date:    2020-04-20
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/tiny-link
+ *
+ * Macro body:      No
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @noparams
+
+<a id="page-tinyurl" href="" target="_blank"></a>
+<script type="text/javascript">
+AJS.toInit(function() {
+   var tinyUrl = $("link[rel=shortlink]").attr("href");
+   var tinyLink = document.getElementById("page-tinyurl") ;
+   tinyLink.innerHTML = tinyUrl;
+   //alert("The Tiny URL of this page is: " + tinyUrl);
+});
+</script>

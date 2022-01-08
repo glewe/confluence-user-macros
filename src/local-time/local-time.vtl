@@ -1,0 +1,138 @@
+#* ============================================================================
+ * LOCAL TIME
+ *
+ * This Confluence user macro displays the user's local date and time offering
+ * several options. Use once per page.
+ *
+ * Version: 1.1.1
+ * Date:    2016-11-18
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/local-time
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param ShowDate:title=Show Date|type=boolean|default=true
+## @param ShowWeekday:title=Show Weekday|type=boolean|default=false
+## @param RefreshRate:title=Refresh Rate|type=string|desc=Specify the refresh rate of the time in milliseconds, e.g. 1000 for every second or 60000 for every minute.|default=1000
+## @param Font:title=Font|type=string|desc=Enter the name of the font you want to use for the display. Default is "inherit" which applies the default font.|default=inherit
+## @param Family:title=Font Family|desc=Select a serif or sans-serif replacement font if your specified one is not found on the viewers computer.|type=enum|enumValues=sans-serif,serif|default=sans-serif
+## @param Weight:title=Font Weight|desc=Select a font weight. Default is "inherit" which applies the default font weight.|type=enum|enumValues=inherit,normal,bold|default=inherit
+## @param Style:title=Font Style|desc=Select a font style. Default is "inherit" which applies the default font style.|type=enum|enumValues=inherit,normal,italic|default=inherit
+## @param Size:title=Font Size|type=string|desc=Enter the factor by which you want to increase or decrease the font size, e.g. 1 = normal, 1.2 = 20% bigger.|default=1
+## @param Color:title=Text Color|type=string|desc=Enter the color hex code for the text color here. Start with a hash (#), e.g. #000000 = black. Default is "inherit" which applies the default color. <a href="http://hslpicker.com/">Color Picker</a>|default=inherit
+## @param Background:title=Background Color|type=string|desc=Enter the color hex code for the background color here. Start with a hash (#), e.g. #000000 = black. Default is "inherit" which applies the default color. <a href="http://hslpicker.com/">Color Picker</a>|default=inherit
+## @param ShowBorder:title=Show Border|type=boolean|desc=Select whether to display a border around the display.|default=false
+## @param BorderColor:title=Border Color|type=string|desc=Enter the color hex code for the border color here. Start with a hash (#), e.g. #000000 = black. <a href="http://hslpicker.com/">Color Picker</a>|default=#666666
+## @param FixedTimezone:title=Fixed Timezone|type=boolean|desc=Select this option if you want to display a fixed timezone instead of the user's local time. Enter the appropriate GMT offset below.|default=false
+## @param GMTOffset:title=GMT Offset|type=string|desc=Enter the GMT offset for the fixed timezone you want to display, e.g. +2 or -5.5. Default is 0. This setting only has an effect with Fixed Timezone being selected above.|default=0
+## @param TimezoneText:title=Timezone|type=string|desc=You may enter a text for the fixed timezone here, e.g. a city name, that will be displayed too. This setting only has an effect with Fixed Timezone being selected above.
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+##
+## Figure out what to display
+##
+#set($timeString="%H:%M:%S")
+#set($dateString="")
+#set($weekdayString="")
+#set($timeZone="")
+
+#if ($paramShowDate==true)
+   #set($dateString="%y-%m-%d, ")
+#end
+
+#if ($paramShowWeekday==true)
+   #set($weekdayString="%w, ")
+#end
+
+#if ($paramFixedTimezone==true && $paramTimezoneText.length() > 1)
+   #set($timeZone=" (" + $paramTimezoneText + ")")
+#end
+
+#set($formatString = $dateString + $weekdayString + $timeString)
+
+##
+## Figure out how to display
+##
+#set($borderStyle="")
+#set($backgroundStyle="background-color:" + $paramBackground)
+#set($fontSize = $paramSize + "em")
+#set($fontWeightStyle="font-weight:" + $paramWeight)
+#set($fontStyleStyle="font-style:" + $paramStyle)
+#if ($paramShowBorder==true)
+   #set($borderStyle="border:1px solid " + $paramBorderColor + ";border-radius:4px;padding:4px 6px 4px 6px")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<span id='local-time' style="font-size:$fontSize;font-family:$paramFont,$paramFamily;color:$paramColor;$backgroundStyle;$borderStyle;$fontWeightStyle;$fontStyleStyle;"></span>
+
+#* ----------------------------------------------------------------------------
+ * JAVASCRIPT
+ *#
+<script type="text/javascript">
+//<![CDATA[
+window.onload = function(){
+   display_time();
+}
+
+function refresh_time(){
+   var refresh=$paramRefreshRate; // Refresh rate in milliseconds
+   mytime=setTimeout('display_time()',refresh);
+}
+
+function display_time() {
+   var strcount;
+   var fmt = new DateFmt("$formatString")
+   if ($paramFixedTimezone) {
+      var d = new Date();
+      var utc = d.getTime() + (d.getTimezoneOffset()*60000);
+      var x = fmt.format(new Date(utc + (3600000*$paramGMTOffset))) + '$timeZone';
+   }
+   else {
+      var x = fmt.format(new Date());
+   }
+   document.getElementById('local-time').innerHTML = x;
+   tt=refresh_time();
+}
+
+function DateFmt(fstr) { // By samsonl (http://snipplr.com/view/66968.82825/)
+   this.formatString = fstr;
+   var mthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+   var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+   var zeroPad = function(number) {
+      return ("0"+number).substr(-2,2);
+   }
+
+   var dateMarkers = {
+      d:['getDate',function(v){return zeroPad(v)}],
+      m:['getMonth',function(v){return zeroPad(v+1)}],
+      n:['getMonth',function(v){return mthNames[v]; }],
+      w:['getDay',function(v){return dayNames[v]; }],
+      y:['getFullYear'],
+      H:['getHours',function(v){return zeroPad(v)}],
+      M:['getMinutes',function(v){return zeroPad(v)}],
+      S:['getSeconds',function(v){return zeroPad(v)}],
+      i:['toISOString']
+   };
+
+   this.format = function(date) {
+      var dateTxt = this.formatString.replace(/%(.)/g, function(m,p) {
+         var rv = date[(dateMarkers[p])[0]]();
+         if (dateMarkers[p][1] != null) 
+            rv = dateMarkers[p][1](rv);
+         return rv;
+      });
+      return dateTxt;
+   }
+}
+//]]>
+</script>

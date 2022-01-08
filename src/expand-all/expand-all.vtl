@@ -1,0 +1,75 @@
+#* ============================================================================
+ * EXPAND ALL
+ *
+ * This Confluence user macro toggles/expands/collapses all Expand sections on 
+ * your page. 
+ *
+ * Version: 1.0.1
+ * Date:    2016-11-17
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/expand-all
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @noparams
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<a id="toggleAll" href="#" title="Toggles all Expand sections on the page. Expanded ones will collapse, collapsed ones will expand.">Toggle All</a> | <a id="expandAll" href="#" title="Expands all Expand sections on the page.">Expand All</a> | <a id="collapseAll" href="#" title="Collapses all Expand sections on the page.">Collapse All</a>
+
+#* ----------------------------------------------------------------------------
+ * JAVASCRIPT
+ *#
+<script type="text/javascript">
+AJS.toInit(function () {
+   
+   AJS.$('#toggleAll').click(function() {
+      jQuery(".expand-control").each(function(){
+         var $expander=$(this);
+         var $expanderIcon=$(".expand-control-icon", $expander);
+         var $expanderContent=$(".expand-content",$expander.closest(".expand-container")).first();
+         if ($expanderContent.hasClass("expand-hidden")){
+            $expanderContent.show();
+            $expanderContent.animate({opacity:1});
+         } else {
+            $expanderContent.hide();
+            $expanderContent.animate({opacity:0});
+         }
+         $expanderContent.toggleClass("expand-hidden");
+         $expanderIcon.toggleClass("expanded");
+      })
+   });
+   
+   AJS.$('#expandAll').click(function() {
+      jQuery(".expand-control").each(function(){
+         var $expander=$(this);
+         var $expanderIcon=$(".expand-control-icon", $expander);
+         var $expanderContent=$(".expand-content",$expander.closest(".expand-container")).first();
+         $expanderContent.show();
+         $expanderContent.animate({opacity:1});
+         $expanderContent.toggleClass("expand-hidden",false);
+         $expanderIcon.toggleClass("expanded",true);
+      })
+   });
+
+   AJS.$('#collapseAll').click(function() {
+      jQuery(".expand-control").each(function(){
+         var $expander=$(this);
+         var $expanderIcon=$(".expand-control-icon", $expander);
+         var $expanderContent=$(".expand-content",$expander.closest(".expand-container")).first();
+         $expanderContent.hide();
+         $expanderContent.animate({opacity:0});
+         $expanderContent.toggleClass("expand-hidden",true);
+         $expanderIcon.toggleClass("expanded",false);
+      })
+   });
+   
+});
+</script>

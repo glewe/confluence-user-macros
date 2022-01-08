@@ -1,0 +1,71 @@
+#* ============================================================================
+ * HIDE SECTIONS
+ *
+ * This Confluence user macro hides Confluence sections of your page.
+ *
+ * Version: 1.0.1
+ * Date:    2016-11-18
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/hide-sections
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param HideBreadcrumbs:title=Hide Breadcrumbs|type=boolean|desc=Select to hide the breadcrumbs section.|default=false
+## @param HideChildren:title=Hide Children|type=boolean|desc=Select to hide the children section.|default=false
+## @param HideComments:title=Hide Comments|type=boolean|desc=Select to hide the comments section.|default=false
+## @param HideLabels:title=Hide Labels|type=boolean|desc=Select to hide the labels section.|default=false
+## @param HideLikes:title=Hide Likes|type=boolean|desc=Select to hide the likes section.|default=false
+## @param HideModification:title=Hide Modification Info|type=boolean|desc=Select to hide the modification info section.|default=false
+## @param HideTitle:title=Hide Page Title|type=boolean|desc=Select to hide the page title.|default=false
+## @param HideSidebar:title=Hide Sidebar|type=boolean|desc=Select to hide the sidebar.|default=false
+## @param HideToolsMenu:title=Hide Tools Menu|type=boolean|desc=Select to hide the tools menu.|default=false
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#set ($hideScripts="") 
+#set ($hideStyles="")
+ 
+#if ($paramHideBreadcrumbs==true)
+   #set($hideStyles=$hideStyles+"div#breadcrumb-section{display:none;}")
+#end
+#if ($paramHideChildren==true)
+   #set($hideStyles=$hideStyles+"div#children-section.pageSection{display:none;}")
+#end
+#if ($paramHideComments==true)
+   #set($hideStyles=$hideStyles+"div#comments-section{display:none;}")
+#end
+#if ($paramHideLabels==true)
+   #set($hideStyles=$hideStyles+".label-list{display:none;}")
+#end
+#if ($paramHideLikes==true)
+   #set($hideStyles=$hideStyles+"div#likes-section{display:none;}")
+#end
+#if ($paramHideModification==true)
+   #set($hideStyles=$hideStyles+"li.page-metadata-modification-info{display:none;}a#content-metadata-page-restrictions{display:none;}a#content-metadata-attachments{display:none;}")
+#end
+#if ($paramHideTitle==true)
+   #set($hideScripts=$hideScripts+"document.getElementById('title-text').innerHTML='&nbsp;';")
+#end
+#if ($paramHideSidebar==true)
+   #set($hideStyles=$hideStyles+".ia-fixed-sidebar {display: none;}.ia-splitter #main,.ia-splitter #footer{margin-left:0px !important;}")
+#end
+#if ($paramHideToolsMenu==true)
+   #set($hideStyles=$hideStyles+"a#action-menu-link {display: none;}")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+#if ($hideStyles!="")
+   <style type="text/css">$hideStyles</style>
+#end   
+#if ($hideScripts!="")
+   <script>$hideScripts</script>
+#end   

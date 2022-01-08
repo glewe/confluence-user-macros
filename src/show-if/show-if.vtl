@@ -1,0 +1,100 @@
+#* ============================================================================
+ * SHOW IF
+ *
+ * This Confluence user macro allows to show content based on conditions.
+ *
+ * Version: 1.0.1
+ * Date:    2020-04-01
+ * Author:  Cyrille Martin [VALIANTYS], George Lewe
+ * Source:  https://bitbucket.org/georgelewe/show-if
+ *
+ * Macro body:      Yes
+ * Body processing: Rendered
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param match:title=Match Using|type=enum|enumValues=all,any|required=false|desc=If set to any, only one of the specified restrictions needs to match.|default=any
+## @param user:title=Users|type=username|required=false|desc=The list of users that can see this content.|multiple=true
+## @param group:title=User groups|type=string|required=false|desc=The list of user groups that can see this content.
+## @param spacePermission:title=Space Permissions|type=string|required=false|desc=This property allows you to define whether the content inside this macro is shown to a certain user based on his space permissions. This can be done by either of the following:</br>Using @self to specify current space, followed by ":", then followed by permission type e.g. @self:view<br>These are the permission types:</br><ul><li><strong>view</strong> - (default) The user can view the space.</li><li><strong>edit</strong> - The user can edit pages.</li><li><strong>admin</strong> - The user can administer the space.</li><li><strong>news</strong> - The user can post a blog entry</li></ul>
+## @param display:title=Display Types|type=string|required=false|desc=This property allows the user to show content only on the Confluence page but not in a document that has been exported to PDF or Word.</br>The (list of) display modes:</br><strong>default</strong> - content is shown in both Confluence and the exported PDF or Word document</br><strong>printable</strong> - content is hidden in the exported PDF document
+ 
+#set( $showcontentuser = false )
+#set( $showcontentgroup = false )
+#set( $getPermission = false )
+#set( $username = "$req.getRemoteUser()" )
+ 
+#* ----------------------------------------------------------------------------
+ * Check allowed users
+ *#
+#if( $!paramuser )
+   #foreach( $userlisted in $paramuser.split(",") )
+      #if( $userlisted == $username )
+         #set( $showcontentuser = true )
+      #end
+   #end
+#end
+ 
+#* ----------------------------------------------------------------------------
+ * Check allowed groups
+ *#
+#if( $!paramgroup )
+   #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
+      #foreach( $grouplisted in $paramgroup.split(",") )
+         #if( $grouplist == $grouplisted )
+         #set( $showcontentgroup = true )
+         #end
+      #end
+   #end
+#end
+ 
+#* ----------------------------------------------------------------------------
+ * Check allowed permissions
+ *#
+#if( $!paramspacePermission )
+   #set ( $colonIndex = $paramspacePermission.indexOf(":") )
+   #if ( $colonIndex == -1 )
+      #set ( $pagePermission = $paramspacePermission )
+   #else
+      #set ( $spaceKey = $paramspacePermission.substring(0, $colonIndex) )
+      #set ( $pageActionIndex = $colonIndex + 1 )
+      #set ( $pagePermission = $paramspacePermission.substring($pageActionIndex) )
+   #end
+   #if( $pagePermission == "edit" )
+      #set( $getPermission = $permissionHelper.canEdit($userAccessor.getUserByName($username),$content) )
+   #elseif( $pagePermission ==  "view" )
+      #set( $getPermission = $permissionHelper.canViewPage($userAccessor.getUserByName($username),$content) )
+   #elseif( $pagePermission ==  "news" )
+      #set( $getPermission = $permissionHelper.canCreateBlogPost($userAccessor.getUserByName($username),$space) )
+   #elseif( $pagePermission ==  "admin" )
+      #set( $getPermission = $permissionHelper.canAdminister($userAccessor.getUserByName($username),$space) )
+   #end
+#end
+ 
+ 
+#* ----------------------------------------------------------------------------
+ * Display body based on above check
+ *#
+#if( $parammatch == "any" )
+   #if( $showcontentuser || $showcontentgroup || $getPermission )
+      #if( $!paramdisplay != "printable" )
+         $body
+      #else
+         <div class="NoDisplay">
+         $body
+         </div>
+      #end
+   #end
+#else
+   #if( (($!paramuser && $showcontentuser) || !($!paramuser || $showcontentuser)) && (( $!paramgroup && $showcontentgroup) || !( $!paramgroup || $showcontentgroup)) && (($!paramspacePermission && $getPermission) || !($!paramspacePermission || $getPermission)) )
+      #if( $!paramdisplay != "printable" )
+         $body
+      #else
+         <div class="NoDisplay">
+         $body
+         </div>
+      #end
+   #end
+#end

@@ -1,0 +1,33 @@
+#* ============================================================================
+ * PAGE FONT
+ *
+ * This Confluence user macro allows you to change the font on yur page, incl.
+ * size and color.
+ *
+ * Version: 1.0.2
+ * Date:    2017-02-12
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/page-font
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param Font:title=Font|type=string|desc=Enter the name of the font you want to use on your page. This will only affect the page content, not the page title or navigation.|default=Segoe UI
+## @param Style:title=Style|desc=Select whether you prefer a serif or sans-serif replacement font if your specified one is not found on the viewers computer.|type=enum|enumValues=sans-serif,serif|default=sans-serif
+## @param Size:title=Size|type=string|desc=Enter the factor by which you want to increase or decrease the font size, e.g. 1 = normal, 1.2 = 20% bigger.|default=1.2
+## @param Color:title=Text Color|type=string|desc=Enter the color hex code for the paragraph text color here. Start with a hash (#), e.g. #000000 = black (find more color codes in the documentation). Default is "inherit" which applies the default color.|default=inherit
+
+#set ($fontSize = $paramSize + "em")
+
+<style type="text/css">
+   #main-content.wiki-content {
+      font-size: $fontSize;
+      font-family: $paramFont, $paramStyle;
+      color: $paramColor;
+   }
+</style>

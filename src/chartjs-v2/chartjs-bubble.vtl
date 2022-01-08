@@ -1,0 +1,174 @@
+#* ============================================================================
+ * CHARTJS v2 BUBBLE
+ *
+ * This Confluence user macro adds an animated bubble chart to your page.
+ *
+ * Version: 2.0.0
+ * Date:    2018-11-16
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/chartjs-v2
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyBubbleChart
+## @param ShowTitle:title=Show Title|type=boolean|desc=Select whether the chart title shall be displayed.|default=true
+## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Bubble Chart
+## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
+## @param BorderWidth:title=Border Width|type=string|required=false|desc=Enter the width of the chart border followed by 'px'. Enter 0px for no border.|default=1px
+## @param BorderColor:title=Border Color|type=string|required=false|desc=Enter the border color as a hex value starting with a hash.|default=#d7d7d7
+## @param BubbleBorderWidth:title=Bubble Border Width|type=string|required=false|desc=Enter the bubble border width in pixels.|default=1
+## @param HoverBorderWidth:title=Hover Border Width|type=string|required=false|desc=Enter the bubble border width when hovered in pixels.|default=1
+## @param AspectRatio:title=Aspect Ratio|type=boolean|desc=Select whether to maintain the aspect ratio.|default=true
+## @param ShowLegend:title=Show Legend|type=boolean|desc=Select whether to show the legend or not.|default=true
+## @param ShowTooltips:title=Show Tooltips|type=boolean|desc=Select whether to show tooltips or not.|default=true
+## @param ShowTable:title=Show Data Table|type=boolean|desc=Select whether to hide the data table or not.|default=false
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#set ($tableDivID = $paramChartID + "-dataTable")
+
+#if (!$paramChartTitle)
+   #set ($paramTitle="My Bubble Chart")
+#end
+
+#set ($aspectRatio="aspectRatio:1,")
+#if ($paramAspectRatio == false)
+   #set ($aspectRatio="")
+#end
+
+#set ($showLegend="")
+#if ($paramShowLegend == false)
+   #set ($showLegend="legend:false,")
+#end
+
+#set ($showTooltips="")
+#if ($paramShowTooltips == false)
+   #set ($showTooltips="tooltips:false,")
+#end
+
+#set ($displayTable="none")
+#if ($paramShowTable == true)
+   #set ($displayTable="block")
+#end
+
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<div id="$tableDivID" style="display:$displayTable;">
+   #if($body!="") $body #end
+</div>
+
+<div style="width: $paramChartWidth;">
+   #if ($paramShowTitle == true)
+   <div style="text-align: center; font-weight: bold; margin-bottom:8px;">$paramChartTitle</div>
+   #end
+   <canvas id="$paramChartID" data-charttype="bubble" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
+</div>
+
+
+#* ----------------------------------------------------------------------------
+ * JAVASCRIPT
+ *#
+<script type="text/javascript">
+//<![CDATA[
+   var divTables = document.getElementById("$tableDivID").getElementsByTagName("table");
+   var bubbleTable = divTables[0];
+   var bubbleData = [];
+   var currentLabel = "no_label";
+   var rowLabel = "";
+   var bubbleDatasets = [];
+   var baseColor = "";
+   var transparentColor = "";
+   var opaqueColor = "";
+
+   function randomColor( format ){
+      var rint = Math.floor( 0x100000000 * Math.random());
+      switch( format ){
+         case 'hex':
+            return '#' + ('00000'   + rint.toString(16)).slice(-6).toUpperCase();
+         case 'hexa':
+            return '#' + ('0000000' + rint.toString(16)).slice(-8).toUpperCase();
+         case 'rgb':
+            return 'rgb('  + (rint & 255) + ',' + (rint >> 8 & 255) + ',' + (rint >> 16 & 255) + ',';
+         case 'rgba':
+            return 'rgba(' + (rint & 255) + ',' + (rint >> 8 & 255) + ',' + (rint >> 16 & 255) + ',' + (rint >> 24 & 255)/255 + ')';
+         default:
+            return rint;
+      }
+   }   
+
+   for ( var i = 1; row = bubbleTable.rows[i]; i++ ) {
+      row = bubbleTable.rows[i];
+
+      col = row.cells[0];
+      rowLabel = col.firstChild.nodeValue;
+      if (rowLabel != currentLabel) {
+         if (i > 1) {
+            baseColor = randomColor('rgb');
+            transparentColor = baseColor + '0.2)';
+            opaqueColor = baseColor + '1)';
+            bubbleDatasets.push({
+               label:currentLabel,
+               backgroundColor:transparentColor,
+               borderColor:opaqueColor,
+               borderWidth:$paramBubbleBorderWidth,
+               hoverBackgroundColor:opaqueColor,
+               hoverBorderColor:opaqueColor,
+               hoverBorderWidth:$paramHoverBorderWidth,
+               data:bubbleData
+            });
+            bubbleData = [];
+         }
+         currentLabel = rowLabel;
+      }
+
+      col = row.cells[1];
+      myX = parseInt(col.firstChild.nodeValue);
+
+      col = row.cells[2];
+      myY = parseInt(col.firstChild.nodeValue);
+
+      col = row.cells[3];
+      myR = parseInt(col.firstChild.nodeValue);
+
+      bubbleData.push({
+         x:myX,
+         y:myY,
+         r:myR
+      });
+   }
+
+   baseColor = randomColor('rgb');
+   transparentColor = baseColor + '0.2)';
+   opaqueColor = baseColor + '1)';
+   bubbleDatasets.push({
+      label:currentLabel,
+      backgroundColor:transparentColor,
+      borderColor:opaqueColor,
+      borderWidth:$paramBubbleBorderWidth,
+      hoverBackgroundColor:opaqueColor,
+      hoverBorderColor:opaqueColor,
+      hoverBorderWidth:$paramHoverBorderWidth,
+      data:bubbleData
+   });
+   //alert(JSON.stringify(bubbleDatasets));
+
+   var data$paramChartID = {
+      datasets : bubbleDatasets
+   }
+   
+   var options$paramChartID = {
+      $aspectRatio
+      $showLegend
+      $showTooltips
+   }
+//]]>
+</script>

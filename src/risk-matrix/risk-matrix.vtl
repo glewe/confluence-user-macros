@@ -1,0 +1,294 @@
+#* ============================================================================
+ * RISK MATRIX
+ *
+ * Creates a risk matrix based on an issue type, likelihood field and impact field.
+ *
+ * Version: 2.0.0
+ * Date:    2020-08-11
+ * Author:  George Lewe
+ * Source:  
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param ProjectKeys:title=Project Keys|type=string|desc=Enter the project keys you want include in the report. Separate them by comma.|default=ISOA,ISOB
+## @param Issuetype:title=Issue Type|type=string|desc=Enter the issue type for the report.|default=Risk
+## @param FontSize:title=Font Size|type=string|desc=Enter the factor by which you want to increase the font size, e.g. 1 = normal, 1.2 = 20% bigger.|default=1.1
+## @param Subtitle:title=Subtitle|desc=Enter a subtitle to show under the matrix.|type=string
+## @param Likelihood1:title=Likelihood 1|type=string|desc=Enter the text for likelihood level 1.|default=1 - Rare (<10%)
+## @param Likelihood2:title=Likelihood 2|type=string|desc=Enter the text for likelihood level 2.|default=2 - Unlikely (11-30%)
+## @param Likelihood3:title=Likelihood 3|type=string|desc=Enter the text for likelihood level 3.|default=3 - Possible (31-50%)
+## @param Likelihood4:title=Likelihood 4|type=string|desc=Enter the text for likelihood level 4.|default=4 - Likely (51-80%)
+## @param Likelihood5:title=Likelihood 5|type=string|desc=Enter the text for likelihood level 5.|default=5 - Almost certain (81-99%)
+## @param Impact1:title=Impact 1|type=string|desc=Enter the text for impact level 1.|default=1 - Very low
+## @param Impact2:title=Impact 1|type=string|desc=Enter the text for impact level 2.|default=2 - Low
+## @param Impact3:title=Impact 1|type=string|desc=Enter the text for impact level 3.|default=3 - Medium
+## @param Impact4:title=Impact 1|type=string|desc=Enter the text for impact level 4.|default=4 - High
+## @param Impact5:title=Impact 1|type=string|desc=Enter the text for impact level 5.|default=5 - Very high
+
+#* ----------------------------------------------------------------------------
+ * VARIABLES
+ *#
+#set ($fontSize = $paramFontSize + "em")
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<div>
+   <table class="riskmatrix">
+      <tr>
+         <td class="no-border"></td>
+         <td class="no-border"></td>
+         <td class="label-name-top" colspan="5"><div class="label-horizontal">Impact</div></td>
+      </tr>
+      <tr>
+         <td class="no-border"></td>
+         <td class="no-border"></td>
+         <td class="label-value">1</td>
+         <td class="label-value">2</td>
+         <td class="label-value">3</td>
+         <td class="label-value">4</td>
+         <td class="label-value">5</td>
+      </tr>
+      <tr>
+         <td class="label-name-left" rowspan="5" style="border-left:2px solid;"><div class="label-vertical">Likelihood</div></td>
+         <td class="label-value">5</td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood5" and Impact = "$paramImpact1" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood5" and Impact = "$paramImpact2" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood5" and Impact = "$paramImpact3" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood5" and Impact = "$paramImpact4" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood5" and Impact = "$paramImpact5" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+      </tr>
+      <tr>
+         <td class="label-value">4</td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood4" and Impact = "$paramImpact1" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood4" and Impact = "$paramImpact2" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood4" and Impact = "$paramImpact3" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood4" and Impact = "$paramImpact4" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood4" and Impact = "$paramImpact5" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+      </tr>
+      <tr>
+         <td class="label-value">3</td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood3" and Impact = "$paramImpact1" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood3" and Impact = "$paramImpact2" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood3" and Impact = "$paramImpact3" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood3" and Impact = "$paramImpact4" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-red">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood3" and Impact = "$paramImpact5" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+      </tr>
+      <tr>
+         <td class="label-value">2</td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood2" and Impact = "$paramImpact1" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood2" and Impact = "$paramImpact2" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood2" and Impact = "$paramImpact3" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood2" and Impact = "$paramImpact4" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood2" and Impact = "$paramImpact5" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+      </tr>
+      <tr>
+         <td class="label-value">1</td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood1" and Impact = "$paramImpact1" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood1" and Impact = "$paramImpact2" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-green">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood1" and Impact = "$paramImpact3" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood1" and Impact = "$paramImpact4" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+         <td class="risk-yellow">
+            <ac:structured-macro ac:macro-id="a9ff83e9-219b-4416-a911-ed409e664cb2" ac:name="jira" ac:schema-version="1">
+               <ac:parameter ac:name="server">inTrack</ac:parameter>
+               <ac:parameter ac:name="jqlQuery">project in ($paramProjectKeys) and issuetype = "$paramIssuetype" and Likelihood = "$paramLikelihood1" and Impact = "$paramImpact5" </ac:parameter>
+               <ac:parameter ac:name="count">true</ac:parameter>
+               <ac:parameter ac:name="serverId">5e8f7bbd-3e9d-38c6-bea1-33a932dc9e92</ac:parameter>
+            </ac:structured-macro>
+         </td>
+      </tr>
+   </table>
+   #if ($paramSubtitle)
+      <p class="riskmatrix-subtitle">$paramSubtitle</p>
+   #end
+  
+   <style>
+      table.riskmatrix {border-collapse:collapse;font-size:$fontSize;}
+      table.riskmatrix td {width:50px; height:50px; border:1px solid #000000; text-align:center; vertical-align: middle;}
+      table.riskmatrix td.no-border {border:0px !important; padding:0px !important; margin:0px !important;}
+      table.riskmatrix td.risk-green, table.riskmatrix td.risk-green a {font-weight:bold;background-color:#00aa00;color:#ffffff;}
+      table.riskmatrix td.risk-yellow, table.riskmatrix td.risk-yellow a {font-weight:bold;background-color:#ffff00;color:#000000;}
+      table.riskmatrix td.risk-red, table.riskmatrix td.risk-red a {font-weight:bold;background-color:#ff0000;color:#ffffff;}
+      table.riskmatrix td.label-name-top { color:inherit; }
+      table.riskmatrix td.label-name-left { width:28px !important;color:inherit; }
+      table.riskmatrix td.label-value {color:#999999; font-weight:bold;font-style: italic;}
+      div.label-horizontal {font-weight:bold;font-style: italic;}
+      div.label-vertical {font-weight:bold;font-style: italic; transform: rotate(-90deg);}
+      p.riskmatrix-subtitle {font-size:$fontSize;font-style: italic;}
+   </style>
+   
+</div>

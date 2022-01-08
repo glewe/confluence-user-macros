@@ -1,0 +1,107 @@
+#* ============================================================================
+ * CHARTJS v2 RADAR
+ *
+ * This Confluence user macro adds an animated radar chart to your page.
+ *
+ * Version: 1.0.0
+ * Date:    2017-07-22
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/chartjs-v2
+ * License: GNU LGPLv3
+ *
+ * Macro body:      None
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param ChartID:title=Chart ID|type=string|required=true|desc=Enter a unique (!) identifier for this chart on your page. Use no blanks.|default=MyRadarChart
+## @param ChartTitle:title=Chart Title|type=string|required=false|desc=Enter the title of your chart.|default=My Radar Chart
+## @param ChartWidth:title=Chart Width|type=string|required=true|desc=Enter the width of your chart in pixels or percent here. The height will be automatically adjusted.|default=500px
+## @param ChartColor:title=Chart Color|type=string|required=false|desc=Enter the chart color here in the form of three decimal values for R, G and B separated by a comma.|default=255,100,100
+## @param BorderWidth:title=Border Width|type=string|required=false|desc=Enter the width of the chart border followed by 'px'. Enter 0px for no border.|default=1px
+## @param BorderColor:title=Border Color|type=string|required=false|desc=Enter the border color as a hex value starting with a hash.|default=#d7d7d7
+## @param ShowTitle:title=Show Title|type=boolean|desc=Select whether the chart title shall be displayed.|default=true
+## @param DataLabels:title=Dataset Labels|type=string|required=true|desc=Enter a semicolon separated list of your datasete labels. They apply to all datasets. Make sure you enter as much labels as you enter dataset values below.|default=Apples,Oranges,Bananas,Grapes
+## @param Data1Title:title=Dataset 1 Legend|type=string|required=true|desc=Enter the title of this dataset.|default=My dataset
+## @param Data1Values:title=Dataset 1 Values|type=string|required=true|desc=Enter a comma separated list of your data values. Make sure you enter as much values as you enter labels above.|default=18,29,40,34,24
+## @param Data1LineWidth:title=Dataset 1 Line Width|type=string|required=false|desc=Enter the line width of this dataset in pixels.|default=1
+## @param Data1LineColor:title=Dataset 1 Line Color|type=string|required=false|desc=Enter the line color of this dataset. Use three decimal values for R, G and B separated by a comma.|default=151,187,205
+## @param Data1BackgroundColor:title=Dataset 1 Background Color|type=string|required=false|desc=Enter the fill color inside the area of this dataset. Use three decimal values for R, G and B separated by a comma.|default=151,187,205
+## @param ShowSecondSet:title=Show Second Dataset|type=boolean|desc=Select whether the chart shall show a second dataset. If unchecked, the values below have no effect.|default=false
+## @param Data2Title:title=Dataset 2 Legend|type=string|required=true|desc=Enter the title of this dataset.|default=My second dataset
+## @param Data2Values:title=Dataset 2 Values|type=string|required=true|desc=Enter a comma separated list of your data values. Make sure you enter as much values as you enter labels above.|default=4,34,8,21,3
+## @param Data2LineWidth:title=Dataset 2 Line Width|type=string|required=false|desc=Enter the line width of this dataset in pixels.|default=1
+## @param Data2LineColor:title=Dataset 2 Line Color|type=string|required=false|desc=Enter the line color of this dataset. Use three decimal values for R, G and B separated by a comma.|default=179,179,0
+## @param Data2BackgroundColor:title=Dataset 2 Background Color|type=string|required=false|desc=Enter the fill color inside the area of this dataset. Use three decimal values for R, G and B separated by a comma.|default=179,179,0
+
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#if (!$paramChartTitle)
+   #set ($paramTitle="My Radar Chart")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<div style="width: $paramChartWidth;">
+   #if ($paramShowTitle == true)
+   <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
+   #end
+   <canvas id="$paramChartID" data-charttype="radar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
+</div>
+
+#* ----------------------------------------------------------------------------
+ * JAVASCRIPT
+ *#
+<script type="text/javascript">
+//<![CDATA[
+   var data$paramChartID = {
+      labels : [
+         #set( $myLabels = $paramDataLabels.split(","))
+         #foreach( $item in $myLabels )
+            "$item",
+         #end
+      ],
+      datasets : [
+         {
+            label : "$paramData1Title",
+            backgroundColor : "rgba($paramData1BackgroundColor,0.2)",
+            borderColor : "rgba($paramData1LineColor,1)",
+            borderWidth: $paramData1LineWidth,
+            pointBackgroundColor : "rgba($paramData1LineColor,1)",
+            data : [
+            #set( $myValues = $paramData1Values.split(","))
+            #foreach( $item in $myValues )
+               $item,
+            #end
+            ]
+         }
+         #if ($paramShowSecondSet == true)
+         ,{
+            label : "$paramData2Title",
+            backgroundColor : "rgba($paramData2BackgroundColor,0.2)",
+            borderColor : "rgba($paramData2LineColor,1)",
+            borderWidth: $paramData2LineWidth,
+            pointBackgroundColor : "rgba($paramData2LineColor,1)",
+            data : [
+            #set( $myValues = $paramData2Values.split(","))
+            #foreach( $item in $myValues )
+               $item,
+            #end
+            ]
+         }
+         #end
+      ]
+   }
+   
+   var options$paramChartID = {
+      legend: { position: 'top', },
+      scale: { ticks: { beginAtZero: true } },
+      responsive : true
+   }
+//]]>
+</script>

@@ -1,0 +1,46 @@
+#* ============================================================================
+ * HORIZONTAL RULER
+ *
+ * This Confluence user macro adds a custom HR element to your page.
+ *
+ * Version: 1.0.0
+ * Date:    2021-11-01
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/horizonta-ruler
+ * License: GNU LGPLv3
+ *
+ * Macro body:      No
+ * Body processing: None
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETER
+ *#
+## @param Strength:title=Strength|type=int|desc=Enter the thickness of the horizontal line in pixel. Default is 1.|default=1
+## @param Color:title=Color|type=string|desc=Enter the border color in hexadecimal starting with a #. Default: #cccccc. <a href="http://hslpicker.com/">Color Picker</a>|default=#cccccc
+## @param SpaceBefore:title=Space Before|type=string|desc=Enter the space above the line in pixels (add suffix 'px', e.g. 20px). Default: 20px|default=20px
+## @param SpaceAfter:title=Space After|type=string|desc=Enter the space below the line in pixels (add suffix 'px', e.g. 20px). Default: 20px|default=20px
+
+#* ----------------------------------------------------------------------------
+ * PROCESS INPUT
+ *#
+#if (!$paramStrength)
+   #set ($paramStrength="1px")
+#end
+
+#if (!$paramColor)
+   #set ($paramColor="#cccccc")
+#end
+
+#if (!$paramSpaceBefore)
+   #set ($paramSpaceBefore="20px")
+#end
+
+#if (!$paramSpaceAfter)
+   #set ($paramSpaceAfter="20px")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<hr style="border:$paramStrength;border-color:$paramColor;margin-top:$paramSpaceBefore;margin-bottom:$paramSpaceAfter;">

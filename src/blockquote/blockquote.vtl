@@ -1,0 +1,82 @@
+#* ============================================================================
+ * BLOCKQOUTE
+ *
+ * This Confluence user macro adds a styled blockquote to your page.
+ *
+ * Version: 1.1.0
+ * Date:    2017-09-23
+ * Updated: 2018-08-07
+ * Author:  George Lewe
+ * Source:  https://bitbucket.org/georgelewe/blockquote
+ * License: GNU LGPLv3
+ *
+ * Macro body: Rendered
+ *#
+
+#* ----------------------------------------------------------------------------
+ * PARAMETERS
+ *#
+## @param Source:title=Source|type=string|desc=Enter the source (e.g. name of the person) of the quote.|default=
+
+#* ----------------------------------------------------------------------------
+ * DEFAULTS
+ *#
+#set ($citeTag = "")
+
+#* ----------------------------------------------------------------------------
+ * INPUT
+ *#
+#if ($paramSource != "")
+   #set ($citeTag = "<cite>" + $paramSource + "</cite>")
+#end
+
+#* ----------------------------------------------------------------------------
+ * OUTPUT
+ *#
+<blockquote>
+   #if ($body!="")
+      $body
+   #end
+   $citeTag
+</blockquote>
+
+<style>
+   blockquote{
+      font-size: 1.2em;
+      margin:40px 40px 40px 40px;
+      font-family:Calibri,Arial,sans-serif;
+      font-style:italic;
+      color: #333333;
+      padding:1.2em 30px 1.2em 75px;
+      border-left:8px solid #428bca ;
+      line-height:1.6;
+      position: relative;
+      background:#f0f0f0;
+   }
+
+   blockquote::before{
+      font-family:Arial;
+      content: '\201C';
+      color:#428bca;
+      font-size:4em;
+      position: absolute;
+      left: 10px;
+      top:-10px;
+   }
+
+   blockquote::after{
+      content: '';
+   }
+
+   blockquote cite {
+      display:block;
+      color:#999999;
+      font-style: normal;
+      font-weight: bold;
+      margin-top:1em;
+   }
+
+   blockquote cite::before{
+      content: '- ';
+   }
+</style>
