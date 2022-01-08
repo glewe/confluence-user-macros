@@ -1,20 +1,19 @@
 #** ===========================================================================
- * COLORED PANEL
- *
- * This Confluence user macro adds a panel to your page with several coloring options.
- *
- * Version: 1.2.1
- * Date:    2020-03-19
- * Author:  George Lewe, Daniel Sokolowski
- * Source:  https://github.com/glewe/colored-panel
- * License: GNU LGPLv3
- *
- * Macro body:      Yes
- * Body processing: Rendered
+COLORED PANEL
+
+This Confluence user macro adds a panel to your page with several coloring options.
+
+Version:    2.0.0
+Updated:    2021-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  Rendered
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param Style:title=Style|type=enum|enumValues=Gray,Dark,Cyan,Blue,Blue (Dark),Green,Yellow,Orange,Red,Gray (Gradient),Dark (Gradient),Cyan (Gradient),Blue (Gradient),Orange (Gradient),Green (Gradient),Red (Gradient)|default=Gray
 ## @param Title:title=Title|type=string|desc=Enter the title of the panel|default=My Title
@@ -25,7 +24,7 @@
 ## @param GradientBottomColor:title=Gradient Bottom Color|type=string|desc=Enter the gradient bottom color in hexadecimal starting with a #. If "Gradient Background" is unchecked, this color will be ignored. Default: #EDEDED (Recommended for CSP styles)|default=#EDEDED
 
 #** ---------------------------------------------------------------------------
- * SET DEFAULTS
+SET DEFAULTS
 *#
 #set ($borderColor="#dddddd")
 #set ($backgroundColor="#f5f5f5")
@@ -34,203 +33,202 @@
 #set ($headerGradient=false)
 
 #if (!$paramTitle)
-   #set ($paramTitle="My Title")
+    #set ($paramTitle="My Title")
 #end
 
 #if (!$paramGradientTopColor)
-   #set ($paramGradientTopColor="#FFFFFF")
+    #set ($paramGradientTopColor="#FFFFFF")
 #end
 
 #if (!$paramGradientBottomColor)
-   #set ($paramGradientBottomColor="#EDEDED")
+    #set ($paramGradientBottomColor="#EDEDED")
 #end
 
 #set ($borderWidth = 1)
 
 #if ($paramStyle=="Orange (CSP)")
-   #set($paramStyle="Yellow (Gradient)")
+    #set($paramStyle="Yellow (Gradient)")
 #end
 
 #if ($paramStyle=="Orange (Gradient)")
-   #set($paramStyle="Yellow (Gradient)")
+    #set($paramStyle="Yellow (Gradient)")
 #end
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #if ($paramStyle=="Dark")
-   #set ($borderColor="#767676")
-   #set ($backgroundColor="#878787")
-   #set ($textColor="#ffffff")
+    #set ($borderColor="#767676")
+    #set ($backgroundColor="#878787")
+    #set ($textColor="#ffffff")
 #elseif ($paramStyle=="Cyan")
-   #set ($borderColor="#bce8f1")
-   #set ($backgroundColor="#d9edf7")
-   #set ($textColor="#31708f")
+    #set ($borderColor="#bce8f1")
+    #set ($backgroundColor="#d9edf7")
+    #set ($textColor="#31708f")
 #elseif ($paramStyle=="Blue")
-   #set ($borderColor="#428bca")
-   #set ($backgroundColor="#428bca")
-   #set ($textColor="#ffffff")
+    #set ($borderColor="#428bca")
+    #set ($backgroundColor="#428bca")
+    #set ($textColor="#ffffff")
 #elseif ($paramStyle=="Blue (Dark)")
-   #set ($borderColor="#05164d")
-   #set ($backgroundColor="#05164d")
-   #set ($textColor="#ffffff")
+    #set ($borderColor="#05164d")
+    #set ($backgroundColor="#05164d")
+    #set ($textColor="#ffffff")
 #elseif ($paramStyle=="Green")
-   #set ($borderColor="#d6e9c6")
-   #set ($backgroundColor="#dff0d8")
-   #set ($textColor="#3c763d")
+    #set ($borderColor="#d6e9c6")
+    #set ($backgroundColor="#dff0d8")
+    #set ($textColor="#3c763d")
 #elseif ($paramStyle=="Yellow")
-   #set ($borderColor="#faebcc")
-   #set ($backgroundColor="#fcf8e3")
-   #set ($textColor="#8a6d3b")
+    #set ($borderColor="#faebcc")
+    #set ($backgroundColor="#fcf8e3")
+    #set ($textColor="#8a6d3b")
 #elseif ($paramStyle=="Orange")
-   #set ($borderColor="#ffb300")
-   #set ($backgroundColor="#ffc422")
-   #set ($textColor="#ffffff")
+    #set ($borderColor="#ffb300")
+    #set ($backgroundColor="#ffc422")
+    #set ($textColor="#ffffff")
 #elseif ($paramStyle=="Red")
-   #set ($borderColor="#ebccd1")
-   #set ($backgroundColor="#f2dede")
-   #set ($textColor="#a94442")
+    #set ($borderColor="#ebccd1")
+    #set ($backgroundColor="#f2dede")
+    #set ($textColor="#a94442")
 #elseif ($paramStyle=="Gray (CSP)")
-   #set ($borderColor="#ABABAB")
-   #set ($backgroundColor="#CCC")
-   #set ($textColor="#666666")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#F5F5F5")
-   #set ($headerGradientStop="#DCDCDC")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#ABABAB")
+    #set ($backgroundColor="#CCC")
+    #set ($textColor="#666666")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#F5F5F5")
+    #set ($headerGradientStop="#DCDCDC")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Dark (CSP)")
-   #set ($borderColor="#767676")
-   #set ($backgroundColor="#767676")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#878787")
-   #set ($headerGradientStop="#5A5A5A")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#767676")
+    #set ($backgroundColor="#767676")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#878787")
+    #set ($headerGradientStop="#5A5A5A")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Cyan (CSP)")
-   #set ($borderColor="#20A0ED")
-   #set ($backgroundColor="#20A0ED")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#A5DDFF")
-   #set ($headerGradientStop="#30B0FD")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#20A0ED")
+    #set ($backgroundColor="#20A0ED")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#A5DDFF")
+    #set ($headerGradientStop="#30B0FD")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Blue (CSP)")
-   #set ($borderColor="#000066")
-   #set ($backgroundColor="#000066")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#000075")
-   #set ($headerGradientStop="#000057")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#000066")
+    #set ($backgroundColor="#000066")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#000075")
+    #set ($headerGradientStop="#000057")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Yellow (CSP)")
-   #set ($borderColor="#FFB300")
-   #set ($backgroundColor="#FFB300")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#FFC200")
-   #set ($headerGradientStop="#FFA400")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#FFB300")
+    #set ($backgroundColor="#FFB300")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#FFC200")
+    #set ($headerGradientStop="#FFA400")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Green (CSP)")
-   #set ($borderColor="#408236")
-   #set ($backgroundColor="#408236")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#4F9145")
-   #set ($headerGradientStop="#317327")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#408236")
+    #set ($backgroundColor="#408236")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#4F9145")
+    #set ($headerGradientStop="#317327")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Red (CSP)")
-   #set ($borderColor="#cc241c")
-   #set ($backgroundColor="#cc241c")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#DB332B")
-   #set ($headerGradientStop="#BD150D")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#cc241c")
+    #set ($backgroundColor="#cc241c")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#DB332B")
+    #set ($headerGradientStop="#BD150D")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Gray (Gradient)")
-   #set ($borderColor="#ABABAB")
-   #set ($backgroundColor="#CCC")
-   #set ($textColor="#666666")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#F5F5F5")
-   #set ($headerGradientStop="#DCDCDC")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#ABABAB")
+    #set ($backgroundColor="#CCC")
+    #set ($textColor="#666666")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#F5F5F5")
+    #set ($headerGradientStop="#DCDCDC")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Dark (Gradient)")
-   #set ($borderColor="#767676")
-   #set ($backgroundColor="#767676")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#878787")
-   #set ($headerGradientStop="#5A5A5A")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#767676")
+    #set ($backgroundColor="#767676")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#878787")
+    #set ($headerGradientStop="#5A5A5A")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Cyan (Gradient)")
-   #set ($borderColor="#20A0ED")
-   #set ($backgroundColor="#20A0ED")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#A5DDFF")
-   #set ($headerGradientStop="#30B0FD")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#20A0ED")
+    #set ($backgroundColor="#20A0ED")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#A5DDFF")
+    #set ($headerGradientStop="#30B0FD")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Blue (Gradient)")
-   #set ($borderColor="#05164d")
-   #set ($backgroundColor="#05164d")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#05166d")
-   #set ($headerGradientStop="#05163d")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#05164d")
+    #set ($backgroundColor="#05164d")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#05166d")
+    #set ($headerGradientStop="#05163d")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Yellow (Gradient)")
-   #set ($borderColor="#FFB300")
-   #set ($backgroundColor="#FFB300")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#FFC200")
-   #set ($headerGradientStop="#FFA400")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#FFB300")
+    #set ($backgroundColor="#FFB300")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#FFC200")
+    #set ($headerGradientStop="#FFA400")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Green (Gradient)")
-   #set ($borderColor="#408236")
-   #set ($backgroundColor="#408236")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#4F9145")
-   #set ($headerGradientStop="#317327")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#408236")
+    #set ($backgroundColor="#408236")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#4F9145")
+    #set ($headerGradientStop="#317327")
+    #set ($borderWidth = 2)
 #elseif ($paramStyle=="Red (Gradient)")
-   #set ($borderColor="#cc241c")
-   #set ($backgroundColor="#cc241c")
-   #set ($textColor="#FFFFFF")
-   #set ($headerGradient=true)
-   #set ($headerGradientStart="#DB332B")
-   #set ($headerGradientStop="#BD150D")
-   #set ($borderWidth = 2)
+    #set ($borderColor="#cc241c")
+    #set ($backgroundColor="#cc241c")
+    #set ($textColor="#FFFFFF")
+    #set ($headerGradient=true)
+    #set ($headerGradientStart="#DB332B")
+    #set ($headerGradientStop="#BD150D")
+    #set ($borderWidth = 2)
 #end
 
-
-#** ---------------------------------------------------------------------------
- * GENERATE STYLES
+#**
+Generate styles
 *#
 #set ($panelBackgroundStyle = "background-color: "+$paramGradientTopColor+";")
 #set ($headerBackgroundStyle = "background-color: "+$backgroundColor+";")
 
 #if ($paramGradientBackground==true)
-   #set ($panelBackgroundStyle = "background-color: #EBEBEB;")
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"background: linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
+    #set ($panelBackgroundStyle = "background-color: #EBEBEB;")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"background: linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
 #*   
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -webkit-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -moz-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -o-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
-   #set ($panelBackgroundStyle = $panelBackgroundStyle+"filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='"+$paramGradientTopColor+"', endColorstr='"+$paramGradientBottomColor+"', GradientType=0);")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -webkit-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -moz-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: -o-linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"background-image: linear-gradient(to bottom, "+$paramGradientTopColor+", "+$paramGradientBottomColor+" 100%);")
+    #set ($panelBackgroundStyle = $panelBackgroundStyle+"filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='"+$paramGradientTopColor+"', endColorstr='"+$paramGradientBottomColor+"', GradientType=0);")
 *#
 #end
    
 #if ($headerGradient==true)
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"background: linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"background: linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
 #*
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -webkit-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -moz-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -o-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
-   #set ($headerBackgroundStyle = $headerBackgroundStyle+"filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='"+$headerGradientStart+"', endColorstr='"+$headerGradientStop+"', GradientType=0);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -webkit-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -moz-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: -o-linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"background-image: linear-gradient(to bottom, "+$headerGradientStart+", "+$headerGradientStop+" 100%);")
+    #set ($headerBackgroundStyle = $headerBackgroundStyle+"filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='"+$headerGradientStart+"', endColorstr='"+$headerGradientStop+"', GradientType=0);")
 *#
 #end
 
@@ -251,13 +249,13 @@
 
 
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
 <div class="panel" style="$panelStyle">
-   #if ($paramshowTitle==true)
-      <div class="panelHeader" style="$headerStyle">$paramTitle</div>
-   #end
-   #if ($paramshowBody==true)
-      <div class="panelContent" style="padding: 10px;">$body</div>
-   #end
+    #if ($paramshowTitle==true)
+        <div class="panelHeader" style="$headerStyle">$paramTitle</div>
+    #end
+    #if ($paramshowBody==true)
+        <div class="panelContent" style="padding: 10px;">$body</div>
+    #end
 </div>

@@ -11,7 +11,7 @@ When running Confluence on your own server, it allows you to create so-called "U
 Read more about Confluence User Macros here:
 https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 
-# Installation in Confluence Server #
+## Installation in Confluence Server
 ## Include Font Awesome 5 style shhet ##
 
 1. Login as administrator
@@ -22,7 +22,7 @@ https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 1. Click Save
 
 ## Install the User Macro ##
-**Note: User Macros are not available in Confluence Cloud!**
+__Note: User Macros are not available in Confluence Cloud!__
 
 1. Login as administrator
 1. Go to "General Configuration", then select "User Macros" from the menu on the left
