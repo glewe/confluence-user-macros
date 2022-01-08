@@ -1,42 +1,41 @@
-#* ============================================================================
- * AUDIO CONTROL
- *
- * This Confluence user macro adds an HTML5 audio control element to your 
- * page that can play MP3, OGG and WAV files.
- *
- * Version: 1.0.3
- * Date:    2016-11-17
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/audio-control
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+AUDIO CONTROL
 
-#* ----------------------------------------------------------------------------
- * PARAMETERS
- *#
+This Confluence user macro adds an HTML5 audio control element to your page
+that can play MP3, OGG and WAV files.
+
+Version:    1.0.3
+Updated:    2016-11-17
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETERS
+*#
 ## @param File:title=File|type=string|desc=Enter the file name of the audio file. It needs to be attached to the page.|default=myfile.mp3
 ## @param Format:title=Audio Format|type=enum|enumValues=mp3,mp4,ogg,wav|desc=Select the audio format of the file.|default=mp3
 ## @param Filename:title=Show File Name|type=boolean|desc=Select to display the file name underneath the control. This might not show in the preview on the right.|default=false
 
-#* ----------------------------------------------------------------------------
- * INPUT
- *#
+#** ---------------------------------------------------------------------------
+INPUT
+*#
 #if (!$paramFormat)
-   #set ($paramFormat="mpeg")
+    #set ($paramFormat="mpeg")
 #elseif ($paramFormat=="mp3")
-   #set ($paramFormat="mpeg")
+    #set ($paramFormat="mpeg")
 #end
 
 #set($paramCaption="")
 #if ($paramFilename==true)
-   #set($paramCaption="<p style='margin-top:-4px; font-style:italic'>$paramFile</p>")
+    #set($paramCaption="<p style='margin-top:-4px; font-style:italic'>$paramFile</p>")
 #end
 
-#* ----------------------------------------------------------------------------
- * OUTPUT
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <audio controls><source src="/download/attachments/$content.getIdAsString()/$paramFile" type="audio/$paramFormat">Your browser does not support this HTML5 audio element.</audio>
 $paramCaption
