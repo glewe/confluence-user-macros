@@ -1,117 +1,116 @@
-#* ============================================================================
- * BOOTSTRAP PROGRESS BAR STYLES
- *
- * This Confluence user macro is needed once on each page where you want to use
- * the Bootstrap Progress Bar macro.
- *
- * Version: 1.0.2
- * Date:    2017-02-12
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/bootstrap-progress-bar
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+BOOTSTRAP PROGRESS BAR STYLES
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro is needed once on each page where you want to use
+the Bootstrap Progress Bar macro.
+
+Version:    1.1.0
+Updated:    2022-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @noparams
 
-#* ----------------------------------------------------------------------------
- * STYLES
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <style type="text/css">
    
-   @-webkit-keyframes progress-bar-stripes {
-      from {
-         background-position: 40px 0;
-      }
-      to {
-         background-position: 0 0;
-      }
-   }
-
-   @keyframes progress-bar-stripes {
-      from {
-         background-position: 40px 0;
-      }
-      to {
-         background-position: 0 0;
-      }
+    @-webkit-keyframes progress-bar-stripes {
+        from {
+            background-position: 40px 0;
+        }
+        to {
+            background-position: 0 0;
+        }
     }
 
-   .progress {
-      height: 20px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      background-color: #f5f5f5;
-      border-radius: 4px;
-      -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-              box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-   }
-
-   .progress-bar {
-      float: left;
-      width: 0;
-      height: 100%;
-      font-size: 12px;
-      line-height: 20px;
-      color: #ffffff;
-      text-align: center;
-      background-color: #428bca;
-      -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-              box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-      -webkit-transition: width 0.6s ease;
-              transition: width 0.6s ease;
+    @keyframes progress-bar-stripes {
+        from {
+            background-position: 40px 0;
+        }
+        to {
+            background-position: 0 0;
+        }
     }
 
-   .progress-striped .progress-bar {
-      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-size: 40px 40px;
-   }
-
-   .progress.active .progress-bar {
-      -webkit-animation: progress-bar-stripes 2s linear infinite;
-              animation: progress-bar-stripes 2s linear infinite;
+    .bsprogress {
+        height: 20px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-   .progress-bar-success {
-      background-color: #5cb85c;
-   }
+    .bsprogress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 12px;
+        line-height: 20px;
+        color: #ffffff;
+        text-align: center;
+        background-color: #428bca;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        -webkit-transition: width 0.6s ease;
+                transition: width 0.6s ease;
+        }
 
-   .progress-striped .progress-bar-success {
-      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-   }
+    .bsprogress-striped .bsprogress-bar {
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-size: 40px 40px;
+    }
 
-   .progress-bar-info {
-      background-color: #5bc0de;
-   }
+    .bsprogress.active .bsprogress-bar {
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+                animation: progress-bar-stripes 2s linear infinite;
+    }
 
-   .progress-striped .progress-bar-info {
-      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-   }
+    .bsprogress-bar-success {
+        background-color: #5cb85c;
+    }
 
-   .progress-bar-warning {
-      background-color: #f0ad4e;
-   }
+    .bsprogress-striped .bsprogress-bar-success {
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    }
 
-   .progress-striped .progress-bar-warning {
-      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-   }
+    .bsprogress-bar-info {
+        background-color: #5bc0de;
+    }
 
-   .progress-bar-danger {
-      background-color: #d9534f;
-   }
+    .bsprogress-striped .bsprogress-bar-info {
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    }
 
-   .progress-striped .progress-bar-danger {
-      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-   }
+    .bsprogress-bar-warning {
+        background-color: #f0ad4e;
+    }
+
+    .bsprogress-striped .bsprogress-bar-warning {
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    }
+
+    .bsprogress-bar-danger {
+        background-color: #d9534f;
+    }
+
+    .bsprogress-striped .bsprogress-bar-danger {
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    }
    
 </style>

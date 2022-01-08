@@ -43,3 +43,9 @@ This Confluence user macro adds a styled blockquote to your page.
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/bootstrap-button/bootstrap-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds a Bootstrap 3 styled button, supporting different colors and sizes, and linking to a URL.
 
+---
+
+### [Bootstrap Progress Bar](/src/bootstrap-progress-bar)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/bootstrap-progress-bar/bootstrap-32.png?raw=true" align="left" alt=""/>
+This set of two Confluence user macros adds a Bootstrap like progress to your page, offering different coloring and animation options.
+

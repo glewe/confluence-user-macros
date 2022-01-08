@@ -1,68 +1,67 @@
-#* ============================================================================
- * BOOTSTRAP PROGRESS BAR
- *
- * This Confluence user macro adds a Bootstrap like progress bar to your page.
- * Requires the bootstrap-progress-bar-styles macro once on that page.
- *
- * Version: 1.0.1
- * Date:    2016-11-17
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/bootstrap-progress-bar
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
- *#
+#** ===========================================================================
+BOOTSTRAP PROGRESS BAR
 
-#* ----------------------------------------------------------------------------
- * PARAMETER
- *#
+This Confluence user macro adds a Bootstrap like progress bar to your page.
+Requires the bootstrap-progress-bar-styles macro once on that page.
+
+Version:    1.1.0
+Updated:    2022-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing:  No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
 ## @param Progress:title=Progress|type=string|required=true|desc=Type in the percentage of the progress here as a number between 1 and 100.|default=50
 ## @param Color:title=Color|type=enum|enumValues=Blue,Cyan,Green,Orange,Red|desc=Select the progress bar color here.|default=Blue
 ## @param Style:title=Style|type=enum|enumValues=Plain,Striped,Animated|desc=Select the progress bar style here.|default=Plain
 ## @param Width:title=Width|type=string|desc=Enter the width in pixel here or use 'Auto' for auto width.|default=Auto
 ## @param Height:title=Height|type=string|desc=Enter the height in pixel here or use 'Auto' for auto height.|default=Auto
 
-#* ----------------------------------------------------------------------------
- * PROCESS INPUT
- *#
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #if (!$paramProgress)
-   #set ($paramProgress="50")
+    #set ($paramProgress="50")
 #end
 
 #set ($paramBarColor="")
 #if ($paramColor=="Cyan")
-   #set ($paramBarColor=" progress-bar-info")
+    #set ($paramBarColor=" bsprogress-bar-info")
 #elseif ($paramColor=="Green")
-   #set ($paramBarColor=" progress-bar-success")
+    #set ($paramBarColor=" bsprogress-bar-success")
 #elseif ($paramColor=="Orange")
-   #set ($paramBarColor=" progress-bar-warning")
+    #set ($paramBarColor=" bsprogress-bar-warning")
 #elseif ($paramColor=="Red")
-   #set ($paramBarColor=" progress-bar-danger")
+    #set ($paramBarColor=" bsprogress-bar-danger")
 #end
 
 #set ($paramBarStyle="")
 #if ($paramStyle=="Striped")
-   #set ($paramBarStyle=" progress-striped")
+    #set ($paramBarStyle=" bsprogress-striped")
 #elseif ($paramStyle=="Animated")
-   #set ($paramBarStyle=" progress-striped active")
+    #set ($paramBarStyle=" bsprogress-striped active")
 #end
 
 #if ($paramWidth=="Auto")
-   #set ($paramBarWidth="")
+    #set ($paramBarWidth="")
 #else
-   #set ($paramBarWidth="width:"+$paramWidth+"px;")
+    #set ($paramBarWidth="width:"+$paramWidth+"px;")
 #end
 
 #if ($paramHeight=="Auto")
-   #set ($paramBarHeight="")
+    #set ($paramBarHeight="")
 #else
-   #set ($paramBarHeight="height:"+$paramHeight+"px;")
+    #set ($paramBarHeight="height:"+$paramHeight+"px;")
 #end
 
 #* ----------------------------------------------------------------------------
  * OUTPUT
  *#
-<div class="progress$paramBarStyle" style="margin-bottom: 9px; $paramBarWidth $paramBarHeight">
-   <div class="progress-bar$paramBarColor" style="width: $paramProgress%"></div>
+<div class="bsprogress$paramBarStyle" style="margin-bottom: 9px; $paramBarWidth $paramBarHeight">
+    <div class="bsprogress-bar$paramBarColor" style="width: $paramProgress%"></div>
 </div>
