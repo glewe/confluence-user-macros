@@ -4,8 +4,8 @@ AUDIO CONTROL
 This Confluence user macro adds an HTML5 audio control element to your page
 that can play MP3, OGG and WAV files.
 
-Version:    1.0.3
-Updated:    2016-11-17
+Version:    1.1.0
+Updated:    2021-01-08
 Author/s:   George Lewe
 Source:     https://github.com/glewe/confluence-user-macros
 License:    GNU LGPLv3
@@ -29,13 +29,12 @@ INPUT
     #set ($paramFormat="mpeg")
 #end
 
-#set($paramCaption="")
-#if ($paramFilename==true)
-    #set($paramCaption="<p style='margin-top:-4px; font-style:italic'>$paramFile</p>")
-#end
-
 #** ---------------------------------------------------------------------------
 OUTPUT
 *#
-<audio controls><source src="/download/attachments/$content.getIdAsString()/$paramFile" type="audio/$paramFormat">Your browser does not support this HTML5 audio element.</audio>
-$paramCaption
+<audio controls>
+    <source src="/download/attachments/$content.getIdAsString()/$paramFile" type="audio/$paramFormat">Your browser does not support this HTML5 audio element.
+</audio>
+#if ($paramFilename==true)
+    <p style="margin-top:-4px; font-style:italic">$paramFile</p>
+#end
