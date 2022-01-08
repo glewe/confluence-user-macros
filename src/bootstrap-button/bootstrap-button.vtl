@@ -1,10 +1,10 @@
 #** ===========================================================================
 BOOTSTRAP BUTTON
 
-This Confluence user macro adds a Bootstrap like button in different colors and
-sizes, linking to a URL. 
+This Confluence user macro adds a Bootstrap 3 button, supporting different 
+colors and sizes, and linking to a URL. 
 
-Version: 1.0.1
+Version:    1.3.0
 Updated:    2022-01-08
 Author/s:   George Lewe
 Source:     https://github.com/glewe/confluence-user-macros
@@ -19,37 +19,37 @@ PARAMETER
 ## @param Style:title=Style|type=enum|enumValues=Gray,Blue,Cyan,Green,Orange,Red|default=Gray
 ## @param Size:title=Size|type=enum|enumValues=Large,Medium,Small|default=Large
 ## @param Title:title=Title|type=string|desc=Enter the button title|default=Button
-## @param Link:title=Link|type=string|desc=Enter a link that this button shall trigger|default=https://docspace.lhsystems.com
+## @param Link:title=Link|type=string|desc=Enter a link that this button shall trigger|default=#
 ## @param Target:title=Link target|type=enum|enumValues=Same window,New window|desc=Select the target of the link|default=Same window
-## @param ScrollExportID:title=Scroll PDF Export ID|type=string|desc=You can use this button to launch a specific Scroll PDF Export. Just enter the export ID here. How to find this ID can be read <a href="https://www.k15t.com/display/PDF/Where+can+I+find+my+Export+Scheme+ID">here</a>.|default=
+## @param ScrollExportID:title=Scroll PDF Export ID|type=string|desc=In case you have Scroll PDF Exporter installed, you can use this button to launch a specific Scroll PDF Export. Just enter the export ID here. How to find this ID can be read <a href="https://www.k15t.com/display/PDF/Where+can+I+find+my+Export+Scheme+ID">here</a>.|default=
 
 #** ---------------------------------------------------------------------------
 PROCESS INPUT
 *#
 #if ($paramStyle=="Gray")
-    #set ($paramButtonStyle="btn-default")
+    #set ($paramButtonStyle="bsbtn-default")
 #elseif ($paramStyle=="Blue")
-    #set ($paramButtonStyle="btn-primary")
+    #set ($paramButtonStyle="bsbtn-primary")
 #elseif ($paramStyle=="Cyan")
-    #set ($paramButtonStyle="btn-info")
+    #set ($paramButtonStyle="bsbtn-info")
 #elseif ($paramStyle=="Green")
-    #set ($paramButtonStyle="btn-success")
+    #set ($paramButtonStyle="bsbtn-success")
 #elseif ($paramStyle=="Orange")
-    #set ($paramButtonStyle="btn-warning")
+    #set ($paramButtonStyle="bsbtn-warning")
 #elseif ($paramStyle=="Red")
-    #set ($paramButtonStyle="btn-danger")
+    #set ($paramButtonStyle="bsbtn-danger")
 #else
-    #set ($paramButtonStyle="btn-default")
+    #set ($paramButtonStyle="bsbtn-default")
 #end
 
 #if ($paramSize=="Large")
-    #set ($paramButtonSize="btn-lg")
+    #set ($paramButtonSize="bsbtn-lg")
 #elseif ($paramSize=="Medium")
-    #set ($paramButtonSize="btn-sm")
+    #set ($paramButtonSize="bsbtn-sm")
 #elseif ($paramSize=="Small")
-    #set ($paramButtonSize="btn-xs")
+    #set ($paramButtonSize="bsbtn-xs")
 #else
-    #set ($paramButtonSize="btn-lg")
+    #set ($paramButtonSize="bsbtn-lg")
 #end
 
 #if (!$paramTitle)
@@ -57,7 +57,7 @@ PROCESS INPUT
 #end
 
 #if (!$paramLink)
-    #set ($paramLink="https://docspace.lhsystems.com")
+    #set ($paramLink="#")
 #end
 
 #if ($paramTarget=="Same window")
