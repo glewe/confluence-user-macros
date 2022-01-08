@@ -1,50 +1,56 @@
-#* ============================================================================
- * ANONYMOUS PERMISSIONS
- *
- * This Confluence user macro lists all spaces with Anonymous permissions.
- *
- * Version: 1.0.0
- * Date:    2018-09-28
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/anonymous-permissions
- * License: GNU LGPLv3
- *
- * Macro body: None
- *#
+#** ===========================================================================
+ANONYMOUS PERMISSIONS
 
-#* ----------------------------------------------------------------------------
- * PARAMETERS
- *#
+This Confluence user macro lists all spaces where 'Anonymous' has at least
+view permissions.
+
+Version:    2.0.0
+Updated:    2022-01-08
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing: No macro body
+*#
+
+#**
+PARAMETERS
+*#
 ## @noparams
 
-#* ----------------------------------------------------------------------------
- * INPUT
- *#
+#** ---------------------------------------------------------------------------
+INPUT
+*#
 
-#* ----------------------------------------------------------------------------
- * OUTPUT
- *#
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
 <h1>Spaces with Aonymous Permissions</h1>
    
 <table class="confluenceTable">
-   <tbody>
-      <tr>
-         <th class="confluenceTh">Space Home</th>
-         <th class="confluenceTh">Space Permissions</th>
-      </tr> 
-      #foreach ($space in $spaceManager.getAllSpaces())
-         #set ($anonymousPermission = false)
-         #foreach ($perm in $space.getPermissions())
-            #if ($perm.isAnonymousPermission())
-               #set ($anonymousPermission = true)
+    <tbody>
+        <tr>
+            <th class="confluenceTh">Space Home</th>
+            <th class="confluenceTh">Edit Permissions</th>
+        </tr> 
+        #foreach ($space in $spaceManager.getAllSpaces())
+            #set ($anonymousPermission = false)
+            #foreach ($perm in $space.getPermissions())
+                #if ($perm.isAnonymousPermission())
+                #set ($anonymousPermission = true)
+                #end
             #end
-         #end
-         #if ($anonymousPermission == true)
-            <tr>
-               <td class="confluenceTd"><a href="/display/$space.key">$space.getName()</a></td>
-               <td class="confluenceTd"><a href="/spaces/spacepermissions.action?key=$space.key">Space permissions...</a></td>
-            </tr> 
-         #end
-      #end
-   </tbody>
+            #if ($anonymousPermission == true)
+                <tr>
+                <td class="confluenceTd"><a href="/display/$space.key">$space.getName()</a></td>
+                <td class="confluenceTd">
+                    <a class="aui-button aui-button-primary aui-button-compact conf-macro output-block" 
+                        style="color:#ffffff;"
+                        href="/spaces/spacepermissions.action?key=$space.key"
+                        target="_blank">Edit permissions...</a>
+                </td>
+                </tr> 
+            #end
+        #end
+    </tbody>
 </table>
