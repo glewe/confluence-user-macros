@@ -1,5 +1,11 @@
-# Expand All #
-This Confluence user macro toggles/expands/collapses all Expand sections on your page.
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/expand-all/folder_orange_open.png?raw=true" align="left" alt=""/>Expand All</h1>
+
+[![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
+[![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
+
+This Confluence user macro adds a button group that toggles/expands/collapses all Expand sections on your page. 
+
 
 # Confluence User Macros #
 Confluence is Atlassian's Enterprise Wiki.
@@ -22,9 +28,5 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
 
-# License #
-This Confluence User Macro is distributed under the GNU LGPLv3 license.
-
 ## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1
-

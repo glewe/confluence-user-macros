@@ -69,6 +69,12 @@ This macro lists all spaces for which the group 'confluence-users' has at least 
 
 ---
 
+### [Expand All](/src/expand-all)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/expand-all/folder_orange_open-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a button group that toggles/expands/collapses all Expand sections on your page.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
