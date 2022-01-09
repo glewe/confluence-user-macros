@@ -1,4 +1,8 @@
-# Marquee Newsticker #
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/marquee/knewsticker.png?raw=true" align="left" alt=""/>Marquee Newsticker</h1>
+
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
+[![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
+
 This Confluence user macro adds an HTML5 marquee element to your page.
 
 ## Confluence User Macros

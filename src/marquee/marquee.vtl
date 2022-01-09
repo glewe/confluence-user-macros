@@ -1,20 +1,19 @@
 #** ===========================================================================
- * MARQUEE NEWSTICKER
- *
- * This Confluence user macro adds an HTML5 marquee element to your page.
- *
- * Version: 1.1.0
- * Date:    2017-12-15
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/marquee
- * License: GNU LGPLv3
- *
- * Macro body:      Yes
- * Body processing: Rendered
+MARQUEE NEWSTICKER
+
+This Confluence user macro adds an HTML5 marquee element to your page.
+
+Version:    1.2.0
+Updated:    2021-01-09
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: Rendered
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param ScrollDirection:title=Scroll Direction|type=enum|default=Right|enumValues=Left,Right
 ## @param ScrollSpeed:title=Scroll Speed|type=int|desc=Enter a numeric value for the speed. The higher the number, the faster the scroll. Default is 5.|default=5
@@ -25,39 +24,42 @@
 ## @param BorderColor:title=Border Color|type=string|desc=Enter the border color in hexadecimal starting with a #. Default: #000000 (Black). <a href="http://hslpicker.com/">Color Picker</a>|default=#000000
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #if (!$paramScrollDirection)
-   #set ($paramScrollDirection="Right")
+    #set ($paramScrollDirection="Right")
 #end
 
 #if (!$paramScrollSpeed)
-   #set ($paramScrollSpeed="5")
+    #set ($paramScrollSpeed="5")
 #end
 
 #if (!$paramPadding)
-   #set ($paramPadding="6px")
+    #set ($paramPadding="6px")
 #end
 
 #if (!$paramBackgroundColor)
-   #set ($paramBackgroundColor="inherit")
+    #set ($paramBackgroundColor="inherit")
 #end
 
 #if (!$paramBorderWidth)
-   #set ($paramBorderWidth="0px")
+    #set ($paramBorderWidth="0px")
 #end
 
 #if (!$paramBorderRadius)
-   #set ($paramBorderRadius="0px")
+    #set ($paramBorderRadius="0px")
 #end
 
 #if (!$paramBorderColor)
-   #set ($paramBorderColor="#000000")
+    #set ($paramBorderColor="#000000")
 #end
 
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
+<!-- User Macro: Marquee START -->
 <marquee behavior="scroll" direction="$paramScrollDirection" scrollamount="$paramScrollSpeed" onmouseover="this.stop();" onmouseout="this.start();" style="background-color: $paramBackgroundColor;padding: $paramPadding; border: $paramBorderWidth solid $paramBorderColor; border-radius: $paramBorderRadius; margin-top:6px; margin-bottom:6px;">
-   $body
+    #set($body=$body)
+    $body
 </marquee>
+<!-- User Macro: Marquee END -->
