@@ -1,4 +1,8 @@
-# Tiny Link #
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/tinylink/browser.png?raw=true" align="left" alt=""/>Tiny Link</h1>
+
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
+[![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
+
 This Confluence user macro displays a link to the Tiny URL of the current page.
 
 ## Confluence User Macros
@@ -21,9 +25,6 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Select "No macro body"
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
-
-# License #
-This Confluence User Macro is distributed under the GNU LGPLv3 license.
 
 ## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1

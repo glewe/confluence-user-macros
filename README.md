@@ -164,3 +164,9 @@ This Confluence user macro adds a vertical space into your page.
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/telephone-link/chat-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds an HTML telephone link to your page.
 
+---
+
+### [Tiny Link](/src/tinylink)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/tinylink/browser-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro displays a link to the Tiny URL of the current page.
+
