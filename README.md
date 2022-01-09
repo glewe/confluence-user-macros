@@ -158,3 +158,9 @@ This Confluence user macro lists users and groups having permissions to the curr
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/spacer/kget_list-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds a vertical space into your page.
 
+---
+
+### [Telephone Link](/src/telephone-link)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/telephone-link/chat-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds an HTML telephone link to your page.
+
