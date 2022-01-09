@@ -100,6 +100,7 @@ Takes n^2 passes
 #** ---------------------------------------------------------------------------
 OUTPUT
 *#
+<!-- User Macro: Profile Info START -->
 #foreach ($item in $unarray)
 
     #if ($paramPanelBgColor != "")
@@ -120,7 +121,7 @@ OUTPUT
     #if($userAccessor.getGroupNames($userAccessor.getUser($item)).indexOf('my-group') > -1)
         #set($bordercolor = '#FFB300')
     #end
-   *#
+    *#
 
     <ac:structured-macro ac:name="panel">
         <ac:parameter ac:name="bgColor">$bgcolor</ac:parameter>
@@ -137,7 +138,7 @@ OUTPUT
                 <p>
                 #**
                 Set $body to avoid output of 'body')
-               *#
+                *#
                 #set($body = $body)
                 $body
                 </p>
@@ -153,3 +154,4 @@ OUTPUT
     .profile-macro .vcard .values {width:300px;}
     .profile-macro a {font-size:14px;}
 </style>
+<!-- User Macro: Profile Info END -->

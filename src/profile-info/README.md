@@ -1,6 +1,5 @@
 <h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard.png?raw=true" align="left" alt=""/>Profile Info</h1>
 
-
 [![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
 [![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
 

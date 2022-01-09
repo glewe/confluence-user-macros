@@ -133,3 +133,9 @@ This Confluence user macro lists space permissions and page restrictions for the
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
 
+---
+
+### [Risk Matrix](/src/risk-matrix)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/risk-matrix/risk-matrix-icon-32.png?raw=true" align="left" alt=""/>
+Creates a risk matrix based on an issue type, likelihood field and impact field from a linked Jira instance.
+
