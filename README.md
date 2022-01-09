@@ -170,3 +170,9 @@ This Confluence user macro adds an HTML telephone link to your page.
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/tinylink/browser-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a link to the Tiny URL of the current page.
 
+---
+
+### [Tooltip](/src/tooltip)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/tooltip/ktip-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds an inline text with a hover tooltip.
+
