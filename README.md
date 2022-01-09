@@ -105,6 +105,12 @@ This Confluence user macro adds a legend box to the top right of the page.
 
 ---
 
+### [Local Time](/src/local-time)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/local-time/clock-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro displays the user's local date and time offering several options. Use once per page.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.

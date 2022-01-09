@@ -1,21 +1,20 @@
 #** ===========================================================================
- * LOCAL TIME
- *
- * This Confluence user macro displays the user's local date and time offering
- * several options. Use once per page.
- *
- * Version: 1.1.1
- * Date:    2016-11-18
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/local-time
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
+LOCAL TIME
+
+This Confluence user macro displays the user's local date and time offering
+several options. Use once per page.
+
+Version:    1.1.2
+Updated:    2021-01-09
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param ShowDate:title=Show Date|type=boolean|default=true
 ## @param ShowWeekday:title=Show Weekday|type=boolean|default=false
@@ -34,105 +33,98 @@
 ## @param TimezoneText:title=Timezone|type=string|desc=You may enter a text for the fixed timezone here, e.g. a city name, that will be displayed too. This setting only has an effect with Fixed Timezone being selected above.
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
-##
-## Figure out what to display
-##
 #set($timeString="%H:%M:%S")
 #set($dateString="")
 #set($weekdayString="")
 #set($timeZone="")
 
 #if ($paramShowDate==true)
-   #set($dateString="%y-%m-%d, ")
+    #set($dateString="%y-%m-%d, ")
 #end
 
 #if ($paramShowWeekday==true)
-   #set($weekdayString="%w, ")
+    #set($weekdayString="%w, ")
 #end
 
 #if ($paramFixedTimezone==true && $paramTimezoneText.length() > 1)
-   #set($timeZone=" (" + $paramTimezoneText + ")")
+    #set($timeZone=" (" + $paramTimezoneText + ")")
 #end
 
 #set($formatString = $dateString + $weekdayString + $timeString)
 
-##
-## Figure out how to display
-##
 #set($borderStyle="")
 #set($backgroundStyle="background-color:" + $paramBackground)
 #set($fontSize = $paramSize + "em")
 #set($fontWeightStyle="font-weight:" + $paramWeight)
 #set($fontStyleStyle="font-style:" + $paramStyle)
 #if ($paramShowBorder==true)
-   #set($borderStyle="border:1px solid " + $paramBorderColor + ";border-radius:4px;padding:4px 6px 4px 6px")
+    #set($borderStyle="border:1px solid " + $paramBorderColor + ";border-radius:4px;padding:4px 6px 4px 6px")
 #end
 
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
+<!-- User Macro: Local Time START -->
 <span id='local-time' style="font-size:$fontSize;font-family:$paramFont,$paramFamily;color:$paramColor;$backgroundStyle;$borderStyle;$fontWeightStyle;$fontStyleStyle;"></span>
 
-#** ---------------------------------------------------------------------------
- * JAVASCRIPT
-*#
 <script type="text/javascript">
 //<![CDATA[
 window.onload = function(){
-   display_time();
+    display_time();
 }
 
 function refresh_time(){
-   var refresh=$paramRefreshRate; // Refresh rate in milliseconds
-   mytime=setTimeout('display_time()',refresh);
+    var refresh=$paramRefreshRate; // Refresh rate in milliseconds
+    mytime=setTimeout('display_time()',refresh);
 }
 
 function display_time() {
-   var strcount;
-   var fmt = new DateFmt("$formatString")
-   if ($paramFixedTimezone) {
-      var d = new Date();
-      var utc = d.getTime() + (d.getTimezoneOffset()*60000);
-      var x = fmt.format(new Date(utc + (3600000*$paramGMTOffset))) + '$timeZone';
-   }
-   else {
-      var x = fmt.format(new Date());
-   }
-   document.getElementById('local-time').innerHTML = x;
-   tt=refresh_time();
+    var strcount;
+    var fmt = new DateFmt("$formatString")
+    if ($paramFixedTimezone) {
+        var d = new Date();
+        var utc = d.getTime() + (d.getTimezoneOffset()*60000);
+        var x = fmt.format(new Date(utc + (3600000*$paramGMTOffset))) + '$timeZone';
+    }
+    else {
+        var x = fmt.format(new Date());
+    }
+    document.getElementById('local-time').innerHTML = x;
+    tt=refresh_time();
 }
 
 function DateFmt(fstr) { // By samsonl (http://snipplr.com/view/66968.82825/)
-   this.formatString = fstr;
-   var mthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-   var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-   var zeroPad = function(number) {
-      return ("0"+number).substr(-2,2);
-   }
+    this.formatString = fstr;
+    var mthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    var zeroPad = function(number) {
+        return ("0"+number).substr(-2,2);
+    }
 
-   var dateMarkers = {
-      d:['getDate',function(v){return zeroPad(v)}],
-      m:['getMonth',function(v){return zeroPad(v+1)}],
-      n:['getMonth',function(v){return mthNames[v]; }],
-      w:['getDay',function(v){return dayNames[v]; }],
-      y:['getFullYear'],
-      H:['getHours',function(v){return zeroPad(v)}],
-      M:['getMinutes',function(v){return zeroPad(v)}],
-      S:['getSeconds',function(v){return zeroPad(v)}],
-      i:['toISOString']
-   };
+    var dateMarkers = {
+        d:['getDate',function(v){return zeroPad(v)}],
+        m:['getMonth',function(v){return zeroPad(v+1)}],
+        n:['getMonth',function(v){return mthNames[v]; }],
+        w:['getDay',function(v){return dayNames[v]; }],
+        y:['getFullYear'],
+        H:['getHours',function(v){return zeroPad(v)}],
+        M:['getMinutes',function(v){return zeroPad(v)}],
+        S:['getSeconds',function(v){return zeroPad(v)}],
+        i:['toISOString']
+    };
 
-   this.format = function(date) {
-      var dateTxt = this.formatString.replace(/%(.)/g, function(m,p) {
-         var rv = date[(dateMarkers[p])[0]]();
-         if (dateMarkers[p][1] != null) 
-            rv = dateMarkers[p][1](rv);
-         return rv;
-      });
-      return dateTxt;
-   }
+    this.format = function(date) {
+        var dateTxt = this.formatString.replace(/%(.)/g, function(m,p) {
+            var rv = date[(dateMarkers[p])[0]]();
+            if (dateMarkers[p][1] != null) 
+                rv = dateMarkers[p][1](rv);
+            return rv;
+        });
+        return dateTxt;
+    }
 }
 //]]>
 </script>
+<!-- User Macro: Local Time END -->

@@ -1,5 +1,9 @@
-# Local Time #
-This Confluence user macro displays the user’s local date and time offering several options. Use once per page.
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/local-time/clock.png?raw=true" align="left" alt=""/>Local Time</h1>
+
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
+[![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
+
+This Confluence user macro displays the user's local date and time offering several options. Use once per page.
 
 ## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
@@ -22,11 +26,8 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
 
-# Documentation #
+## Documentation
 https://support.lewe.com/docs/confluence-user-macros/local-time/
-
-# License #
-This Confluence User Macro is distributed under the GNU LGPLv3 license.
 
 ## Credits
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1
