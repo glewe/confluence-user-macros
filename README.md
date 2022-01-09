@@ -63,6 +63,12 @@ This Confluence user macro adds a headed panel to your page with several colorin
 
 ---
 
+### [Confluence Users Access](/src/confluence-users-access)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/confluence-users-access/kgpg-32.png?raw=true" align="left" alt=""/>
+This macro lists all spaces for which the group 'confluence-users' has at least view permission.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.

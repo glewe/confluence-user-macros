@@ -1,47 +1,48 @@
 #** ===========================================================================
- * CONFLUENCE USER ACCESS
- *
- * This macro lists all spaces to which the group 'confluence-users' has at 
- * least permission to view it.
- *
- * Version: 2.0.0
- * Date:    2021-12-23
- * Author:  George Lewe
- *
- * Macro body:      No
- * Body processing: None
+CONFLUENCE USER ACCESS
+
+This macro lists all spaces for which the group 'confluence-users' has at least
+view permission.
+
+Version:    2.0.0
+Update:     2021-12-23
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing:  No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @noparams
    
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
 <h1>Confluence Users Access</h1>
 <table class="confluenceTable">
-   <tbody>
-      <tr>
-         <th class="confluenceTh">Space</th>
-         <th class="confluenceTh">Confluence-users have access</th>
-         <th class="confluenceTh">Permissions Page</th>
-      </tr> 
-      #foreach ($space in $spaceManager.getAllSpaces())
-         #foreach ($permission in $space.getPermissions())
+<tbody>
+    <tr>
+        <th class="confluenceTh">Space</th>
+        <th class="confluenceTh">Confluence-users have access</th>
+        <th class="confluenceTh">Permissions Page</th>
+    </tr> 
+    #foreach ($space in $spaceManager.getAllSpaces())
+        #foreach ($permission in $space.getPermissions())
             #if ($permission.isGroupPermission() && $permission.getType() == "VIEWSPACE" && $permission.getGroup() == "confluence-users")
-               <tr>
-                  <td class="confluenceTd"><strong>$space.getName()</strong> $space.getKey()</td>
-                  <td class="confluenceTd">
-                     <ul>
+            <tr>
+                <td class="confluenceTd"><strong>$space.getName()</strong> $space.getKey()</td>
+                <td class="confluenceTd">
+                    <ul>
                         <li>$permission.getGroup()</li>
-                     </ul>
-                  </td>
-                  <td class="confluenceTd"><a href="/spaces/spacepermissions.action?key=$space.getKey()&src=spacetools">Space permissions...</td>
-               </tr> 
+                    </ul>
+                </td>
+                <td class="confluenceTd"><a href="/spaces/spacepermissions.action?key=$space.getKey()&src=spacetools">Space permissions...</td>
+            </tr> 
             #end
-         #end
-      #end
-   </tbody>
+        #end
+    #end
+</tbody>
 </table>
