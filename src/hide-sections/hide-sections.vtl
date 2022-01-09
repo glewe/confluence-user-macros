@@ -1,20 +1,19 @@
 #** ===========================================================================
- * HIDE SECTIONS
- *
- * This Confluence user macro hides Confluence sections of your page.
- *
- * Version: 1.0.1
- * Date:    2016-11-18
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/hide-sections
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
+HIDE SECTIONS
+
+This Confluence user macro hides different Confluence sections of your page.
+
+Version:    1.1.0
+Updated:    2021-01-09
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param HideBreadcrumbs:title=Hide Breadcrumbs|type=boolean|desc=Select to hide the breadcrumbs section.|default=false
 ## @param HideChildren:title=Hide Children|type=boolean|desc=Select to hide the children section.|default=false
@@ -27,45 +26,55 @@
 ## @param HideToolsMenu:title=Hide Tools Menu|type=boolean|desc=Select to hide the tools menu.|default=false
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #set ($hideScripts="") 
 #set ($hideStyles="")
  
 #if ($paramHideBreadcrumbs==true)
-   #set($hideStyles=$hideStyles+"div#breadcrumb-section{display:none;}")
+    #set($hideStyles=$hideStyles+"div#breadcrumb-section{display:none;}")
 #end
+
 #if ($paramHideChildren==true)
-   #set($hideStyles=$hideStyles+"div#children-section.pageSection{display:none;}")
+    #set($hideStyles=$hideStyles+"div#children-section.pageSection{display:none;}")
 #end
+
 #if ($paramHideComments==true)
-   #set($hideStyles=$hideStyles+"div#comments-section{display:none;}")
+    #set($hideStyles=$hideStyles+"div#comments-section{display:none;}")
 #end
+
 #if ($paramHideLabels==true)
-   #set($hideStyles=$hideStyles+".label-list{display:none;}")
+    #set($hideStyles=$hideStyles+".label-list{display:none;}")
 #end
+
 #if ($paramHideLikes==true)
-   #set($hideStyles=$hideStyles+"div#likes-section{display:none;}")
+    #set($hideStyles=$hideStyles+"div#likes-section{display:none;}")
 #end
+
 #if ($paramHideModification==true)
-   #set($hideStyles=$hideStyles+"li.page-metadata-modification-info{display:none;}a#content-metadata-page-restrictions{display:none;}a#content-metadata-attachments{display:none;}")
+    #set($hideStyles=$hideStyles+"li.page-metadata-modification-info{display:none;}a#content-metadata-page-restrictions{display:none;}a#content-metadata-attachments{display:none;}")
 #end
+
 #if ($paramHideTitle==true)
-   #set($hideScripts=$hideScripts+"document.getElementById('title-text').innerHTML='&nbsp;';")
+    #set($hideScripts=$hideScripts+"document.getElementById('title-text').innerHTML='&nbsp;';")
 #end
+
 #if ($paramHideSidebar==true)
-   #set($hideStyles=$hideStyles+".ia-fixed-sidebar {display: none;}.ia-splitter #main,.ia-splitter #footer{margin-left:0px !important;}")
+    #set($hideStyles=$hideStyles+".ia-fixed-sidebar {display: none;}.ia-splitter #main,.ia-splitter #footer{margin-left:0px !important;}")
 #end
+
 #if ($paramHideToolsMenu==true)
-   #set($hideStyles=$hideStyles+"a#action-menu-link {display: none;}")
+    #set($hideStyles=$hideStyles+"a#action-menu-link {display: none;}")
 #end
 
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
+<!-- User Macro: Hide Sections START -->
 #if ($hideStyles!="")
    <style type="text/css">$hideStyles</style>
 #end   
 #if ($hideScripts!="")
-   <script>$hideScripts</script>
+    <script>$hideScripts</script>
 #end   
+<!-- User Macro: Hide Sections START -->

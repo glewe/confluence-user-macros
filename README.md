@@ -87,6 +87,12 @@ This Confluence user macro allows to hide content from users, groups or permissi
 
 ---
 
+### [Hide Sections](/src/hide-sections)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/hide-sections/file_locked.png-32?raw=true" align="left" alt=""/>
+This Confluence user macro hides different Confluence sections of your page.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
