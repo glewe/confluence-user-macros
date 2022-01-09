@@ -1,6 +1,5 @@
 <h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/hide-if/hideif.png?raw=true" align="left" alt=""/>Hide If</h1>
 
-[![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
 [![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
 [![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
 
@@ -28,4 +27,3 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Click Save
 
 ## Credits
-
