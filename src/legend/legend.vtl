@@ -1,0 +1,100 @@
+#** ===========================================================================
+LEGEND
+
+This Confluence user macro adds a legend box to the top right of the page.
+
+Version:    2.0.0
+Updated:    2022-01-09
+Author/s:   George Lewe (based on a macro by Derrik Oltmann)
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: Rendered
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
+## @param Title:title=Title|type=string|required=true|desc=Enter the title of the legend box.|default=Legend
+## @param Position:title=Position|type=enum|enumValues=right,left|desc=Select the position of the legend box on the page.|default=right
+## @param Width:title=Width|type=string|desc=Enter the width of the legend box, e.g. in px or em.|default=22em
+## @param HeaderBackground:title=Header Background|type=string|desc=Enter the header background color as a hex value starting with a hash.|default=#fafbfc
+## @param HeaderTextAlign:title=Header Text Alignment|type=enum|enumValues=center,left,right|desc=Select the horizontal header text alignment.|default=center
+## @param HeaderVerticalAlign:title=Header Vertical Alignment|type=enum|enumValues=middle,top,bottom|desc=Select the horizontal header text alignment.|default=middle
+## @param HeaderFontSize:title=Header Font Size|type=string|desc=Select the header font size, e.g. in px or %.|default=100%
+## @param Border:title=Border Type|type=enum|enumValues=solid,dotted,dashed|desc=Select the border type of the legend box.|default=solid
+## @param BorderColor:title=Border Color|type=string|desc=Enter the border color of the legend box.|default=#f0f0f0
+## @param BorderWidth:title=Border Width|type=string|desc=Enter the border width of the legend box.|default=1px
+## @param BorderRadius:title=Border Radius|type=string|desc=Enter the border radius of the legend box.|default=5px
+## @param CellPadding:title=Cell Padding|type=string|desc=Enter the cell padding of the legend box.|default=.5em
+
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
+<style type="text/css">
+    .legendbox {
+        border-collapse: collapse;
+        border-radius: $!paramBorderRadius;
+        display: table;
+        float: $!paramPosition;
+        margin: .5em 0 .5em 1em;
+        width: $!paramWidth;
+        -moz-border-radius: $!paramBorderRadius;
+        -webkit-border-radius: $!paramBorderRadius;
+    }
+
+    .legendbox-body {
+        border-color: inherit;
+        display: table-row-group;
+        vertical-align: middle;
+    }
+
+    .legendbox-row {
+        display: table-row;
+    }
+
+    .legendbox-cell, .legendbox-head {
+        border: $!paramBorder $!paramBorderColor $!paramBorderWidth;
+        display: table-cell;
+        padding: $!paramCellPadding;
+    }
+
+    .legendbox-cell {
+        border-bottom-right-radius: $!paramBorderRadius;
+        border-bottom-left-radius: $!paramBorderRadius;
+        -moz-border-radius-bottomleft: $!paramBorderRadius;
+        -moz-border-radius-bottomright: $!paramBorderRadius;
+        -webkit-border-bottom-right-radius: $!paramBorderRadius;
+        -webkit-border-bottom-left-radius: $!paramBorderRadius;
+    }
+
+    .legendbox-head {
+        background-color: $!paramHeaderBackground !important;
+        border-top-right-radius: $!paramBorderRadius;
+        border-top-left-radius: $!paramBorderRadius;
+        font-weight: bold;
+        font-size: $!paramHeaderFontSize;
+        text-align: $!paramHeaderTextAlign;
+        vertical-align: $!paramHeaderVerticalAlign;
+        -moz-border-radius-topleft: $!paramBorderRadius;
+        -moz-border-radius-topright: $!paramBorderRadius;
+        -webkit-border-top-right-radius: $!paramBorderRadius;
+        -webkit-border-top-left-radius: $!paramBorderRadius;
+    }
+</style>
+
+<!-- User Macro: Legend START -->
+<div class="legendbox">
+    <div class="legendbox-body">
+        <div class="legendbox-row">
+            <div class="legendbox-head">$!paramTitle</div>
+        </div>
+        <div class="legendbox-row">
+            <div class="legendbox-cell">
+                #set($body = $body)
+                $body
+            </div>
+        </div>
+    </div>
+</div>
+<!-- User Macro: Legend END -->
