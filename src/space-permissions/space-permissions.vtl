@@ -1,16 +1,20 @@
 #** ===========================================================================
- * SPACE PERMISSIONS
- *
- * This Confluence user macro lists groups and users having permissions to the 
- * current or given space.
- *
- * Version: 3.0.0
- * Date:    2019-01-08
- * Author:  George Lewe, Benny Varughese, Zsolt Balint
- * Source:  https://bitbucket.org/georgelewe/space-permissions
- *
- * Macro body:      None
- * Body processing: None
+SPACE PERMISSIONS
+
+This Confluence user macro lists groups and users having permissions to the 
+current or given space.
+
+Version:    3.0.1
+Updated:    2022-01-09
+Author/s:   George Lewe, Benny Varughese, Zsolt Balint
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
 *#
 ## @param SpaceKey:title=Space Key|type=string|desc=Enter a space key. Leave empty for current space.
 ## @param Header:title=Header|type=string|desc=Enter the header here|default=Space Permissions
@@ -21,99 +25,107 @@
 ## @param ShowAdmin:title=Show Admin Permissions|type=boolean|desc=Select whether to show Admin permissions|default=true
 ## @param ShowMembers:title=Show Group Members|type=boolean|desc=Select whether to show the members of each group in an expandable section below the group name. This will only be done for groups with less than 100 members.|default=true
 
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
 #set($permArray = [])
 #if (!$paramSpaceKey)
-   #set($paramSpaceKey = $space.key)
+    #set($paramSpaceKey = $space.key)
 #end
 #set($forspace = $spaceManager.getSpace($paramSpaceKey))
 #set($spacename = $forspace.getName())
 #set($header = $paramHeader + " for " + $spacename + " (" + $paramSpaceKey + ")")
 
 #if ($paramShowView==true)
-   #set ($res = $permArray.add("VIEWSPACE"))
+    #set ($res = $permArray.add("VIEWSPACE"))
 #end
 #if ($paramShowComment==true)
-   #set ($res = $permArray.add("COMMENT"))
+    #set ($res = $permArray.add("COMMENT"))
 #end
 #if ($paramShowEdit==true)
-   #set ($res = $permArray.add("EDITSPACE"))
+    #set ($res = $permArray.add("EDITSPACE"))
 #end
 #if ($paramShowAdmin==true)
-   #set ($res = $permArray.add("SETSPACEPERMISSIONS"))
+    #set ($res = $permArray.add("SETSPACEPERMISSIONS"))
 #end
 
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
+<!-- User Macro: Space Permissions START -->
 #if ($paramShowHeader==true)
-   <h1>$header</h1>
+    <h1>$header</h1>
 #end
 
 #set ($colspan = 1)
 
 <table class="confluenceTable">
-   <tr>
-      #if ($paramShowView==true)
-         <th class="highlight-green" data-highlight-colour="green">View Permissions</th>
-         #set ($colspan = $colspan + 1)
-      #end
-      #if ($paramShowComment==true)
-         <th class="highlight-yellow" data-highlight-colour="yellow">Comment Permissions</th>
-         #set ($colspan = $colspan + 1)
-      #end
-      #if ($paramShowEdit==true)
-         <th class="highlight-blue" data-highlight-colour="blue">Edit Permissions</th>
-         #set ($colspan = $colspan + 1)
-      #end
-      #if ($paramShowAdmin==true)
-         <th class="highlight-red" data-highlight-colour="red">Admin Permissions</th>
-         #set ($colspan = $colspan + 1)
-      #end
-   </tr>
-   <tr>
-      <th class="confluenceTh" colspan="$colspan">Users</th>
-   </tr>
-   <tr>
-   #foreach( $perm in $permArray )
-      <td class="confluenceTd">
-         #foreach ($permission in $forspace.getPermissions())
-            #if ($permission.isUserPermission() && $permission.getType() == $perm)
-               #usernameLink($permission.getUserName())<br/>
+    <tr>
+        #if ($paramShowView==true)
+            <th class="highlight-green" data-highlight-colour="green">View Permissions</th>
+            #set ($colspan = $colspan + 1)
+        #end
+        #if ($paramShowComment==true)
+            <th class="highlight-yellow" data-highlight-colour="yellow">Comment Permissions</th>
+            #set ($colspan = $colspan + 1)
+        #end
+        #if ($paramShowEdit==true)
+            <th class="highlight-blue" data-highlight-colour="blue">Edit Permissions</th>
+            #set ($colspan = $colspan + 1)
+        #end
+        #if ($paramShowAdmin==true)
+            <th class="highlight-red" data-highlight-colour="red">Admin Permissions</th>
+            #set ($colspan = $colspan + 1)
+        #end
+    </tr>
+    <tr>
+        <th class="confluenceTh" colspan="$colspan">Users</th>
+    </tr>
+    <tr>
+    #foreach( $perm in $permArray )
+        <td class="confluenceTd">
+            #foreach ($permission in $forspace.getPermissions())
+                #if ($permission.isUserPermission() && $permission.getType() == $perm)
+                #usernameLink($permission.getUserName())<br/>
+                #end
             #end
-         #end
-      </td>
-   #end
-   </tr>
-   <tr>
-      <th class="confluenceTh" colspan="$colspan">Groups</th>
-   </tr>
-   <tr>
-   #foreach( $perm in $permArray )
-      <td class="confluenceTd">
-         #foreach ($permission in $forspace.getPermissions())
-            #if ($permission.isGroupPermission() && $permission.getType() == $perm)
-               #set ( $groupString = $permission.getGroup() )
-               #set ( $groupObject = $userAccessor.getGroup($groupString) )
-               <b>$groupString</b>
-               #if ($paramShowMembers==true)
-                  <ac:structured-macro ac:name="expand">
-                     <ac:parameter ac:name="title">Click to show members...</ac:parameter>
-                     <ac:rich-text-body>
-                        #if($groupString != "LSY Employee" && $groupString != "confluence-users" && $groupString != "jira-users") 
-                           #set ( $memberList = $userAccessor.getMemberNamesAsList($groupObject) )
-                           #if ($memberList.size()<100)
-                              #foreach ($member in $memberList)
-                                 #usernameLink($member)<br />
-                              #end
-                           #else
-                              Too many users to be displayed ($memberList.size())
-                           #end
-                        #else
-                           Too many users to be displayed (>100)
-                        #end
-                     </ac:rich-text-body>
-                  </ac:structured-macro>
-               #end
+        </td>
+    #end
+    </tr>
+    <tr>
+        <th class="confluenceTh" colspan="$colspan">Groups</th>
+    </tr>
+    <tr>
+    #foreach( $perm in $permArray )
+        <td class="confluenceTd">
+            #foreach ($permission in $forspace.getPermissions())
+                #if ($permission.isGroupPermission() && $permission.getType() == $perm)
+                #set ( $groupString = $permission.getGroup() )
+                #set ( $groupObject = $userAccessor.getGroup($groupString) )
+                <b>$groupString</b>
+                #if ($paramShowMembers==true)
+                    <ac:structured-macro ac:name="expand">
+                        <ac:parameter ac:name="title">Click to show members...</ac:parameter>
+                        <ac:rich-text-body>
+                            #if($groupString != "LSY Employee" && $groupString != "confluence-users" && $groupString != "jira-users") 
+                            #set ( $memberList = $userAccessor.getMemberNamesAsList($groupObject) )
+                            #if ($memberList.size()<100)
+                                #foreach ($member in $memberList)
+                                    #usernameLink($member)<br />
+                                #end
+                            #else
+                                Too many users to be displayed ($memberList.size())
+                            #end
+                            #else
+                            Too many users to be displayed (>100)
+                            #end
+                        </ac:rich-text-body>
+                    </ac:structured-macro>
+                #end
+                #end
             #end
-         #end
-      </td>
-   #end   
-   </tr>
+        </td>
+    #end   
+    </tr>
 </table>
+<!-- User Macro: Space Permissions END -->

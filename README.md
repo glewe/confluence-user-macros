@@ -145,3 +145,9 @@ Creates a risk matrix based on an issue type, likelihood field and impact field 
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/show-if/showif-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro allows to show content only to certain users, groups or permissions.
 
+
+---
+
+### [Space Permissions](/src/space-permissions)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/space-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro lists users and groups having permissions to the current or given space.
