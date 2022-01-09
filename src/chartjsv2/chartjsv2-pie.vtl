@@ -47,6 +47,7 @@ PROCESS INPUT
 #** ---------------------------------------------------------------------------
 OUTPUT
 *#
+<!-- User Macro: ChartJSv2 Pie START -->
 <div style="width: $paramChartWidth;">
     #if ($paramShowTitle == true)
     <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
@@ -54,9 +55,6 @@ OUTPUT
     <canvas id="$paramChartID" data-charttype="$paramType" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#** ---------------------------------------------------------------------------
- * JAVASCRIPT
-*#
 <script type="text/javascript">
 //<![CDATA[
     var data$paramChartID = {
@@ -103,3 +101,4 @@ OUTPUT
     }
 //]]>
 </script>
+<!-- User Macro: ChartJSv2 Pie END -->

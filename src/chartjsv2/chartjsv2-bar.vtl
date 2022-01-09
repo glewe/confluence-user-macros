@@ -41,6 +41,7 @@ Macro Body processing:  No macro body
 #** ---------------------------------------------------------------------------
  * OUTPUT
 *#
+<!-- User Macro: ChartJSv2 Bar START -->
 <div style="width: $paramChartWidth;">
     #if ($paramShowTitle == true)
     <div style="text-align: center; font-weight: bold;">$paramChartTitle</div>
@@ -48,9 +49,6 @@ Macro Body processing:  No macro body
     <canvas id="$paramChartID" data-charttype="bar" style="border: $paramBorderWidth solid $paramBorderColor; border-radius: 4px; padding: 10px;"></canvas>
 </div>
 
-#** ---------------------------------------------------------------------------
- * JAVASCRIPT
-*#
 <script type="text/javascript">
 //<![CDATA[
     var data$paramChartID = {
@@ -110,3 +108,4 @@ Macro Body processing:  No macro body
     }
 //]]>
 </script>
+<!-- User Macro: ChartJSv2 Bar END -->
