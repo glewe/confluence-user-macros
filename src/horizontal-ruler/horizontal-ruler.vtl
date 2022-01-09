@@ -1,20 +1,19 @@
 #** ===========================================================================
- * HORIZONTAL RULER
- *
- * This Confluence user macro adds a custom HR element to your page.
- *
- * Version: 1.0.0
- * Date:    2021-11-01
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/horizonta-ruler
- * License: GNU LGPLv3
- *
- * Macro body:      No
- * Body processing: None
+HORIZONTAL RULER
+
+This Confluence user macro adds a customizable HR element to your page.
+
+Version:    1.0.0
+Updated:    2021-11-01
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param Strength:title=Strength|type=int|desc=Enter the thickness of the horizontal line in pixel. Default is 1.|default=1
 ## @param Color:title=Color|type=string|desc=Enter the border color in hexadecimal starting with a #. Default: #cccccc. <a href="http://hslpicker.com/">Color Picker</a>|default=#cccccc
@@ -22,25 +21,27 @@
 ## @param SpaceAfter:title=Space After|type=string|desc=Enter the space below the line in pixels (add suffix 'px', e.g. 20px). Default: 20px|default=20px
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #if (!$paramStrength)
-   #set ($paramStrength="1px")
+    #set ($paramStrength="1px")
 #end
 
 #if (!$paramColor)
-   #set ($paramColor="#cccccc")
+    #set ($paramColor="#cccccc")
 #end
 
 #if (!$paramSpaceBefore)
-   #set ($paramSpaceBefore="20px")
+    #set ($paramSpaceBefore="20px")
 #end
 
 #if (!$paramSpaceAfter)
-   #set ($paramSpaceAfter="20px")
+    #set ($paramSpaceAfter="20px")
 #end
 
 #** ---------------------------------------------------------------------------
  * OUTPUT
 *#
+<!-- User Macro: Horizontal Ruler START -->
 <hr style="border:$paramStrength;border-color:$paramColor;margin-top:$paramSpaceBefore;margin-bottom:$paramSpaceAfter;">
+<!-- User Macro: Horizontal Ruler END -->

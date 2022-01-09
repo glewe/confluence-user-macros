@@ -93,6 +93,12 @@ This Confluence user macro hides different Confluence sections of your page.
 
 ---
 
+### [Horizontal Ruler](/src/horizontal-ruler)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/horizontal-ruler/kruler-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a customizable HR element to your page.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
