@@ -1,7 +1,7 @@
 # Hide If #
 This Confluence user macro allows to hide content based on user, groups or permission conditions.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

@@ -1,7 +1,7 @@
 # Risk Matrix #
 This Confluence user macro creates a risk matrix based on an issue type, likelihood field and impact field.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

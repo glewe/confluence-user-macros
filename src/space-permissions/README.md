@@ -1,7 +1,7 @@
 # Space Permissions #
 This Confluence user macro lists users and groups having permissions to the current or given space.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

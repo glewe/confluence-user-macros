@@ -1,7 +1,7 @@
 # Spacer #
 This Confluence user macro replaces variables in its body.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

@@ -1,7 +1,7 @@
 # Local Time #
 This Confluence user macro displays the user’s local date and time offering several options. Use once per page.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

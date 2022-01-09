@@ -1,21 +1,20 @@
 #** ===========================================================================
- * GROUP MEMBERS
- *
- * This Confluence user macro adds a sorted table with numbered rows for each
- * member of a given group.
- *
- * Version: 1.7.2
- * Date:    2021-06-24
- * Author:  George Lewe, Zsolt Balint
- * Source:  https://github.com/glewe/group-members
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
+GROUP MEMBERS
+
+This Confluence user macro adds a sorted table with numbered rows for each
+member of a given group.
+
+Version:    1.7.2
+Updated:    2021-06-24
+Author/s:   George Lewe, Zsolt Balint
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param Group:title=Group|type=string|desc=Enter the group name here|default=jira-administrators
 ## @param ShowUsername:title=Show username|type=boolean|desc=Select whether to show the username in an extra column.|default=false
@@ -30,7 +29,7 @@
 #set($containerContext = $containerManager.containerContext)
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #if (!$paramGroup)
    #set ($paramshowGroup="jira-administrators")
@@ -44,131 +43,131 @@
 
    #set ( $usernames = $userAccessor.getMemberNamesAsList($group) )
    
-   #** ---------------------------------------------------------------------------
-    * BUBBLE SORT BY FULL NAME
-   *#
-   ## 
-   ## Create an array that we can sort
-   ##
-   #set( $uarray = [] )
-   #set( $unarray = [] )
+    #**
+    Bubble sort by full name.
+    First, create two arrays that we can sort
+    *#
+    #set( $uarray = [] )
+    #set( $unarray = [] )
    
-   ##
-   ## Now fill it with the full names
-   ##
-   #set ( $count = 0 )
-   #foreach( $username in  $usernames )
-      #set( $fullName = $uarray.add( $userAccessor.getUserByName($username).getFullName() ) )
-      #set( $un = $unarray.add( $username) )
-      #set( $count = $count + 1 )
-   #end
+    #**
+    Now fill them with the full names
+    *#
+    #set ( $count = 0 )
+    #foreach( $username in  $usernames )
+        #set( $fullName = $uarray.add( $userAccessor.getUserByName($username).getFullName() ) )
+        #set( $un = $unarray.add( $username) )
+        #set( $count = $count + 1 )
+    #end
    
-   ##
-   ## Bubble Sort (takes n^2 passes)
-   ##
-   #set($size=$uarray.size())
-   #foreach($junk in $uarray)
-      #set($actual=-1)
-      #foreach($line in $uarray)
-         #set($actual=$actual+1)
-         #if($velocityCount<$size)
-            ##
-            ## Compare with previous. If smaller, swap.
-            ##
-            #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
-               #set ($tmp=$uarray.get($velocityCount))
-               #set ($junk=$uarray.set($velocityCount,$line))
-               #set ($junk=$uarray.set($actual,$tmp))
-               ##
-               ## Sort usernames together with fullnames as map is not available in confluence velocity version
-               ##
-               #set ($tmp2=$unarray.get($velocityCount))
-               #set ($junk=$unarray.set($velocityCount, $unarray.get($actual)))
-               #set ($junk=$unarray.set($actual, $tmp2))
+    #**
+    Bubble Sort (takes n^2 passes)
+    *#
+    #set($size=$uarray.size())
+    #foreach($junk in $uarray)
+        #set($actual=-1)
+        #foreach($line in $uarray)
+            #set($actual=$actual+1)
+            #if($velocityCount<$size)
+                ##
+                ## Compare with previous. If smaller, swap.
+                ##
+                #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
+                #set ($tmp=$uarray.get($velocityCount))
+                #set ($junk=$uarray.set($velocityCount,$line))
+                #set ($junk=$uarray.set($actual,$tmp))
+                ##
+                ## Sort usernames together with fullnames as map is not available in confluence velocity version
+                ##
+                #set ($tmp2=$unarray.get($velocityCount))
+                #set ($junk=$unarray.set($velocityCount, $unarray.get($actual)))
+                #set ($junk=$unarray.set($actual, $tmp2))
+                #end
             #end
-         #end
-      #end
-   #end
+        #end
+    #end
    
-   #** ---------------------------------------------------------------------------
-    * OUTPUT
-   *#
-   #set ($colspan = 2)
-   #if ($paramShowUsername == true)
-      #set ($colspan = $colspan + 1)
-   #end
-   #if ($paramShowEmailAddresses == true)
-      #set ($colspan = $colspan + 1)
-   #end
-   #if ($paramShowOtherMemberships == true)
-      #set ($colspan = $colspan + 1)
-   #end
-    
-   #set ( $i = 1 )
-   #set ( $j = 0 )
-   #set ( $distributionList = "" )
+    #set ($colspan = 2)
+    #if ($paramShowUsername == true)
+        #set ($colspan = $colspan + 1)
+    #end
+    #if ($paramShowEmailAddresses == true)
+        #set ($colspan = $colspan + 1)
+    #end
+    #if ($paramShowOtherMemberships == true)
+        #set ($colspan = $colspan + 1)
+    #end
+        
+    #set ( $i = 1 )
+    #set ( $j = 0 )
+    #set ( $distributionList = "" )
 
-   <!-- Group Members Macro -->
-   #if ($paramShowCountOnly == true)
-      <strong>$paramshowGroup ($count)</strong>
-   #else
-      <table class="confluenceTable">
-         <tr>
-            <th colspan="$colspan" class="highlight-blue confluenceTh" style="padding:12px;min-width:300px;"><div class="aui-icon aui-icon-large aui-iconfont-group" style="padding-right:16px;float:left;">Group</div><div style="font-size:16px;padding-top:4px;">$paramshowGroup ($count)</div></th>
-         </tr>
-         <tr>
-            <th class="confluenceTh" style="text-align:center;">#</th>
-            #if ($paramShowUsername == true)
-               <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-person">Username</span> Username</th>
-            #end
-            <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-person-circle">Profile</span> Profile</th>
-            #if ($paramShowEmailAddresses == true)
-               <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-email">Email</span> E-mail</th>
-            #end
-            #if ($paramShowOtherMemberships == true)
-               <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-people">Membership</span> Other Memberships</th>
-            #end
-         </tr>
-         #foreach ($item in $uarray)
-            #set( $eMail = $userAccessor.getUserByName($unarray.get($j)).getEmail() ) 
-
-            #set( $distributionList = $distributionList + $eMail + ";" )
+    #** ---------------------------------------------------------------------------
+    OUTPUT
+    *#
+    <!-- User Macro: Group Members START -->
+    #if ($paramShowCountOnly == true)
+        <strong>$paramshowGroup ($count)</strong>
+    #else
+        <table class="confluenceTable">
             <tr>
-               <td class="confluenceTd" style="text-align: right;">$i</td>
-               #if ($paramShowUsername == true)
-                  <td class="confluenceTd">$unarray.get($j)</td>
-               #end
-               <td class="confluenceTd"><a href='/display/~$unarray.get($j)' title="Show profile...">$item</a></td>
-               #if ($paramShowEmailAddresses == true)
-                  <td class="confluenceTd"><a href='mailto:$eMail' title="Send email to this user...">$eMail</a></td>
-               #end
-               #if ($paramShowOtherMemberships == true)
-               <td>
-                  #set ( $groupnames = $userAccessor.getGroupNamesForUserName($unarray.get($j)) )
-                  #foreach ($groupname in $groupnames)
-                     $groupname<br>
-                  #end
-               </td>
-               #end
+                <th colspan="$colspan" class="highlight-blue confluenceTh" style="padding:12px;min-width:300px;"><div class="aui-icon aui-icon-large aui-iconfont-group" style="padding-right:16px;float:left;">Group</div><div style="font-size:16px;padding-top:4px;">$paramshowGroup ($count)</div></th>
             </tr>
-            #set ( $j = $i )
-            #set ( $i = $i + 1 )
-         #end
-      </table>
-      #if ($paramShowSendMailButton == true)
-         <p><a href="mailto:$distributionList"><button class="aui-button aui-button-primary"><span class="aui-icon aui-icon-small aui-iconfont-email">Email</span> Send mail to group</button></a></p>
-      #end
-   #end
+            <tr>
+                <th class="confluenceTh" style="text-align:center;">#</th>
+                #if ($paramShowUsername == true)
+                <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-person">Username</span> Username</th>
+                #end
+                <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-person-circle">Profile</span> Profile</th>
+                #if ($paramShowEmailAddresses == true)
+                <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-email">Email</span> E-mail</th>
+                #end
+                #if ($paramShowOtherMemberships == true)
+                <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-people">Membership</span> Other Memberships</th>
+                #end
+            </tr>
+            #foreach ($item in $uarray)
+                #set( $eMail = $userAccessor.getUserByName($unarray.get($j)).getEmail() ) 
+
+                #set( $distributionList = $distributionList + $eMail + ";" )
+                <tr>
+                <td class="confluenceTd" style="text-align: right;">$i</td>
+                #if ($paramShowUsername == true)
+                    <td class="confluenceTd">$unarray.get($j)</td>
+                #end
+                <td class="confluenceTd"><a href='/display/~$unarray.get($j)' title="Show profile...">$item</a></td>
+                #if ($paramShowEmailAddresses == true)
+                    <td class="confluenceTd"><a href='mailto:$eMail' title="Send email to this user...">$eMail</a></td>
+                #end
+                #if ($paramShowOtherMemberships == true)
+                <td>
+                    #set ( $groupnames = $userAccessor.getGroupNamesForUserName($unarray.get($j)) )
+                    #foreach ($groupname in $groupnames)
+                        $groupname<br>
+                    #end
+                </td>
+                #end
+                </tr>
+                #set ( $j = $i )
+                #set ( $i = $i + 1 )
+            #end
+        </table>
+        #if ($paramShowSendMailButton == true)
+            <p><a href="mailto:$distributionList"><button class="aui-button aui-button-primary"><span class="aui-icon aui-icon-small aui-iconfont-email">Email</span> Send mail to group</button></a></p>
+        #end
+        <!-- User Macro: Group Members END -->
+    #end
 #else
 
-   #** ---------------------------------------------------------------------------
-    * OUTPUT: Group not found
-   *#
-   <!-- Group Members Macro -->
-   <table class="confluenceTable">
-      <tr>
-         <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-people">Group</span> $paramshowGroup (not found)</th>
-      </tr>
-   </table>
+    #** -----------------------------------------------------------------------
+    OUTPUT: Group not found
+    *#
+    <!-- User Macro: Group Members START -->
+    <table class="confluenceTable">
+        <tr>
+            <th class="confluenceTh"><span class="aui-icon aui-icon-small aui-iconfont-people">Group</span> $paramshowGroup (not found)</th>
+        </tr>
+    </table>
+    <!-- User Macro: Group Members END -->
 
 #end

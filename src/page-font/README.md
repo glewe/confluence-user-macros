@@ -1,7 +1,7 @@
 # Page Font #
 This Confluence user macro allows you to set a different font incl. size and color for your page.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

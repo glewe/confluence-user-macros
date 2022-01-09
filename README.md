@@ -75,6 +75,12 @@ This Confluence user macro adds a button group that toggles/expands/collapses al
 
 ---
 
+### [Group Members](/src/group-members)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/group-members/kdmconfig-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a sorted table with numbered rows for each member of a given group.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.

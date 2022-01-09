@@ -1,7 +1,7 @@
 # Tooltip #
 This Confluence user macro adds an inline text with a hover tooltip.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

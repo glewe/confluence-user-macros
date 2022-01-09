@@ -1,7 +1,7 @@
 # Page Permissions #
 This Confluence user macro lists space permissions and page restrictions for the current page.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence

@@ -1,7 +1,7 @@
 # Video Control #
 This Confluence user macro adds an HTML5 video control element to your page that can play MP4 and OGG files.
 
-# Confluence User Macros #
+## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence
