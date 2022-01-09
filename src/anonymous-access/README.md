@@ -1,10 +1,10 @@
-<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-permissions/kgpg.png?raw=true" align="left" alt=""/>Anonymous Permissions</h1>
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-access/kgpg.png?raw=true" align="left" alt=""/>Anonymous Access</h1>
 
 [![Groovy](https://img.shields.io/badge/Language-Groovy-informational.svg)](https://groovy-lang.org/)
 [![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
 [![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
 
-This Confluence user macro lists all spaces where 'Anonymous' has at least view permissions.
+This Confluence user macro lists all spaces for which 'Anonymous' has at least view permission.
 
 ## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.

@@ -256,6 +256,9 @@ OUTPUT
         <div class="panelHeader" style="$headerStyle">$paramTitle</div>
     #end
     #if ($paramshowBody==true)
-        <div class="panelContent" style="padding: 10px;">$body</div>
+        <div class="panelContent" style="padding: 10px;">
+            #set($body = $body)
+            $body
+        </div>
     #end
 </div>

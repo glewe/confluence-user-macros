@@ -39,7 +39,12 @@ OUTPUT
                         <li>$permission.getGroup()</li>
                     </ul>
                 </td>
-                <td class="confluenceTd"><a href="/spaces/spacepermissions.action?key=$space.getKey()&src=spacetools">Space permissions...</td>
+                <td class="confluenceTd">
+                    <a class="aui-button aui-button-primary aui-button-compact conf-macro output-block" 
+                        style="color:#ffffff;"
+                        href="/spaces/spacepermissions.action?key=$space.getKey()"
+                        target="_blank">Edit permissions...</a>
+                </td>
             </tr> 
             #end
         #end
