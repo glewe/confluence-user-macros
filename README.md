@@ -139,3 +139,9 @@ This Confluence user macro displays a panel with the profile info of a single us
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/risk-matrix/risk-matrix-icon-32.png?raw=true" align="left" alt=""/>
 Creates a risk matrix based on an issue type, likelihood field and impact field from a linked Jira instance.
 
+---
+
+### [Show If](/src/show-if)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/show-if/showif-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro allows to show content only to certain users, groups or permissions.
+

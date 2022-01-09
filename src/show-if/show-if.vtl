@@ -1,19 +1,20 @@
 #** ===========================================================================
- * SHOW IF
- *
- * This Confluence user macro allows to show content based on conditions.
- *
- * Version: 1.0.1
- * Date:    2020-04-01
- * Author:  Cyrille Martin [VALIANTYS], George Lewe
- * Source:  https://bitbucket.org/georgelewe/show-if
- *
- * Macro body:      Yes
- * Body processing: Rendered
+SHOW IF
+
+This Confluence user macro allows to show content only to certain users, groups
+or permissions.
+
+Version:    1.1.0
+Updated:    2022-01-09
+Author/s:   Cyrille Martin [VALIANTYS], George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: Rendered
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param match:title=Match Using|type=enum|enumValues=all,any|required=false|desc=If set to any, only one of the specified restrictions needs to match.|default=any
 ## @param user:title=Users|type=username|required=false|desc=The list of users that can see this content.|multiple=true
@@ -27,74 +28,79 @@
 #set( $username = "$req.getRemoteUser()" )
  
 #** ---------------------------------------------------------------------------
- * Check allowed users
+PROCESS INPUT
+*#
+#**
+Check allowed users
 *#
 #if( $!paramuser )
-   #foreach( $userlisted in $paramuser.split(",") )
-      #if( $userlisted == $username )
-         #set( $showcontentuser = true )
-      #end
-   #end
+    #foreach( $userlisted in $paramuser.split(",") )
+        #if( $userlisted == $username )
+            #set( $showcontentuser = true )
+        #end
+    #end
 #end
  
-#** ---------------------------------------------------------------------------
- * Check allowed groups
+#**
+Check allowed groups
 *#
 #if( $!paramgroup )
-   #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
-      #foreach( $grouplisted in $paramgroup.split(",") )
-         #if( $grouplist == $grouplisted )
-         #set( $showcontentgroup = true )
-         #end
-      #end
-   #end
+    #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
+        #foreach( $grouplisted in $paramgroup.split(",") )
+            #if( $grouplist == $grouplisted )
+            #set( $showcontentgroup = true )
+            #end
+        #end
+    #end
 #end
  
-#** ---------------------------------------------------------------------------
- * Check allowed permissions
+#**
+Check allowed permissions
 *#
 #if( $!paramspacePermission )
-   #set ( $colonIndex = $paramspacePermission.indexOf(":") )
-   #if ( $colonIndex == -1 )
-      #set ( $pagePermission = $paramspacePermission )
-   #else
-      #set ( $spaceKey = $paramspacePermission.substring(0, $colonIndex) )
-      #set ( $pageActionIndex = $colonIndex + 1 )
-      #set ( $pagePermission = $paramspacePermission.substring($pageActionIndex) )
-   #end
-   #if( $pagePermission == "edit" )
-      #set( $getPermission = $permissionHelper.canEdit($userAccessor.getUserByName($username),$content) )
-   #elseif( $pagePermission ==  "view" )
-      #set( $getPermission = $permissionHelper.canViewPage($userAccessor.getUserByName($username),$content) )
-   #elseif( $pagePermission ==  "news" )
-      #set( $getPermission = $permissionHelper.canCreateBlogPost($userAccessor.getUserByName($username),$space) )
-   #elseif( $pagePermission ==  "admin" )
-      #set( $getPermission = $permissionHelper.canAdminister($userAccessor.getUserByName($username),$space) )
-   #end
+    #set ( $colonIndex = $paramspacePermission.indexOf(":") )
+    #if ( $colonIndex == -1 )
+        #set ( $pagePermission = $paramspacePermission )
+    #else
+        #set ( $spaceKey = $paramspacePermission.substring(0, $colonIndex) )
+        #set ( $pageActionIndex = $colonIndex + 1 )
+        #set ( $pagePermission = $paramspacePermission.substring($pageActionIndex) )
+    #end
+    #if( $pagePermission == "edit" )
+        #set( $getPermission = $permissionHelper.canEdit($userAccessor.getUserByName($username),$content) )
+    #elseif( $pagePermission ==  "view" )
+        #set( $getPermission = $permissionHelper.canViewPage($userAccessor.getUserByName($username),$content) )
+    #elseif( $pagePermission ==  "news" )
+        #set( $getPermission = $permissionHelper.canCreateBlogPost($userAccessor.getUserByName($username),$space) )
+    #elseif( $pagePermission ==  "admin" )
+        #set( $getPermission = $permissionHelper.canAdminister($userAccessor.getUserByName($username),$space) )
+    #end
 #end
  
  
 #** ---------------------------------------------------------------------------
- * Display body based on above check
+OUTPUT
 *#
+<!-- User Macro: Show If START -->
 #if( $parammatch == "any" )
-   #if( $showcontentuser || $showcontentgroup || $getPermission )
-      #if( $!paramdisplay != "printable" )
-         $body
-      #else
-         <div class="NoDisplay">
-         $body
-         </div>
-      #end
-   #end
+    #if( $showcontentuser || $showcontentgroup || $getPermission )
+        #if( $!paramdisplay != "printable" )
+            $body
+        #else
+            <div class="NoDisplay">
+            $body
+            </div>
+        #end
+    #end
 #else
-   #if( (($!paramuser && $showcontentuser) || !($!paramuser || $showcontentuser)) && (( $!paramgroup && $showcontentgroup) || !( $!paramgroup || $showcontentgroup)) && (($!paramspacePermission && $getPermission) || !($!paramspacePermission || $getPermission)) )
-      #if( $!paramdisplay != "printable" )
-         $body
-      #else
-         <div class="NoDisplay">
-         $body
-         </div>
-      #end
-   #end
+    #if( (($!paramuser && $showcontentuser) || !($!paramuser || $showcontentuser)) && (( $!paramgroup && $showcontentgroup) || !( $!paramgroup || $showcontentgroup)) && (($!paramspacePermission && $getPermission) || !($!paramspacePermission || $getPermission)) )
+        #if( $!paramdisplay != "printable" )
+            $body
+        #else
+            <div class="NoDisplay">
+            $body
+            </div>
+        #end
+    #end
 #end
+<!-- User Macro: Show If END -->
