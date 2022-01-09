@@ -1,19 +1,20 @@
 #** ===========================================================================
- * HIDE IF
- *
- * This Confluence user macro allows to hide content based on conditions.
- *
- * Version: 1.0.1
- * Date:    2020-04-01
- * Author:  Cyrille Martin [VALIANTYS]
- * Source:  https://bitbucket.org/georgelewe/hide-if
- *
- * Macro body:      Yes
- * Body processing: Rendered
+HIDE IF
+
+This Confluence user macro allows to hide content from users, groups or
+permissions.
+
+Version:    1.1.0
+Updated:    2022-01-09
+Author/s:   Cyrille Martin [VALIANTYS], George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: Rendered
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param match:title=Match Using|type=enum|enumValues=all,any|required=false|desc=If set to any, only one of the specified restrictions needs to match.|default=any
 ## @param user:title=Users|type=username|required=false|desc=The list of users to match.|multiple=true
@@ -27,82 +28,90 @@
 #set( $username = "$req.getRemoteUser()" )
  
 #** ---------------------------------------------------------------------------
- * Check users to hide from
+PROCESS INPUT
+*#
+#**
+Check users to hide from
 *#
 #if( $!paramuser )
-   #foreach( $userlisted in $paramuser.split(",") )
-      #if( $userlisted == $username )
-         #set( $hidecontentuser = true )
-      #end
-   #end
+    #foreach( $userlisted in $paramuser.split(",") )
+        #if( $userlisted == $username )
+            #set( $hidecontentuser = true )
+        #end
+    #end
 #end
  
-#** ---------------------------------------------------------------------------
- * Check groups to hide from
+#**
+Check groups to hide from
 *#
 #if( $!paramgroup )
-   #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
-      #foreach( $grouplisted in $paramgroup.split(",") )
-         #if( $grouplist == $grouplisted )
-         #set( $hidecontentgroup = true )
-         #end
-      #end
-   #end
+    #foreach( $grouplist in $userAccessor.getGroupNamesForUserName($username) )
+        #foreach( $grouplisted in $paramgroup.split(",") )
+            #if( $grouplist == $grouplisted )
+            #set( $hidecontentgroup = true )
+            #end
+        #end
+    #end
 #end
  
-#** ---------------------------------------------------------------------------
- * Check permissions to hide from
+#**
+Check permissions to hide from
 *#
 #if( $!paramspacePermission )
-   #set ( $colonIndex = $paramspacePermission.indexOf(":") )
-   #if ( $colonIndex == -1 )
-      #set ( $pagePermission = $paramspacePermission )
-   #else
-      #set ( $spaceKey = $paramspacePermission.substring(0, $colonIndex) )
-      #set ( $pageActionIndex = $colonIndex + 1 )
-      #set ( $pagePermission = $paramspacePermission.substring($pageActionIndex) )
-   #end
-   #if( $pagePermission == "edit" )
-      #set( $getPermission = $permissionHelper.canEdit($userAccessor.getUserByName($username),$content) )
-   #elseif( $pagePermission ==  "view" )
-      #set( $getPermission = $permissionHelper.canViewPage($userAccessor.getUserByName($username),$content) )
-   #elseif( $pagePermission ==  "news" )
-      #set( $getPermission = $permissionHelper.canCreateBlogPost($userAccessor.getUserByName($username),$space) )
-   #elseif( $pagePermission ==  "admin" )
-      #set( $getPermission = $permissionHelper.canAdminister($userAccessor.getUserByName($username),$space) )
-   #end
+    #set ( $colonIndex = $paramspacePermission.indexOf(":") )
+    #if ( $colonIndex == -1 )
+        #set ( $pagePermission = $paramspacePermission )
+    #else
+        #set ( $spaceKey = $paramspacePermission.substring(0, $colonIndex) )
+        #set ( $pageActionIndex = $colonIndex + 1 )
+        #set ( $pagePermission = $paramspacePermission.substring($pageActionIndex) )
+    #end
+    #if( $pagePermission == "edit" )
+        #set( $getPermission = $permissionHelper.canEdit($userAccessor.getUserByName($username),$content) )
+    #elseif( $pagePermission ==  "view" )
+        #set( $getPermission = $permissionHelper.canViewPage($userAccessor.getUserByName($username),$content) )
+    #elseif( $pagePermission ==  "news" )
+        #set( $getPermission = $permissionHelper.canCreateBlogPost($userAccessor.getUserByName($username),$space) )
+    #elseif( $pagePermission ==  "admin" )
+        #set( $getPermission = $permissionHelper.canAdminister($userAccessor.getUserByName($username),$space) )
+    #end
 #end
- 
  
 #** ---------------------------------------------------------------------------
- * Display body based on above check
+OUTPUT
 *#
+<!-- User Macro: Hide If START -->
 #if( $parammatch == "any" )
-   #if( $hidecontentuser || $hidecontentgroup || $getPermission )
-      #if( $!paramdisplay != "printable" )
-      #else
-         <div class="NoDisplay">
-         $body
-         </div>
-      #end
-   #else
-      #if( $!paramdisplay != "printable" )
-         $body
-      #else
-         <div class="NoDisplay">
-         $body
-         </div>
-      #end
-   #end
+    #if( $hidecontentuser || $hidecontentgroup || $getPermission )
+        #if( $!paramdisplay != "printable" )
+        #else
+            <div class="NoDisplay">
+            #set($body = $body)
+            $body
+            </div>
+        #end
+    #else
+        #if( $!paramdisplay != "printable" )
+            #set($body = $body)
+            $body
+        #else
+            <div class="NoDisplay">
+            #set($body = $body)
+            $body
+            </div>
+        #end
+    #end
 #else
-   #if( (($!paramuser && $hidecontentuser) || !($!paramuser || $hidecontentuser)) && (( $!paramgroup && $hidecontentgroup) || !( $!paramgroup || $hidecontentgroup)) && (($!paramspacePermission && $getPermission) || !($!paramspacePermission || $getPermission)) )
-      #if( $!paramdisplay != "printable" )
-      #else
-         <div class="NoDisplay">
-         $body
-         </div> 
-      #end
-   #else 
-      $body
-   #end
+    #if( (($!paramuser && $hidecontentuser) || !($!paramuser || $hidecontentuser)) && (( $!paramgroup && $hidecontentgroup) || !( $!paramgroup || $hidecontentgroup)) && (($!paramspacePermission && $getPermission) || !($!paramspacePermission || $getPermission)) )
+        #if( $!paramdisplay != "printable" )
+        #else
+            <div class="NoDisplay">
+            #set($body = $body)
+            $body
+            </div> 
+        #end
+    #else 
+        $body
+    #end
 #end
+<!-- User Macro: Hide If END -->

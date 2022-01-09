@@ -81,6 +81,12 @@ This Confluence user macro adds a sorted table with numbered rows for each membe
 
 ---
 
+### [Hide If](/src/hide-if)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/hide-if/hideif-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro allows to hide content from users, groups or permissions.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.
