@@ -21,7 +21,7 @@ helped me a lot writing them. Here are my most useful ones as my contribution ba
 
 ---
 
-### [Anonymous Permissions](/src/anonymous-permissions)
+### [Anonymous Access](/src/anonymous-access)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/anonymous-access/kgpg-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro lists all spaces for which 'Anonymous' has at least view permission.
 
