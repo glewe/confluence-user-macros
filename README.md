@@ -123,6 +123,12 @@ This Confluence user macro allows you to set a different font incl. size and col
 
 ---
 
+### [Page Permissions](/src/page-permissions)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/page-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro lists space permissions and page restrictions for the current page.
+
+---
+
 ### [Profile Info](/src/profile-info)
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/profile-info/vcard-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro displays a panel with the profile info of a single user or all users of a group.

@@ -1,20 +1,20 @@
 #** ===========================================================================
- * PAGE PERMISSIONS
- *
- * This Confluence user macro lists space permissions and page restrictions.
- *
- * Version: 2.2.0
- * Date:    2018-01-22
- * Author:  George Lewe (based on a Sandro Herrmann example)
- * Source:  https://bitbucket.org/georgelewe/page-permissions
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
+PAGE PERMISSIONS
+
+This Confluence user macro lists space permissions and page restrictions for
+the current page.
+
+Version:    2.2.0
+Updated:    2018-01-22
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
- * PARAMETER
+PARAMETER
 *#
 ## @param ShowSpacePermissions:title=Show Space Permissions|type=boolean|default=true
 ## @param CollapseSpacePermissions:title=Collapse Space Permissions|type=boolean|default=false
@@ -27,252 +27,335 @@
 #set($containerContext=$containerManager.containerContext)
 #set($contentPermissionManager=$containerContext.getComponent('contentPermissionManager')) 
 
-##
-## These two arrays are used to store the groups and users from the space permissions.
-## They will be compared later with the groups and users from the page restrictions.
-##
+#** ---------------------------------------------------------------------------
+PROCESS INPUT
+*#
+
+#** ---------------------------------------------------------------------------
+Group Space Permissions
+
+These two arrays are used to store the groups and users from the space permissions.
+They will be compared later with the groups and users from the page restrictions.
+*#
 #set($spaceGroups = [] )
 #set($spaceUsers = [] )
 
-#** ---------------------------------------------------------------------------
- * BUBBLE SORT GROUP SPACE PERMISSIONS
+#**
+Create an array for the groups that we can sort
 *#
-## 
-## Create an array for the groups that we can sort
-##
 #set( $garray = [] )
 
-##
-## Now fill it with the group permission entries as a concatenated string: groupname;type
-##
+#**
+Now fill it with the group permission entries as a concatenated string: groupname;type
+*#
 #set ( $count = 0 )
 #foreach ( $spacePermission in $content.space.permissions )
-   #if ( $spacePermission.isGroupPermission() )
-      #set ( $groupPermission = $garray.add("$spacePermission.group;$spacePermission.type") )
-      #set ( $count = $count + 1 )
-   #end
+    #if ( $spacePermission.isGroupPermission() )
+        #set ( $groupPermission = $garray.add("$spacePermission.group;$spacePermission.type") )
+        #set ( $count = $count + 1 )
+    #end
 #end
 
-##
-## Bubble Sort (takes n^2 passes)
-##
+#**
+Bubble Sort (takes n^2 passes)
+*#
 #set ( $size = $garray.size() )
 #foreach ( $junk in $garray )
-   #set ( $actual=-1 )
-   #foreach ( $line in $garray )
-      #set ( $actual = $actual + 1 )
-      #if ( $velocityCount < $size )
-         ##
-         ## Compare with previous. If smaller, swap.
-         ##
-         #if ($line.compareToIgnoreCase($garray.get($velocityCount)) > 0 )
-            #set ($tmp=$garray.get($velocityCount))
-            #set ($junk=$garray.set($velocityCount,$line))
-            #set ($junk=$garray.set($actual,$tmp))
-         #end
-      #end
-   #end
+    #set ( $actual=-1 )
+    #foreach ( $line in $garray )
+        #set ( $actual = $actual + 1 )
+        #if ( $velocityCount < $size )
+            ##
+            ## Compare with previous. If smaller, swap.
+            ##
+            #if ($line.compareToIgnoreCase($garray.get($velocityCount)) > 0 )
+                #set ($tmp=$garray.get($velocityCount))
+                #set ($junk=$garray.set($velocityCount,$line))
+                #set ($junk=$garray.set($actual,$tmp))
+            #end
+        #end
+    #end
 #end
 
 #** ---------------------------------------------------------------------------
- * BUBBLE SORT USER SPACE PERMISSIONS
+User Space Permissions
+
+Create an array for the users that we can sort
 *#
-## 
-## Create an array for the users that we can sort
-##
 #set( $uarray = [] )
 
-##
-## Now fill it with the user permission entries as a concatenated string: username;type
-##
+#**
+Now fill it with the user permission entries as a concatenated string: username;type
+*#
 #set ( $count = 0 )
 #foreach( $spacePermission in $content.space.permissions)
-   #if($spacePermission.isUserPermission() )
-      #set( $userPermission = $uarray.add("$spacePermission.userName;$spacePermission.type") )
-      #set ( $count = $count + 1 )
-   #end
+    #if($spacePermission.isUserPermission() )
+        #set( $userPermission = $uarray.add("$spacePermission.userName;$spacePermission.type") )
+        #set ( $count = $count + 1 )
+    #end
 #end
 
-##
-## Bubble Sort (takes n^2 passes)
-##
+#**
+Bubble Sort (takes n^2 passes)
+*#
 #set($size=$uarray.size())
 #foreach($junk in $uarray)
-   #set($actual=-1)
-   #foreach($line in $uarray)
-      #set($actual=$actual+1)
-      #if($velocityCount<$size)
-         ##
-         ## Compare with previous. If smaller, swap.
-         ##
-         #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
-            #set ($tmp=$uarray.get($velocityCount))
-            #set ($junk=$uarray.set($velocityCount,$line))
-            #set ($junk=$uarray.set($actual,$tmp))
-         #end
-      #end
-   #end
+    #set($actual=-1)
+    #foreach($line in $uarray)
+        #set($actual=$actual+1)
+        #if($velocityCount<$size)
+            ##
+            ## Compare with previous. If smaller, swap.
+            ##
+            #if ($line.compareToIgnoreCase($uarray.get($velocityCount)) > 0 )
+                #set ($tmp=$uarray.get($velocityCount))
+                #set ($junk=$uarray.set($velocityCount,$line))
+                #set ($junk=$uarray.set($actual,$tmp))
+            #end
+        #end
+    #end
 #end
  
 #** ---------------------------------------------------------------------------
- * BUILD SPACE SPACE PERMISSIONS TABLES
+OUTPUT
 *#
-#if ( $paramShowSpacePermissions != true )
-<!--
-#end
-#if ( $paramCollapseSpacePermissions == true )
-<ac:structured-macro ac:macro-id="9d01a481-c5fb-4b85-bd4b-ea4d40412e1d" ac:name="expand" ac:schema-version="1">
-   <ac:parameter ac:name="title">Click here to view Space Permissions...</ac:parameter>
-   <ac:rich-text-body>
-#end
-   <h1>Space Permissions</h1>
-   <p>The following groups and users have permissions in this space.</p>
-   <h2>Space Permissions for groups</h2>
-   <table class="wrapped">
-   <colgroup>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-   </colgroup>
-   <tbody>
-      <tr>
-         <th class="highlight-blue" data-highlight-colour="blue"> </th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">All</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Page</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Blog</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Attachments</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Comments</th>
-         <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Restrictions</th>
-         <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Mail</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Space</th>
-      </tr>
-      <tr>
-         <td>
-         <strong>Group</strong>
-         </td>
-         <td>
-         <strong>View</strong>
-         </td>
-         <td>
-         <strong>Delete own</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td colspan="1">
-         <strong>Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Add/Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Export</strong>
-         </td>
-         <td colspan="1">
-         <strong>Admin</strong>
-         </td>
-      </tr>
-      #set($currentGroup = "none")
-      #set($viewSpace = false)
-      #set($removeOwnContent = false)
-      #set($editSpace = false)
-      #set($removePage = false)
-      #set($editBlog = false)
-      #set($removeBlog = false)
-      #set($createAttachment = false)
-      #set($removeAttachment = false)
-      #set($createComment = false)
-      #set($removeComment = false)
-      #set($pagePermissions = false)
-      #set($removeMail = false)
-      #set($exportSpace = false)
-      #set($adminSpace = false)
-      #foreach( $permission in $garray )
-         #set ( $p = [] )
-         #foreach($i in $permission.split(";"))
-            #set ($tmp = $p.add($i))
-         #end
-         #set($loopGroup = $p.get(0))
-         #if($currentGroup == "none") #set($currentGroup = $loopGroup) #end
-         #if($currentGroup == $loopGroup)
-            ##
-            ## What permission is this? Set it to true
-            ##
-            #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
-            #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
-            #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
-            #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
-            #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
-            #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
-            #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
-            #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
-            #if($p.get(1)=="COMMENT") #set($createComment = true) #end
-            #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
-            #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
-            #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
-            #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
-            #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
-         #else
-            ##
-            ## This is a new group so we are done with the current group.
-            ## Save the current group in the compare array for later.
-            ## Print the table row with the permissions for the current group.
-            ##
+<!-- User Macro: Page Permissions START -->
+#**
+Build space permissions tables
+*#
+#if ( $paramShowSpacePermissions == true )
+
+    #if ( $paramCollapseSpacePermissions == true )
+    <ac:structured-macro ac:macro-id="9d01a481-c5fb-4b85-bd4b-ea4d40412e1d" ac:name="expand" ac:schema-version="1">
+        <ac:parameter ac:name="title">Click here to view Space Permissions...</ac:parameter>
+        <ac:rich-text-body>
+    #end
+
+    <h1>Space Permissions</h1>
+    <p>The following groups and users have permissions in this space.</p>
+    <h2>Space Permissions for Groups</h2>
+    <table class="wrapped">
+        <colgroup>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="highlight-blue" data-highlight-colour="blue"> </th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">All</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Page</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Blog</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Attachments</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Comments</th>
+                <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Restrictions</th>
+                <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Mail</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Space</th>
+            </tr>
+            <tr>
+                <td><strong>Group</strong></td>
+                <td><strong>View</strong></td>
+                <td><strong>Delete own</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add/Delete</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Export</strong></td>
+                <td><strong>Admin</strong></td>
+            </tr>
+            #set($currentGroup = "none")
+            #set($viewSpace = false)
+            #set($removeOwnContent = false)
+            #set($editSpace = false)
+            #set($removePage = false)
+            #set($editBlog = false)
+            #set($removeBlog = false)
+            #set($createAttachment = false)
+            #set($removeAttachment = false)
+            #set($createComment = false)
+            #set($removeComment = false)
+            #set($pagePermissions = false)
+            #set($removeMail = false)
+            #set($exportSpace = false)
+            #set($adminSpace = false)
+            #foreach( $permission in $garray )
+                #set ( $p = [] )
+                #foreach($i in $permission.split(";"))
+                    #set ($tmp = $p.add($i))
+                #end
+                #set($loopGroup = $p.get(0))
+                #if($currentGroup == "none") #set($currentGroup = $loopGroup) #end
+                #if($currentGroup == $loopGroup)
+                    #**
+                    What permission is this? Set it to true
+                    *#
+                    #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
+                    #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
+                    #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
+                    #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
+                    #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
+                    #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
+                    #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
+                    #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
+                    #if($p.get(1)=="COMMENT") #set($createComment = true) #end
+                    #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
+                    #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
+                    #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
+                    #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
+                    #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
+                #else
+                    #**
+                    This is a new group so we are done with the current group.
+                    Save the current group in the compare array for later.
+                    Print the table row with the permissions for the current group.
+                    *#
+                    #set ($tmp = $spaceGroups.add($currentGroup))
+                    <tr>
+                        <td>$currentGroup</td>
+                        <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                    </tr>
+                    #**
+                    Set current group to new group.
+                    Reset all permission flags to false for the new one.
+                    *#
+                    #set($currentGroup = $loopGroup)
+                    #set($viewSpace = false)
+                    #set($removeOwnContent = false)
+                    #set($editSpace = false)
+                    #set($removePage = false)
+                    #set($editBlog = false)
+                    #set($removeBlog = false)
+                    #set($createAttachment = false)
+                    #set($removeAttachment = false)
+                    #set($createComment = false)
+                    #set($removeComment = false)
+                    #set($pagePermissions = false)
+                    #set($removeMail = false)
+                    #set($exportSpace = false)
+                    #set($adminSpace = false)
+                    #**
+                    We are at the first permission for the new group. What is it? Set it to true
+                    *#
+                    #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
+                    #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
+                    #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
+                    #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
+                    #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
+                    #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
+                    #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
+                    #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
+                    #if($p.get(1)=="COMMENT") #set($createComment = true) #end
+                    #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
+                    #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
+                    #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
+                    #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
+                    #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
+                #end
+            #end
+            #**
+            This was the last group.
+            Save the it in the compare array for later.
+            Print the table row with the permissions.
+            *#
             #set ($tmp = $spaceGroups.add($currentGroup))
             <tr>
-               <td>$currentGroup</td>
-               <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td>$currentGroup</td>
+                <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
             </tr>
-            ##
-            ## Set current group to new group.
-            ## Reset all permission flags to false for the new one.
-            ##
-            #set($currentGroup = $loopGroup)
+        </tbody>
+    </table>
+
+    <h2>Space Permissions for Users</h2>
+    <table class="wrapped">
+        <colgroup>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+            <col/>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="highlight-blue" data-highlight-colour="blue"> </th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">All</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Page</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Blog</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Attachments</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Comments</th>
+                <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Restrictions</th>
+                <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Mail</th>
+                <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Space</th>
+            </tr>
+            <tr>
+                <td><strong>Group</strong></td>
+                <td><strong>View</strong></td>
+                <td><strong>Delete own</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Add/Delete</strong></td>
+                <td><strong>Delete</strong></td>
+                <td><strong>Export</strong></td>
+                <td><strong>Admin</strong></td>
+            </tr>
+            #set($currentUser = "none")
             #set($viewSpace = false)
             #set($removeOwnContent = false)
             #set($editSpace = false)
@@ -287,411 +370,277 @@
             #set($removeMail = false)
             #set($exportSpace = false)
             #set($adminSpace = false)
-            ##
-            ## We are at the first permission for the new group. What is it? Set it to true
-            ##
-            #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
-            #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
-            #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
-            #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
-            #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
-            #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
-            #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
-            #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
-            #if($p.get(1)=="COMMENT") #set($createComment = true) #end
-            #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
-            #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
-            #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
-            #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
-            #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
-         #end
-      #end
-      ##
-      ## This was the last group.
-      ## Save the it in the compare array for later.
-      ## Print the table row with the permissions.
-      ##
-      #set ($tmp = $spaceGroups.add($currentGroup))
-      <tr>
-         <td>$currentGroup</td>
-         <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-      </tr>
-   </table>
-
-   <h2>Space Permissions for users</h2>
-   <table class="wrapped">
-   <colgroup>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-      <col/>
-   </colgroup>
-   <tbody>
-      <tr>
-         <th class="highlight-blue" data-highlight-colour="blue"> </th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">All</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Page</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Blog</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Attachments</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Comments</th>
-         <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Restrictions</th>
-         <th class="highlight-blue" colspan="1" data-highlight-colour="blue">Mail</th>
-         <th class="highlight-blue" colspan="2" data-highlight-colour="blue">Space</th>
-      </tr>
-      <tr>
-         <td>
-         <strong>Group</strong>
-         </td>
-         <td>
-         <strong>View</strong>
-         </td>
-         <td>
-         <strong>Delete own</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td>
-         <strong>Delete</strong>
-         </td>
-         <td>
-         <strong>Add</strong>
-         </td>
-         <td colspan="1">
-         <strong>Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Add/Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Delete</strong>
-         </td>
-         <td colspan="1">
-         <strong>Export</strong>
-         </td>
-         <td colspan="1">
-         <strong>Admin</strong>
-         </td>
-      </tr>
-      #set($currentUser = "none")
-      #set($viewSpace = false)
-      #set($removeOwnContent = false)
-      #set($editSpace = false)
-      #set($removePage = false)
-      #set($editBlog = false)
-      #set($removeBlog = false)
-      #set($createAttachment = false)
-      #set($removeAttachment = false)
-      #set($createComment = false)
-      #set($removeComment = false)
-      #set($pagePermissions = false)
-      #set($removeMail = false)
-      #set($exportSpace = false)
-      #set($adminSpace = false)
-      #foreach( $permission in $uarray)
-         #set ( $p = [] )
-         #foreach($i in $permission.split(";"))
-            #set ($tmp = $p.add($i))
-         #end
-         #set($loopUser = $p.get(0))
-         #if($currentUser == "none") #set($currentUser = $loopUser) #end
-         #if($currentUser == $loopUser)
-            ##
-            ## What permission is this? Set it to true
-            ##
-            #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
-            #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
-            #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
-            #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
-            #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
-            #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
-            #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
-            #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
-            #if($p.get(1)=="COMMENT") #set($createComment = true) #end
-            #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
-            #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
-            #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
-            #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
-            #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
-         #else
-            ##
-            ## This is a new user so we are done with the current one.
-            ## Save the current user in the compare array for later.
-            ## Print the table row with the permissions for the current user.
-            ##
+            #foreach( $permission in $uarray)
+                #set ( $p = [] )
+                #foreach($i in $permission.split(";"))
+                    #set ($tmp = $p.add($i))
+                #end
+                #set($loopUser = $p.get(0))
+                #if($currentUser == "none") #set($currentUser = $loopUser) #end
+                #if($currentUser == $loopUser)
+                    #**
+                    What permission is this? Set it to true
+                    *#
+                    #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
+                    #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
+                    #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
+                    #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
+                    #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
+                    #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
+                    #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
+                    #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
+                    #if($p.get(1)=="COMMENT") #set($createComment = true) #end
+                    #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
+                    #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
+                    #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
+                    #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
+                    #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
+                #else
+                    #**
+                    This is a new user so we are done with the current one.
+                    Save the current user in the compare array for later.
+                    Print the table row with the permissions for the current user.
+                    *#
+                    #set ($tmp = $spaceUsers.add($currentUser))
+                    <tr>
+                        <td>#usernameLink($currentUser)</td>
+                        <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                        <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                    </tr>
+                    #**
+                    Set current user to the new user.
+                    Reset all permission flags to false for the new one.
+                    *#
+                    #set($currentUser = $loopUser)
+                    #set($viewSpace = false)
+                    #set($removeOwnContent = false)
+                    #set($editSpace = false)
+                    #set($removePage = false)
+                    #set($editBlog = false)
+                    #set($removeBlog = false)
+                    #set($createAttachment = false)
+                    #set($removeAttachment = false)
+                    #set($createComment = false)
+                    #set($removeComment = false)
+                    #set($pagePermissions = false)
+                    #set($removeMail = false)
+                    #set($exportSpace = false)
+                    #set($adminSpace = false)
+                    #**
+                    We are at the first permission for the new user. What is it? Set it to true
+                    *#
+                    #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
+                    #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
+                    #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
+                    #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
+                    #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
+                    #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
+                    #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
+                    #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
+                    #if($p.get(1)=="COMMENT") #set($createComment = true) #end
+                    #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
+                    #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
+                    #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
+                    #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
+                    #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
+                #end
+            #end
+            #**
+            This was the last user.
+            Save the it in the compare array for later.
+            Print the table row with the permissions.
+            *#
             #set ($tmp = $spaceUsers.add($currentUser))
             <tr>
-               <td>#usernameLink($currentUser)</td>
-               <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-               <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td>#usernameLink($currentUser)</td>
+                <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
+                <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
             </tr>
-            ##
-            ## Set current user to the new user.
-            ## Reset all permission flags to false for the new one.
-            ##
-            #set($currentUser = $loopUser)
-            #set($viewSpace = false)
-            #set($removeOwnContent = false)
-            #set($editSpace = false)
-            #set($removePage = false)
-            #set($editBlog = false)
-            #set($removeBlog = false)
-            #set($createAttachment = false)
-            #set($removeAttachment = false)
-            #set($createComment = false)
-            #set($removeComment = false)
-            #set($pagePermissions = false)
-            #set($removeMail = false)
-            #set($exportSpace = false)
-            #set($adminSpace = false)
-            ##
-            ## We are at the first permission for the new user. What is it? Set it to true
-            ##
-            #if($p.get(1)=="VIEWSPACE") #set($viewSpace = true) #end
-            #if($p.get(1)=="REMOVEOWNCONTENT") #set($removeOwnContent = true) #end
-            #if($p.get(1)=="EDITSPACE") #set($editSpace = true) #end
-            #if($p.get(1)=="REMOVEPAGE") #set($removePage = true) #end
-            #if($p.get(1)=="EDITBLOG") #set($editBlog = true) #end
-            #if($p.get(1)=="REMOVEBLOG") #set($removeBlog = true) #end
-            #if($p.get(1)=="CREATEATTACHMENT") #set($createAttachment = true) #end
-            #if($p.get(1)=="REMOVEATTACHMENT") #set($removeAttachment = true) #end
-            #if($p.get(1)=="COMMENT") #set($createComment = true) #end
-            #if($p.get(1)=="REMOVECOMMENT") #set($removeComment = true) #end
-            #if($p.get(1)=="SETPAGEPERMISSIONS") #set($pagePermissions = true) #end
-            #if($p.get(1)=="REMOVEMAIL") #set($removeMail = true) #end
-            #if($p.get(1)=="EXPORTSPACE") #set($exportSpace = true) #end
-            #if($p.get(1)=="SETSPACEPERMISSIONS") #set($adminSpace = true) #end
-         #end
-      #end
-      ##
-      ## This was the last user.
-      ## Save the it in the compare array for later.
-      ## Print the table row with the permissions.
-      ##
-      #set ($tmp = $spaceUsers.add($currentUser))
-      <tr>
-         <td>#usernameLink($currentUser)</td>
-         <td style="text-align: center;">#if($viewSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeOwnContent==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($editSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removePage==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($editBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeBlog==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($createAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeAttachment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($createComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeComment==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($pagePermissions==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($removeMail==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($exportSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-         <td style="text-align: center;">#if($adminSpace==true) <ac:emoticon ac:name="tick"/> #else <ac:emoticon ac:name="cross"/> #end</td>
-      </tr>
-   </table>
-#if ( $paramCollapseSpacePermissions == true )
-  </ac:rich-text-body>
-</ac:structured-macro>
-#end
-#if ( $paramShowSpacePermissions != true )
--->
+        </tbody>
+    </table>
+
+    #if ( $paramCollapseSpacePermissions == true )
+        </ac:rich-text-body>
+    </ac:structured-macro>
+    #end
 #end
 
-#** ---------------------------------------------------------------------------
- * BUILT PAGE RESTRICTIONS TABLES
+#**
+Build page restrictions tables
 *#
-##
-## Assume we don't find permission warning
-##
-#set($groupPermissionWarning = false)
-#set($userPermissionWarning = false)
 
-#if ( $paramShowPageRestrictions != true )
-<!--
-#end
-#if ( $paramCollapsePageRestrictions == true )
-<ac:structured-macro ac:macro-id="9d01a481-c5fb-4b85-bd4b-ea4d40412e1d" ac:name="expand" ac:schema-version="1">
-   <ac:parameter ac:name="title">Click here to view Page Restrictions...</ac:parameter>
-   <ac:rich-text-body>
-#end
-<h1>Page Restrictions</h1>
-<p>Access to this page is restricted to the following groups and users. Note, that adding groups and users with no space permissions to the space restrictions has no effect. They cannot access the space at all.</p>
-<h2>Page access is restricted to the following groups</h2>
-<table class="confluenceTable">
-   <tr>
-      <th class="highlight-red" data-highlight-colour="red">View</th>
-      <th class="highlight-red" data-highlight-colour="red">Edit</th>
-   </tr>
-   <tr>
-      <td>
-         #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"View") )
-            #foreach( $contentPermission in $contentPermissionSet )   
-               #if($contentPermission.isGroupPermission() )
-                  ##
-                  ## Check whether this group exists in the compare array from the space permissions.
-                  ## If not, set flag to true and print a warning icon after the name
-                  ##
-                  #set($groupHasSpacePermission = false)
-                  #foreach ($g in $spaceGroups)
-                     #if($g.equals($contentPermission.groupName))
-                        #set($groupHasSpacePermission = true)
-                     #end
-                  #end
-                  #if($groupHasSpacePermission == true)
-                     $contentPermission.groupName<br>
-                  #else
-                     #set($groupPermissionWarning = true)
-                     $contentPermission.groupName&nbsp;<ac:emoticon ac:name="warning"/><br>
-                  #end
-               #end
-            #end
-         #end
-      </td>
-      <td>
-         #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"Edit") )
-            #foreach( $contentPermission in $contentPermissionSet )   
-               #if($contentPermission.isGroupPermission() )
-                  ##
-                  ## Check whether this group exists in the compare array from the space permissions.
-                  ## If not, set flag to true and print a warning icon after the name
-                  ##
-                  #set($groupHasSpacePermission = false)
-                  #foreach ($g in $spaceGroups)
-                     #if($g.equals($contentPermission.groupName))
-                        #set($groupHasSpacePermission = true)
-                     #end
-                  #end
-                  #if($groupHasSpacePermission == true)
-                     $contentPermission.groupName<br>
-                  #else
-                     #set($groupPermissionWarning = true)
-                     $contentPermission.groupName&nbsp;<ac:emoticon ac:name="warning"/><br>
-                  #end
-               #end
-            #end
-         #end
-      </td>
-   </tr>
-</table>
-##
-## If we found a permission warning we print out an explanation
-##
-#if($groupPermissionWarning == true)
-   <p><ac:emoticon ac:name="warning"/>&nbsp;=&nbsp;The group could not be found in the space permissions. Adding it to the page restrictions has no effect. It cannot access the space at all.</p>
-#end
+#if ( $paramShowPageRestrictions == true )
 
-<h2>Page access is restricted to the following users</h2>
-<table class="confluenceTable">
-   <tr>
-      <th class="highlight-red" data-highlight-colour="red">View</th>
-      <th class="highlight-red" data-highlight-colour="red">Edit</th>
-   </tr>
-   <tr>
-      <td>
-         #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"View") )
-            #foreach( $contentPermission in $contentPermissionSet )   
-               #if($contentPermission.isUserPermission() )
-                  ##
-                  ## Check whether this user exists in the compare array from the space permissions.
-                  ## If not, set flag to true and print a warning icon after the name
-                  ##
-                  #set($userHasSpacePermission = false)
-                  #foreach ($u in $spaceUsers)
-                     #if($u.equals($contentPermission.userName))
-                        #set($userHasSpacePermission = true)
-                     #end
-                  #end
-                  #if($userHasSpacePermission == true)
-                     #usernameLink($contentPermission.userName)<br>
-                  #else
-                     #set($userPermissionWarning = true)
-                     #usernameLink($contentPermission.userName)&nbsp;<ac:emoticon ac:name="warning"/><br>
-                  #end
-               #end
-            #end
-         #end
-      </td>
-      <td>
-         #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"Edit") )
-            #foreach( $contentPermission in $contentPermissionSet )   
-               #if($contentPermission.isUserPermission() )
-                  ##
-                  ## Check whether this user exists in the compare array from the space permissions.
-                  ## If not, set flag to true and print a warning icon after the name
-                  ##
-                  #set($userHasSpacePermission = false)
-                  #foreach ($u in $spaceUsers)
-                     #if($u.equals($contentPermission.userName))
-                        #set($userHasSpacePermission = true)
-                     #end
-                  #end
-                  #if($userHasSpacePermission == true)
-                     #usernameLink($contentPermission.userName)<br>
-                  #else
-                     #set($userPermissionWarning = true)
-                     #usernameLink($contentPermission.userName)&nbsp;<ac:emoticon ac:name="warning"/><br>
-                  #end
-               #end
-            #end
-         #end
-      </td>
-   </tr>
-</table>
-##
-## If we found a permission warning we print out an explanation
-##
-#if($userPermissionWarning == true)
-   <p><ac:emoticon ac:name="warning"/>&nbsp;=&nbsp;The user could not be found in the space permissions. If he is not member of a group that has access, adding him to the page restrictions has no effect. He cannot access the space at all.</p>
+    #**
+    Assume we don't find permission warning
+    *#
+    #set($groupPermissionWarning = false)
+    #set($userPermissionWarning = false)
+
+    #if ( $paramCollapsePageRestrictions == true )
+    <ac:structured-macro ac:macro-id="9d01a481-c5fb-4b85-bd4b-ea4d40412e1d" ac:name="expand" ac:schema-version="1">
+        <ac:parameter ac:name="title">Click here to view Page Restrictions...</ac:parameter>
+        <ac:rich-text-body>
+    #end
+    <h1>Page Restrictions</h1>
+    <p>Access to this page is restricted to the following groups and users. Note, that adding groups and users with no space permissions to the space restrictions has no effect. They cannot access the space at all.</p>
+    <h2>Page access is restricted to the following groups</h2>
+    <table class="confluenceTable">
+        <tr>
+            <th class="highlight-red" data-highlight-colour="red">View</th>
+            <th class="highlight-red" data-highlight-colour="red">Edit</th>
+        </tr>
+        <tr>
+            <td>
+                #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"View") )
+                    #foreach( $contentPermission in $contentPermissionSet )   
+                    #if($contentPermission.isGroupPermission() )
+                        #**
+                        Check whether this group exists in the compare array from the space permissions.
+                        If not, set flag to true and print a warning icon after the name
+                        *#
+                        #set($groupHasSpacePermission = false)
+                        #foreach ($g in $spaceGroups)
+                            #if($g.equals($contentPermission.groupName))
+                                #set($groupHasSpacePermission = true)
+                            #end
+                        #end
+                        #if($groupHasSpacePermission == true)
+                            $contentPermission.groupName<br>
+                        #else
+                            #set($groupPermissionWarning = true)
+                            $contentPermission.groupName&nbsp;<ac:emoticon ac:name="warning"/><br>
+                        #end
+                    #end
+                    #end
+                #end
+            </td>
+            <td>
+                #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"Edit") )
+                    #foreach( $contentPermission in $contentPermissionSet )   
+                    #if($contentPermission.isGroupPermission() )
+                        #**
+                        Check whether this group exists in the compare array from the space permissions.
+                        If not, set flag to true and print a warning icon after the name
+                        *#
+                        #set($groupHasSpacePermission = false)
+                        #foreach ($g in $spaceGroups)
+                            #if($g.equals($contentPermission.groupName))
+                                #set($groupHasSpacePermission = true)
+                            #end
+                        #end
+                        #if($groupHasSpacePermission == true)
+                            $contentPermission.groupName<br>
+                        #else
+                            #set($groupPermissionWarning = true)
+                            $contentPermission.groupName&nbsp;<ac:emoticon ac:name="warning"/><br>
+                        #end
+                    #end
+                    #end
+                #end
+            </td>
+        </tr>
+    </table>
+    #**
+    If we found a permission warning we print out an explanation
+    *#
+    #if($groupPermissionWarning == true)
+    <p><ac:emoticon ac:name="warning"/>&nbsp;=&nbsp;The group could not be found in the space permissions. Adding it to the page restrictions has no effect. It cannot access the space at all.</p>
+    #end
+
+    <h2>Page access is restricted to the following users</h2>
+    <table class="confluenceTable">
+        <tr>
+            <th class="highlight-red" data-highlight-colour="red">View</th>
+            <th class="highlight-red" data-highlight-colour="red">Edit</th>
+        </tr>
+        <tr>
+            <td>
+                #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"View") )
+                    #foreach( $contentPermission in $contentPermissionSet )   
+                    #if($contentPermission.isUserPermission() )
+                        #**
+                        Check whether this user exists in the compare array from the space permissions.
+                        If not, set flag to true and print a warning icon after the name
+                        *#
+                        #set($userHasSpacePermission = false)
+                        #foreach ($u in $spaceUsers)
+                            #if($u.equals($contentPermission.userName))
+                                #set($userHasSpacePermission = true)
+                            #end
+                        #end
+                        #if($userHasSpacePermission == true)
+                            #usernameLink($contentPermission.userName)<br>
+                        #else
+                            #set($userPermissionWarning = true)
+                            #usernameLink($contentPermission.userName)&nbsp;<ac:emoticon ac:name="warning"/><br>
+                        #end
+                    #end
+                    #end
+                #end
+            </td>
+            <td>
+                #foreach( $contentPermissionSet in $contentPermissionManager.getContentPermissionSets($content,"Edit") )
+                    #foreach( $contentPermission in $contentPermissionSet )   
+                    #if($contentPermission.isUserPermission() )
+                        #**
+                        Check whether this user exists in the compare array from the space permissions.
+                        If not, set flag to true and print a warning icon after the name
+                        *#
+                        #set($userHasSpacePermission = false)
+                        #foreach ($u in $spaceUsers)
+                            #if($u.equals($contentPermission.userName))
+                                #set($userHasSpacePermission = true)
+                            #end
+                        #end
+                        #if($userHasSpacePermission == true)
+                            #usernameLink($contentPermission.userName)<br>
+                        #else
+                            #set($userPermissionWarning = true)
+                            #usernameLink($contentPermission.userName)&nbsp;<ac:emoticon ac:name="warning"/><br>
+                        #end
+                    #end
+                    #end
+                #end
+            </td>
+        </tr>
+    </table>
+
+    #**
+    If we found a permission warning we print out an explanation
+    *#
+    #if($userPermissionWarning == true)
+        <p><ac:emoticon ac:name="warning"/>&nbsp;=&nbsp;The user could not be found in the space permissions. If he is not member of a group that has access, adding him to the page restrictions has no effect. He cannot access the space at all.</p>
+    #end
+
+    #if ( $paramCollapsePageRestrictions == true )
+        </ac:rich-text-body>
+    </ac:structured-macro>
+    #end
+
 #end
-#if ( $paramCollapsePageRestrictions == true )
-  </ac:rich-text-body>
-</ac:structured-macro>
-#end
-#if ( $paramShowPageRestrictions != true )
--->
-#end
+<!-- User Macro: Page Permissions END -->
