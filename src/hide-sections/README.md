@@ -5,6 +5,18 @@
 
 This Confluence user macro hides different Confluence sections of your page.
 
+The following sections can be hidden:
+
+* Breadcrumbs
+* Children
+* Comments
+* Labels
+* Likes
+* Modification Info
+* Page Title
+* Sidebar
+* Tools Menu
+
 ## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
 
