@@ -22,7 +22,7 @@ PARAMETER
 OUTPUT
 *#
 <!-- User Macro: Confluence Users Access START -->
-<h1>Soaces with 'confluence-users' Access</h1>
+<h1>Spaces with 'confluence-users' Access</h1>
 <table class="confluenceTable">
 <tbody>
     <tr>
@@ -33,12 +33,14 @@ OUTPUT
         #foreach ($permission in $space.getPermissions())
             #if ($permission.isGroupPermission() && $permission.getType() == "VIEWSPACE" && $permission.getGroup() == "confluence-users")
             <tr>
-                <td class="confluenceTd"><strong>$space.getName()</strong> $space.getKey()</td>
+                <td class="confluenceTd">
+                    <a href="/display/$space.key">$space.getName() ($space.getKey())</a>
+                </td>
                 <td class="confluenceTd">
                     <a class="aui-button aui-button-primary aui-button-compact conf-macro output-block" 
                         style="color:#ffffff;"
                         href="/spaces/spacepermissions.action?key=$space.getKey()"
-                        target="_blank">Edit permissions...</a>
+                        target="_blank">Space permissions...</a>
                 </td>
             </tr> 
             #end
