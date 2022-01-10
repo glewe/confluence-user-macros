@@ -1,0 +1,83 @@
+#** ===========================================================================
+USER PERMISSIONS
+
+This Confluence user macro lists all spaces for which a given user has at least
+view permission.
+
+Version:    1.0.0
+Updated:    2022-01-09
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing: No macro body
+*#
+
+#** ---------------------------------------------------------------------------
+PARAMETER
+*#
+## @param Username:title=Username|type=string|desc=Enter the username for which you want to list all spaces with permissions|default=
+   
+#** ---------------------------------------------------------------------------
+OUTPUT
+*#
+<!-- User Macro: User Permissions START -->
+<h1>Space permissions for user: $paramUsername</h1>
+   
+<table class="confluenceTable">
+    <tbody>
+        <tr>
+            <th class="confluenceTh">Space</th>
+            <th class="confluenceTh">View</th>
+            <th class="confluenceTh">Edit</th>
+            <th class="confluenceTh">Admin</th>
+            <th class="confluenceTh">Permission</th>
+        </tr> 
+        #foreach ($space in $spaceManager.getAllSpaces())
+            #set ($userCanView = false)
+            #set ($userCanEdit = false)
+            #set ($userCanAdmin = false)
+            
+            #foreach ($permission in $space.getPermissions())
+                #if ($permission.isUserPermission() && $permission.getType() == "VIEWSPACE" && $permission.getUserName() == $paramUsername)
+                    #set($userCanView = true)
+                #end
+                #if ($permission.isUserPermission() && $permission.getType() == "EDITSPACE" && $permission.getUserName() == $paramUsername)
+                    #set($userCanEdit = true)
+                #end
+                #if ($permission.isUserPermission() && $permission.getType() == "SETSPACEPERMISSIONS" && $permission.getUserName() == $paramUsername)
+                    #set($userCanAdmin = true)
+                #end
+            #end
+
+            #if ($userCanView == true || $userCanEdit == true || $userCanAdmin == true )
+                <tr>
+                    <td class="confluenceTd"><a href="$req.contextPath$space.getUrlPath()">$space.getName() ($space.getKey())</a></td>
+                    <td class="confluenceTd" style="text-align: center;">
+                        #if ($userCanView == true)
+                            <ac:emoticon ac:name="tick"/>
+                        #end
+                    </td>
+                    <td class="confluenceTd" style="text-align: center;">
+                        #if ($userCanEdit == true)
+                            <ac:emoticon ac:name="tick"/>
+                        #end
+                    </td>
+                    <td class="confluenceTd" style="text-align: center;">
+                        #if ($userCanAdmin == true)
+                            <ac:emoticon ac:name="tick"/>
+                        #end
+                    </td>
+                    <td class="confluenceTd">
+                        <a class="aui-button aui-button-primary aui-button-compact conf-macro output-block" 
+                            style="color:#ffffff;"
+                            href="/spaces/spacepermissions.action?key=$space.getKey()"
+                            target="_blank">Space permissions...</a>
+                    </td>
+                </tr> 
+                #end
+            #end
+        #end
+    </tbody>
+</table>
+<!-- User Macro: User Permissions END -->
