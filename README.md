@@ -191,5 +191,5 @@ This Confluence user macro adds an HTML5 video control element to your page that
 ---
 
 ### [YouTube Video](/src/youtube-video)
-<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/youtube-video/youtube.png?raw=true" align="left" alt=""/>
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/youtube-video/youtube-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds a sizeable YouTube video frame to your page. 
