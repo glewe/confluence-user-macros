@@ -1,17 +1,16 @@
 #** ===========================================================================
- * VIDEO CONTROL
- *
- * This Confluence user macro adds an HTML5 video control element to your 
- * page that can play MP4 and OGG files.
- *
- * Version: 1.1.0
- * Date:    2017-08-25
- * Author:  George Lewe
- * Source:  https://bitbucket.org/georgelewe/video-control
- * License: GNU LGPLv3
- *
- * Macro body:      None
- * Body processing: None
+VIDEO CONTROL
+
+This Confluence user macro adds an HTML5 video control element to your page 
+that can play MP4 and OGG files.
+
+Version:    1.1.1
+Updated:    2022-01-09
+Author/s:   George Lewe
+Source:     https://github.com/glewe/confluence-user-macros
+License:    GNU LGPLv3
+
+Macro Body Processing: No macro body
 *#
 
 #** ---------------------------------------------------------------------------
@@ -24,23 +23,25 @@
 ## @param Height:title=Height|type=string|desc=Enter the height of the video display on the page. Leave empty for original height of the video.|default=
 
 #** ---------------------------------------------------------------------------
- * PROCESS INPUT
+PROCESS INPUT
 *#
 #if (!$paramFormat)
-   #set ($paramFormat="mp4")
+    #set ($paramFormat="mp4")
 #elseif ($paramFormat=="mp4")
-   #set ($paramFormat="mp4")
+    #set ($paramFormat="mp4")
 #else
-   #set ($paramFormat="ogg")
+    #set ($paramFormat="ogg")
 #end
 
 #set($paramCaption="")
 #if ($paramshowFilename==true)
-   #set($paramCaption="<p style='margin-top:-4px; font-style:italic'>$paramFile</p>")
+    #set($paramCaption="<p style='margin-top:-4px; font-style:italic'>$paramFile</p>")
 #end
 
 #** ---------------------------------------------------------------------------
- * OUTPUT
+OUTPUT
 *#
+<!-- User Macro: Video Control START -->
 <video width="$paramWidth" height="$paramHeight" controls><source src="/download/attachments/$content.getIdAsString()/$paramFile" type="video/$paramFormat">Your browser does not support this HTML5 video element.</video>
 $paramCaption
+<!-- User Macro: Video Control END -->

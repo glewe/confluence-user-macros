@@ -182,3 +182,9 @@ This Confluence user macro adds an inline text with a hover tooltip.
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/user-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro lists all spaces in which a user has either View, Edit or Admin permission.
 
+---
+
+### [Video Control](/src/video-control)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/video-control/aktion-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds an HTML5 video control element to your page that can play MP4 and OGG files.
+
