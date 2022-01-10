@@ -1,5 +1,9 @@
-# YouTube Video #
-This Confluence user macro adds a YouTube video frame to your page.
+<h1><img src="https://github.com/glewe/confluence-user-macros/raw/master/src/youtube-video/youtube.png?raw=true" align="left" alt=""/>YouTube Video</h1>
+
+[![Velocity](https://img.shields.io/badge/Language-Velocity-informational.svg)](https://velocity.apache.org/)
+[![Support](https://img.shields.io/badge/Supported-yes-009900.svg)](https://github.com/glewe/confluence-user-macros/issues)
+
+This Confluence user macro adds a sizeable YouTube video frame to your page. 
 
 ## Confluence User Macros
 Confluence is Atlassian's Enterprise Wiki.
@@ -22,9 +26,6 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
  
-# License #
-This Confluence User Macro is distributed under the GNU LGPLv3 license.
-
 ## Credits
 Icon from [YouTube](http://www.youtube.com)
  

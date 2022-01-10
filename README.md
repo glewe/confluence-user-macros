@@ -188,3 +188,8 @@ This Confluence user macro lists all spaces in which a user has either View, Edi
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/video-control/aktion-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds an HTML5 video control element to your page that can play MP4 and OGG files.
 
+---
+
+### [YouTube Video](/src/youtube-video)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/youtube-video/youtube.png?raw=true" align="left" alt=""/>
+This Confluence user macro adds a sizeable YouTube video frame to your page. 
