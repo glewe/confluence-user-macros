@@ -176,3 +176,9 @@ This Confluence user macro displays a link to the Tiny URL of the current page.
 <img src="https://github.com/glewe/confluence-user-macros/raw/master/src/tooltip/ktip-32.png?raw=true" align="left" alt=""/>
 This Confluence user macro adds an inline text with a hover tooltip.
 
+---
+
+### [User Permissions](/src/user-permissions)
+<img src="https://github.com/glewe/confluence-user-macros/raw/master/src/user-permissions/kgpg-32.png?raw=true" align="left" alt=""/>
+This Confluence user macro lists all spaces in which a user has either View, Edit or Admin permission.
+

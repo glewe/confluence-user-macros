@@ -33,11 +33,18 @@ OUTPUT
             <th class="confluenceTh">Admin</th>
             <th class="confluenceTh">Permission</th>
         </tr> 
+
+        #**
+        Loop through all spaces
+        *#
         #foreach ($space in $spaceManager.getAllSpaces())
             #set ($userCanView = false)
             #set ($userCanEdit = false)
             #set ($userCanAdmin = false)
-            
+            #**
+            Loop through all permissions of this space and remember if the user
+            holds one of the three permissions in question.
+            *#
             #foreach ($permission in $space.getPermissions())
                 #if ($permission.isUserPermission() && $permission.getType() == "VIEWSPACE" && $permission.getUserName() == $paramUsername)
                     #set($userCanView = true)
@@ -50,21 +57,24 @@ OUTPUT
                 #end
             #end
 
-            #if ($userCanView == true || $userCanEdit == true || $userCanAdmin == true )
+            #**
+            If the user holds one of the three permissions in question, show the row with the tick marks.
+            *#
+            #if ($userCanView || $userCanEdit || $userCanAdmin)
                 <tr>
                     <td class="confluenceTd"><a href="$req.contextPath$space.getUrlPath()">$space.getName() ($space.getKey())</a></td>
                     <td class="confluenceTd" style="text-align: center;">
-                        #if ($userCanView == true)
+                        #if ($userCanView)
                             <ac:emoticon ac:name="tick"/>
                         #end
                     </td>
                     <td class="confluenceTd" style="text-align: center;">
-                        #if ($userCanEdit == true)
+                        #if ($userCanEdit)
                             <ac:emoticon ac:name="tick"/>
                         #end
                     </td>
                     <td class="confluenceTd" style="text-align: center;">
-                        #if ($userCanAdmin == true)
+                        #if ($userCanAdmin)
                             <ac:emoticon ac:name="tick"/>
                         #end
                     </td>
@@ -75,7 +85,6 @@ OUTPUT
                             target="_blank">Space permissions...</a>
                     </td>
                 </tr> 
-                #end
             #end
         #end
     </tbody>
