@@ -4,15 +4,15 @@
  * This Confluence user macro adds a sorted table with numbered rows for each
  * member of a given group.
  *
- * Version: 1.9.0
- * Date:    2022-05-0922
+ * Version: 1.10.0
+ * Date:    2022-07-12
  * Author:  George Lewe, Zsolt Balint
  * Source:  https://github.com/glewe/group-members
  * License: GNU LGPLv3
  *
  * Changed:
- * - added MaxMembers option to avoid timeouts during bubble sort
- * - added support for Advanced Table Plus macro to avoid bubble sort
+ * - added possibility to not display the groupname and count. In case the table
+ *   is used as a datasource that is unnecessary.
  *
  * Macro body:      None
  * Body processing: None
@@ -29,6 +29,7 @@
 ## @param ShowCountOnly:title=Show count only|type=boolean|desc=Select whether to just show the group name and user count.|default=false
 ## @param MaxMembers:title=Max. Members|type=int|desc=Enter the maximal amount of members to show. The default is 500. Be aware that the macro might timeout for larger groups. This setting only hjas an effect when Table Plus is switched off.|default=500
 ## @param TablePlus:title=Table Plus|type=boolean|desc=Use the Advanced Table Plus macro for sorting. This is faster but requires the corresponding plugin to be installed.|default=true
+## @param ShowSummary:title=Show groupname and count|type=boolean|desc=Show the groupname and membercount at the top of the table. Not considered if Show count only is selected|default=true
 
 #set($containerManagerClass = $content.class.forName('com.atlassian.spring.container.ContainerManager'))
 #set($getInstanceMethod = $containerManagerClass.getDeclaredMethod('getInstance',null))
@@ -138,7 +139,10 @@
                     <ac:rich-text-body>
                         <p class="auto-cursor-target"><br/></p>            
             #end
-            <div class="aui-icon aui-icon-large aui-iconfont-group" style="padding-right:16px;float:left;font-weight:bold;">Group</div><div style="font-size:16px;padding-top:4px;font-weight:bold;">$paramshowGroup ($count)</div>
+			#if ($paramShowSummary == true)
+                <div class="aui-icon aui-icon-large aui-iconfont-group" style="padding-right:16px;float:left;font-weight:bold;">Group</div>
+			    <div style="font-size:16px;padding-top:4px;font-weight:bold;">$paramshowGroup ($count)</div>
+			#end
             <table class="confluenceTable wrapped">
                 <tr>
                     #if ($paramTablePlus == false)
