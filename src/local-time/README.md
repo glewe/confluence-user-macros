@@ -6,6 +6,7 @@
 This Confluence user macro displays the user's local date and time offering several options. Use once per page.
 
 ## Confluence User Macros
+
 Confluence is Atlassian's Enterprise Wiki.
 
 Check it out here: https://www.atlassian.com/software/confluence
@@ -16,6 +17,7 @@ Read more about Confluence User Macros here:
 https://confluence.atlassian.com/doc/writing-user-macros-4485.html
 
 ## Installation in Confluence Server or Data Center
+
 _Note: User Macros are not available in Confluence Cloud!_
 
 1. Login as administrator
@@ -23,11 +25,13 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Scroll down to the bottom and click on "Create a User Macro"
 1. Enter the appropriate Macro Browser Information
 1. Select "No macro body"
-1. Paste the template code from the *.vtl file into the Template field
+1. Paste the template code from the \*.vtl file into the Template field
 1. Click Save
 
 ## Documentation
-https://support.lewe.com/docs/confluence-user-macros/local-time/
+
+https://lewe.gitbook.io/confluence-user-macros/local-time/
 
 ## Credits
+
 Icon from the [Nuvola icon set by David Vignoni](http://www.icon-king.com/projects/nuvola/), distributed under GNU LGPLv2.1

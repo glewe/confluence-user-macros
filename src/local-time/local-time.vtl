@@ -2,12 +2,15 @@
 LOCAL TIME
 
 This Confluence user macro displays the user's local date and time offering
-several options. Use once per page.
+several options. 
 
-Version:    1.1.2
-Updated:    2021-01-09
+When used several times on one page, each Identifier must be different.
+
+Version:    1.2.0
+Updated:    2022-09-16
 Author/s:   George Lewe
 Source:     https://github.com/glewe/confluence-user-macros
+Manual:     https://lewe.gitbook.io/confluence-user-macros/local-time
 License:    GNU LGPLv3
 
 Macro Body processing: No macro body
@@ -31,6 +34,7 @@ PARAMETER
 ## @param FixedTimezone:title=Fixed Timezone|type=boolean|desc=Select this option if you want to display a fixed timezone instead of the user's local time. Enter the appropriate GMT offset below.|default=false
 ## @param GMTOffset:title=GMT Offset|type=string|desc=Enter the GMT offset for the fixed timezone you want to display, e.g. +2 or -5.5. Default is 0. This setting only has an effect with Fixed Timezone being selected above.|default=0
 ## @param TimezoneText:title=Timezone|type=string|desc=You may enter a text for the fixed timezone here, e.g. a city name, that will be displayed too. This setting only has an effect with Fixed Timezone being selected above.
+## @param Identifier:title=Identifier|type=string|desc=If you want to use several Local Time macros on one page, each one needs to have a different identifier. Must start with a letter and contain only letters and numbers.|default=localtime
 
 #** ---------------------------------------------------------------------------
 PROCESS INPUT
@@ -67,20 +71,21 @@ PROCESS INPUT
 OUTPUT
 *#
 <!-- User Macro: Local Time START -->
-<span id='local-time' style="font-size:$fontSize;font-family:$paramFont,$paramFamily;color:$paramColor;$backgroundStyle;$borderStyle;$fontWeightStyle;$fontStyleStyle;"></span>
+<span id='$paramIdentifier' style="font-size:$fontSize;font-family:$paramFont,$paramFamily;color:$paramColor;$backgroundStyle;$borderStyle;$fontWeightStyle;$fontStyleStyle;"></span>
 
 <script type="text/javascript">
 //<![CDATA[
-window.onload = function(){
-    display_time();
-}
+/* window.onload = function(){
+    display_time_$paramIdentifier();
+} */
+display_time_$paramIdentifier();
 
-function refresh_time(){
+function refresh_time_$paramIdentifier(){
     var refresh=$paramRefreshRate; // Refresh rate in milliseconds
-    mytime=setTimeout('display_time()',refresh);
+    mytime=setTimeout('display_time_$paramIdentifier()',refresh);
 }
 
-function display_time() {
+function display_time_$paramIdentifier() {
     var strcount;
     var fmt = new DateFmt("$formatString")
     if ($paramFixedTimezone) {
@@ -91,8 +96,8 @@ function display_time() {
     else {
         var x = fmt.format(new Date());
     }
-    document.getElementById('local-time').innerHTML = x;
-    tt=refresh_time();
+    document.getElementById('$paramIdentifier').innerHTML = x;
+    tt=refresh_time_$paramIdentifier();
 }
 
 function DateFmt(fstr) { // By samsonl (http://snipplr.com/view/66968.82825/)
