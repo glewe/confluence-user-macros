@@ -22,7 +22,7 @@ _Note: User Macros are not available in Confluence Cloud!_
 1. Got to "General Configuration", then select "User Macros" from the menu on the left
 1. Scroll down to the bottom and click on "Create a User Macro"
 1. Enter the appropriate Macro Browser Information
-1. Select "No macro body"
+1. Select "Rendered"
 1. Paste the template code from the *.vtl file into the Template field
 1. Click Save
  
