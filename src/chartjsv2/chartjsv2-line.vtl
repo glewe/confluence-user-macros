@@ -32,6 +32,16 @@
 ## @param Data2Values:title=Dataset 2 Values|type=string|required=true|desc=Enter a comma separated list of your data values. Make sure you enter as much values as you entered labels above.|default=10,12,20,14,4
 ## @param Data2Color:title=Dataset 2 Color|type=string|required=false|desc=Enter the color of the second dataset here in the form of three decimal values for R, G and B separated by a comma.|default=179,179,0
 ## @param Data2Fill:title=Dataset 2 Colorfill|type=boolean|required=false|desc=Select whether the area below the line shall be filled with color.|default=true
+## @param ShowThirdSet:title=Show Third Dataset|type=boolean|desc=Select whether the chart shall show a second dataset. If unchecked, the values below have no effect.|default=false
+## @param Data3Legend:title=Dataset 3 Legend|type=string|required=true|desc=Enter a legend for the dataset.|default=Minimum
+## @param Data3Values:title=Dataset 3 Values|type=string|required=true|desc=Enter a comma separated list of your data values. Make sure you enter as much values as you entered labels above.|default=10,12,20,14,4
+## @param Data3Color:title=Dataset 3 Color|type=string|required=false|desc=Enter the color of the second dataset here in the form of three decimal values for R, G and B separated by a comma.|default=179,179,0
+## @param Data3Fill:title=Dataset 3 Colorfill|type=boolean|required=false|desc=Select whether the area below the line shall be filled with color.|default=true
+## @param ShowFourthSet:title=Show Fourth Dataset|type=boolean|desc=Select whether the chart shall show a second dataset. If unchecked, the values below have no effect.|default=false
+## @param Data4Legend:title=Dataset 4 Legend|type=string|required=true|desc=Enter a legend for the dataset.|default=Minimum
+## @param Data4Values:title=Dataset 4 Values|type=string|required=true|desc=Enter a comma separated list of your data values. Make sure you enter as much values as you entered labels above.|default=10,12,20,14,4
+## @param Data4Color:title=Dataset 4 Color|type=string|required=false|desc=Enter the color of the second dataset here in the form of three decimal values for R, G and B separated by a comma.|default=179,179,0
+## @param Data4Fill:title=Dataset 4 Colorfill|type=boolean|required=false|desc=Select whether the area below the line shall be filled with color.|default=true
 
 #** ---------------------------------------------------------------------------
  PROCESS INPUT
@@ -91,10 +101,52 @@
         pointHoverBackgroundColor: "#fff",
         pointHoverBorderColor: "rgba($paramData2Color,1)",
         pointHoverBorderWidth: 1,
-        fill : #if ($paramData2Fill==true) true #else false #end ,
-        tension : #if ($paramBezierCurve==true) 0.4 #else 0 #end ,
+      fill : #if ($paramData2Fill==true) true #else false #end ,
+      tension : #if ($paramBezierCurve==true) 0.4 #else 0 #end ,
         data: [
           #set( $myValues = $paramData2Values.split(","))
+          #foreach( $item in $myValues )
+              $item,
+          #end
+        ]
+      }
+      #end
+      #if ($paramShowThirdSet == true)
+        , {
+        label: '$paramData3Legend',
+        backgroundColor: "rgba($paramData3Color,0.2)",
+        borderColor: "rgba($paramData3Color,1)",
+        borderWidth: 1,
+        pointBackgroundColor: "rgba($paramData3Color,1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba($paramData3Color,1)",
+        pointHoverBorderWidth: 1,
+      fill : #if ($paramData3Fill==true) true #else false #end ,
+      tension : #if ($paramBezierCurve==true) 0.4 #else 0 #end ,
+        data: [
+          #set( $myValues = $paramData3Values.split(","))
+          #foreach( $item in $myValues )
+              $item,
+          #end
+        ]
+      }
+      #end
+      #if ($paramShowFourthSet == true)
+        , {
+        label: '$paramData4Legend',
+        backgroundColor: "rgba($paramData4Color,0.2)",
+        borderColor: "rgba($paramData4Color,1)",
+        borderWidth: 1,
+        pointBackgroundColor: "rgba($paramData4Color,1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba($paramData4Color,1)",
+        pointHoverBorderWidth: 1,
+      fill : #if ($paramData4Fill==true) true #else false #end ,
+      tension : #if ($paramBezierCurve==true) 0.4 #else 0 #end ,
+        data: [
+          #set( $myValues = $paramData4Values.split(","))
           #foreach( $item in $myValues )
               $item,
           #end
