@@ -32,7 +32,7 @@ _Note: User Macros are not available in Confluence Cloud!_
 
 The ChartJs v2 macros require some advanced knowledge to use them. Read all about it here:
 
-[ChartJs v2 Manual]([https://lewe.gitbook.io/confluence-user-macros/](https://lewe.gitbook.io/confluence-user-macros/readme-1))
+[ChartJs v2 Manual](https://lewe.gitbook.io/confluence-user-macros/readme-1)
 
 ## Credits
 
